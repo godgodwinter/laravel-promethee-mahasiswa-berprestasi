@@ -31,15 +31,15 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Judul Versi PreAlpha 1.21.03.05</h3>
+  <h3 align="center">LARAVEL + VUEJS PENERAPAN PADA METODHE PROMETHEE</h3>
 
   <p align="center">
-    Keterangan Sistem yang dibuat
+     SELEKSI MAHASISWA BERPRESTASI  MENGGUNAKAN METHODE PROMETHEE- DSS - DATA MINING
     <br />
-    <a href="https://github.com/godgodwinter/README-TEMPLATE-laravel"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/godgodwinter/laravel-promethee-mahasiswa-berprestasi"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://inetwork.baemon.web.id">View Demo https://inetwork.baemon.web.id</a>
+    <a href="#">View Demo</a>
     ·
     <a href="https://twitter.com/kakadlz">Report Bug</a>
     ·
@@ -74,7 +74,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot-dashboardluar]](https://github.com/godgodwinter/README-TEMPLATE-laravel)
 
 Ketika usaha jaringan internet anda semakin berkembang maka semakin banyak data yang perlu anda kelola. Untuk itu dengan sistem ini diharapkan dapat membantu usaha jaringan anda.
 
@@ -109,7 +108,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- 1. Get a free API Key at [https://example.com](https://example.com) -->
 1. Clone the repo
    ```sh
-   git clone https://github.com/godgodwinter/README-TEMPLATE-laravel.git
+   git clone https://github.com/godgodwinter/laravel-promethee-mahasiswa-berprestasi.git
    ```
 2. Install menggunakan composer
    ```sh
@@ -131,17 +130,18 @@ This is an example of how to list things you need to use the software and how to
    ```
 6. Jika ingin menggunakan data palsu untuk testing lanjutkan langkah 6 ini
    ```sh
-   php artisan db:seed --class=userseeder  //untuk meload data user admin@gmail.com pass 12345678
+   php artisan db:seed --class=userseeder  //untuk meload data user admin@gmail.com pass 12345678 , kriteria dan detail kriteria secara default (load sekali saja)
    ```
+7. Jalankan npm
 
    ```sh
-   php artisan db:seed --class=paketseeder  //untuk meload data paket, jenis alat, jenis pendapatan , jenis pengeluaran dll
+   npm install && npm run dev
    ```
 
+
    ```sh
-   php artisan db:seed  //untuk meload data pengaturan default, nama web, motto, logo dll
+   npm run watch
    ```
-   
 
 Buka browser dan tulis alamat berikut
    
@@ -163,7 +163,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Kukuh Setya Nugraha - [@kakadlz](https://twitter.com/kakadlz) 
 Kukuh Setya Nugraha - [@kukuh.sn](https://www.instagram.com/kukuh.sn/) 
 
-Project Link: [https://github.com/godgodwinter/inetwork](https://github.com/godgodwinter/inetwork)
+Project Link: [https://github.com/godgodwinter/inetwork](https://github.com/godgodwinter/laravel-promethee-mahasiswa-berprestasi)
 
 
 
