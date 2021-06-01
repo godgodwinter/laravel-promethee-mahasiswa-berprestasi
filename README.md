@@ -75,7 +75,7 @@
 ## About The Project
 
 
-Ketika usaha jaringan internet anda semakin berkembang maka semakin banyak data yang perlu anda kelola. Untuk itu dengan sistem ini diharapkan dapat membantu usaha jaringan anda.
+Contoh penerapan Laravel + VUEjs PADA Pada Project Data mining dengan Studi kasus seleksi mahasiswa menggunakan metode PROMETHEE.
 
 ### Built With
 
