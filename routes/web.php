@@ -14,13 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/{any?}', function () {
-//     return view('app');
-// })->where('any','.*');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//halaman admin fixed
+Route::group(['middleware' => ['auth', 'verified']], function() {
+
+    Route::view('/{any}', 'app')->where('any','.*')->middleware('auth');
+
+});
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
-Route::view('/{any}', 'app')->where('any','.*');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

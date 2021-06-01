@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class NotesController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api');
+    // }
+
     public function index(){
         $notes=notes::latest()->get();
         return NoteResource::collection($notes);

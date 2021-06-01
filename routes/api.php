@@ -7,6 +7,9 @@ use App\Http\Controllers\Notes\subjectController;
 
 
 //notes
+// Route::group(['middleware' => ['auth:api', 'verified']], function() {
+    // Route::group(['middleware' => 'auth:api'], function(){
+
     Route::post('notes/create-new-note', [NotesController::class, 'store'])->name('notes.store');
     Route::get('notes', [NotesController::class, 'index'])->name('notes');
     // :slug berarti di field slug,jika tidak didefinisikan maka akan id
@@ -21,7 +24,7 @@ use App\Http\Controllers\Notes\subjectController;
     // subjects
     Route::get('subjects', [SubjectController::class, 'index'])->name('subjects');
 
-
+// });
 
 /*
 |--------------------------------------------------------------------------

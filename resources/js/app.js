@@ -30,7 +30,7 @@ Vue.productionTips=false;
 
 
 const app = new Vue({
-    el: '#kukuh',
+    el: '#app',
     //implementasi routes diatas
     router: new VueRouter(routes),
 });
