@@ -3,12 +3,22 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Notes\NotesController;
+use App\Http\Controllers\mahasiswaController;
 use App\Http\Controllers\Notes\subjectController;
 
 
 //notes
 // Route::group(['middleware' => ['auth:api', 'verified']], function() {
     // Route::group(['middleware' => 'auth:api'], function(){
+
+    // MAHASISWA
+    Route::get('mahasiswa', [mahasiswaController::class, 'index'])->name('mahasiswa');
+    Route::get('mahasiswa/{id}', [mahasiswaController::class, 'show'])->name('mahasiswa.show');
+    Route::post('mahasiswa/store', [mahasiswaController::class, 'store'])->name('mahasiswa.store');
+    Route::delete('mahasiswa/{id}', [mahasiswaController::class, 'destroy'])->name('mahasiswa.delete');
+    Route::patch('mahasiswa/{id}/edit', [mahasiswaController::class, 'update'])->name('mahasiswa.update');
+
+
 
     Route::post('notes/create-new-note', [NotesController::class, 'store'])->name('notes.store');
     Route::get('notes', [NotesController::class, 'index'])->name('notes');

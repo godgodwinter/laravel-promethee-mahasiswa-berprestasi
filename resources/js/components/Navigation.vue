@@ -60,6 +60,18 @@
                         <router-link to="/" class="nav-link" exact>Home</router-link>
                     </li>
                     <li class="nav-item">
+                        <router-link class="nav-link" :to="{name:'pages.about'}">Kriteria</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" :to="{name:'mahasiswa.table'}">Mahasiswa</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" :to="{name:'pages.about'}">Proses</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" :to="{name:'pages.about'}">Kriteria</router-link>
+                    </li>
+                    <li class="nav-item">
                         <router-link class="nav-link" :to="{name:'pages.about'}">About</router-link>
                     </li>
                     <li class="nav-item">
@@ -76,7 +88,7 @@
                     </li> -->
                 </ul>
                     <form class="d-flex">
-                          <a class="btn btn-dark btn-lg" @click="logout">Logout</a>
+                          <a class="btn btn-dark btn-lg" @click="logout"><i class="feather icon-log-out"></i>&nbsp; Logout</a>
                     </form>
 
             </div>

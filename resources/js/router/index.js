@@ -5,6 +5,11 @@ import NewNote from '../views/notes/Create'
 import TableofNote from '../views/notes/Table'
 import ShowTheNote from '../views/notes/Show'
 import EditNote from '../views/notes/Edit'
+// MAHASISWA
+import TableofMahasiswa from '../views/mahasiswa/Table'
+import MahasiswaCreate from '../views/mahasiswa/Create'
+// import MahasiswaShow from '../views/mahasiswa/Show'
+import MahasiswaEdit from '../views/mahasiswa/Edit'
 
 
 export default {
@@ -20,6 +25,34 @@ export default {
               },
             component:Home
         },
+            // MAHASISWA
+        {
+            path:'/mahasiswa/table',
+            name:'mahasiswa.table',
+            meta: {
+                auth: true
+              },
+            component:TableofMahasiswa
+        },
+        {
+            path:'/mahasiswa/create',
+            name:'mahasiswa.create',
+            meta: {
+                auth: true
+              },
+            component: MahasiswaCreate
+        },
+        {
+            path:'/mahasiswa/:id/edit',
+            name:'mahasiswa.edit',
+            meta: {
+                auth: true
+              },
+            component:MahasiswaEdit
+        },
+
+            //END MAHASISWA
+
         {
             path:'/about',
             name:'pages.about',

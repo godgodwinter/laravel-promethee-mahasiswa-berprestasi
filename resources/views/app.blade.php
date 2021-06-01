@@ -10,6 +10,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" integrity="sha512-7x3zila4t2qNycrtZ31HO0NnJr8kg2VI67YLoRSyi9hGhRN66FHYWr7Axa9Y1J9tGYHVBPqIjSE1ogHrJTz51g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
        <link rel="stylesheet" href="/css/app.css">
 
+    <link href="{{ url('/') }}/icon/Font-Awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url('/') }}/icon/feather/css/feather.css" rel="stylesheet">
+{{-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> --}}
 
     </head>
     <body>
