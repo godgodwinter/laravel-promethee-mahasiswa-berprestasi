@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\thseleksiResource;
 use App\Models\thseleksi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -45,8 +46,11 @@ class thseleksiController extends Controller
 
         ]);
 
+            $th=request('tahun');
+        // $th=Carbon::createFromFormat('Y-m-d H:i:s', request('tahun'))->year;
+
         $data=thseleksi::create([
-            'tahun'=>request('tahun'),
+            'tahun'=>$th,
             'kuota'=>request('kuota'),
             'status'=>request('status'),
         ]);

@@ -6,7 +6,7 @@
                   <h3>DATA PROSES SELEKSI</h3>
                </div>
                <div class="col-lg-6 d-flex flex-row-reverse">
-                  <router-link :to="{name:'mahasiswa.create'}" class="btn btn-primary btn-lg mb-2"><i class="feather icon-plus-square"></i>&nbsp;Tambah</router-link>
+                  <router-link :to="{name:'thseleksi.create'}" class="btn btn-primary btn-lg mb-2"><i class="feather icon-plus-square"></i>&nbsp;Tambah</router-link>
 
                </div>
            </div>
@@ -30,15 +30,11 @@
                         <td>{{data.kuota}}</td>
                         <td>{{data.status}}</td>
                         <td>
-                            <!-- <i class="fa fa-pencil-square-o"></i> -->
-
                             <button class="btn btn-secondary btn-sm"><i class="feather icon-sunrise"></i> Detail</button>
-                            <button class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></button>
-                            <!-- <router-link :to="{name:'mahasiswa.edit',params:{id:data.id}}" class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></router-link>
+                            <router-link :to="{name:'thseleksi.edit',params:{id:data.id}}" class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></router-link>
 
-                            <delete-data class="btn btn-danger btn-sm" :endpoint="data.id"></delete-data> -->
-                            <button class="btn btn-danger btn-sm"><i class="feather icon-delete"></i></button>
-                            <!-- <delete-note :endpoint="data.id" /> -->
+                            <delete-data class="btn btn-danger btn-sm" :endpoint="data.id"></delete-data>
+
                         </td>
                         <!-- <td><router-link :to="{name:'notes.edit',params:{noteSlug:note.slug}}">Edit   </router-link> || <delete-note :endpoint="note.slug" /> </td> -->
                     </tr>

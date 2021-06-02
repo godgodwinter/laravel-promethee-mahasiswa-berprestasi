@@ -7,38 +7,23 @@
                     <hr>
                             <!-- //submit.prevent == onclick.prevent d+i js  -->
                         <form action="#" method="POST" @submit.prevent="update">
-                            <div class="form-group">
-                                <label for="Input-nim" >NIM</label>
-                                <input type="text" v-model="form.nim" id="Input-nim" class="form-control">
-                                <div v-if="theErrors.nim" class="mt-2 text-danger">{{ theErrors.nim[0]}}</div>
+                             <div class="form-group">
+                                <h6 for="Input-tahun" >PILIH TAHUN</h6>
+
+                                 <date-picker v-model="form.tahun" lang="id" type="year" format="YYYY" placeholder="Tahun"></date-picker>
+                                <div v-if="theErrors.tahun" class="mt-2 text-danger">{{ theErrors.tahun[0]}}</div>
                             </div>
                             <div class="form-group">
-                                <label for="Input-nama" >NAMA</label>
-                                <input type="text" v-model="form.nama" id="Input-nama" class="form-control">
-                                <div v-if="theErrors.nama" class="mt-2 text-danger">{{ theErrors.nama[0]}}</div>
+                                <label for="Input-kuota" >KUOTA</label>
+                                <input type="number" v-model="form.kuota" id="Input-kuota" class="form-control">
+                                <div v-if="theErrors.kuota" class="mt-2 text-danger">{{ theErrors.kuota[0]}}</div>
                             </div>
                             <div class="form-group">
-                                <label for="Input-jk" >JENIS KELAMIN</label>
-                                <select type="text" v-model="form.jk" id="Input-jk" class="form-control">
-                                    <option>Laki-laki</option>
-                                    <option>Perempuan</option>
+                                <label for="Input-status" >STATUS</label>
+                                <select type="text" v-model="form.status" id="Input-status" class="form-control">
+                                    <option selected>proses</option>
                                 </select>
-                                <div v-if="theErrors.jk" class="mt-2 text-danger">{{ theErrors.jk[0]}}</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Input-jurusan" >JURUSAN</label>
-                                <select type="text" v-model="form.jurusan" id="Input-jurusan" class="form-control">
-                                    <option>SISTEM INFORMASI</option>
-                                    <option>TEKNIK INFORMATIKA</option>
-                                    <option>PGSD</option>
-                                    <option>PENDIDIKAN MATEMATIKA</option>
-                                </select>
-                                <div v-if="theErrors.jurusan" class="mt-2 text-danger">{{ theErrors.jurusan[0]}}</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Input-hp" >HP</label>
-                                <input type="text" v-model="form.hp" id="Input-hp" class="form-control">
-                                <div v-if="theErrors.hp" class="mt-2 text-danger">{{ theErrors.hp[0]}}</div>
+                                <div v-if="theErrors.status" class="mt-2 text-danger">{{ theErrors.status[0]}}</div>
                             </div>
 
 
@@ -86,7 +71,12 @@
 </template>
 
 <script>
+    import DatePicker from 'vue2-datepicker';
+    import 'vue2-datepicker/index.css';
+    import 'vue2-datepicker/locale/id';
 export default {
+    components: { DatePicker},
+
     data(){
         return{
             //form data yang akan dikirim
@@ -113,8 +103,9 @@ export default {
         },
 
     async getDatas(){
-        let response = await axios.get(`/api/mahasiswa/${this.$route.params.id}`);
+        let response = await axios.get(`/api/thseleksi/${this.$route.params.id}`);
         this.form = response.data.data
+        this.form.tahun=new Date(this.form.tahun)
         console.log(this.form);
     },
 
@@ -128,7 +119,9 @@ export default {
     async update(){
         this.form['id']=this.selected || this.form.subjectId
 
-        let response = await axios.patch(`/api/mahasiswa/${this.$route.params.id}/edit`,this.form)
+        this.form.tahun=this.form.tahun.getFullYear();
+
+        let response = await axios.patch(`/api/thseleksi/${this.$route.params.id}/edit`,this.form)
         if (response.status==200){
                 this.loading=false
             //   console.log(response.data)
@@ -139,7 +132,7 @@ export default {
                     duration : 5000
                 });
 
-            this.$router.push('/mahasiswa/table')
+            this.$router.push('/thseleksi/table')
         }
         // console.log(this.form);
         // console.log('something');

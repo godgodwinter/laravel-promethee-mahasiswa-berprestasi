@@ -14,9 +14,9 @@ export default {
             let q = window.confirm("Apakah anda yakin menghapus data ini?");
 
             if (q ==true){
-               console.log(`/api/mahasiswa/${this.endpoint}/delete`);
+               console.log(`/api/thseleksi/${this.endpoint}/delete`);
 
-            let response = await axios.delete(`/api/mahasiswa/${this.endpoint}`);
+            let response = await axios.delete(`/api/thseleksi/${this.endpoint}`);
 
             if(response.status==200){
                  let toast = this.$toasted.show(response.data.message, {

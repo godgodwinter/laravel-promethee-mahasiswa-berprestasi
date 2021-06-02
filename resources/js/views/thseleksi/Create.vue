@@ -4,42 +4,39 @@
                 <div class="col-md-6 container-fluid">
                     <!-- <div v-if="successMessage" class="alert alert-success">{{successMessage}}</div> -->
                     <h2 class="text-center mb-3">TAMBAH DATA</h2>
-                    <hr>
+                    <!-- <hr>{{ moment().format('MMMM Do YYYY, h:mm:ss a') }} -->
+
 
                             <!-- //submit.prevent == onclick.prevent d+i js  -->
                         <form action="#" method="POST" @submit.prevent="store">
+
+                            <!-- <vue-monthly-picker
+                                v-model="year" type="year" dateFormat="YYYY"  default-year="2020" alignment="center" lang="en"
+       year-only="true" variant="dark">
+                            </vue-monthly-picker> -->
+
+                            <!-- <date-picker v-model="time1" valueType="format"></date-picker>
+                            <date-picker v-model="time2" type="datetime"></date-picker>
+                            <date-picker v-model="time3" range></date-picker> -->
+
                             <div class="form-group">
-                                <label for="Input-title" >NIM</label>
-                                <input type="text" v-model="form.nim" id="Input-nim" class="form-control">
-                                <div v-if="theErrors.nim" class="mt-2 text-danger">{{ theErrors.nim[0]}}</div>
+                                <h6 for="Input-tahun" >PILIH TAHUN</h6>
+                                <!-- <input type="year" v-model="form.tahun" id="Input-tahun" class="form-control"> -->
+
+                                 <date-picker v-model="form.tahun" lang="id" type="year" format="YYYY" placeholder="Tahun"></date-picker>
+                                <div v-if="theErrors.tahun" class="mt-2 text-danger">{{ theErrors.tahun[0]}}</div>
                             </div>
                             <div class="form-group">
-                                <label for="Input-nama" >NAMA</label>
-                                <input type="text" v-model="form.nama" id="Input-nama" class="form-control">
-                                <div v-if="theErrors.nama" class="mt-2 text-danger">{{ theErrors.nama[0]}}</div>
+                                <label for="Input-kuota" >KUOTA</label>
+                                <input type="number" v-model="form.kuota" id="Input-kuota" class="form-control">
+                                <div v-if="theErrors.kuota" class="mt-2 text-danger">{{ theErrors.kuota[0]}}</div>
                             </div>
                             <div class="form-group">
-                                <label for="Input-jk" >JENIS KELAMIN</label>
-                                <select type="text" v-model="form.jk" id="Input-jk" class="form-control">
-                                    <option>Laki-laki</option>
-                                    <option>Perempuan</option>
+                                <label for="Input-status" >STATUS</label>
+                                <select type="text" v-model="form.status" id="Input-status" class="form-control">
+                                    <option selected>proses</option>
                                 </select>
-                                <div v-if="theErrors.jk" class="mt-2 text-danger">{{ theErrors.jk[0]}}</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Input-jurusan" >JURUSAN</label>
-                                <select type="text" v-model="form.jurusan" id="Input-jurusan" class="form-control">
-                                    <option>SISTEM INFORMASI</option>
-                                    <option>TEKNIK INFORMATIKA</option>
-                                    <option>PGSD</option>
-                                    <option>PENDIDIKAN MATEMATIKA</option>
-                                </select>
-                                <div v-if="theErrors.jurusan" class="mt-2 text-danger">{{ theErrors.jurusan[0]}}</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Input-hp" >HP</label>
-                                <input type="text" v-model="form.hp" id="Input-hp" class="form-control">
-                                <div v-if="theErrors.hp" class="mt-2 text-danger">{{ theErrors.hp[0]}}</div>
+                                <div v-if="theErrors.status" class="mt-2 text-danger">{{ theErrors.status[0]}}</div>
                             </div>
 
                         <div class="row">
@@ -86,17 +83,33 @@
     </div>
 </template>
 
+
 <script>
+    import DatePicker from 'vue2-datepicker';
+    import 'vue2-datepicker/index.css';
+    import 'vue2-datepicker/locale/id';
+
+//   import VueMonthlyPicker from 'vue-monthly-picker'
+
 export default {
+ components: { DatePicker
+     },
+    // components: { DatePicker,
+    // VueMonthlyPicker
+    //  },
     data(){
         return{
+          yearonly: true,
+            time1: null,
+            time2: null,
+            time3: null,
+            year:'',
             //form data yang akan dikirim
             form:{
-                nim:'',
-                nama:'',
-                jk:'',
-                jurusan:'',
-                hp:'',
+                year:'',
+                tahun:'',
+                kuota:'',
+                status:'',
             },
             // successMessage:'',
             loading:false,
@@ -105,27 +118,31 @@ export default {
         };
     },
     mounted(){
+        // this.form.tahun='1982-12-31T17:00:00.000Z';
+        // this.form.tahun=new Date('2020');
+        this.form.tahun=new Date();
+        this.form.status='proses';
         this.getdatas();
     },
     methods:{
         async getdatas(){
-            let response = await axios.get('/api/mahasiswa')
+            let response = await axios.get('/api/thseleksi')
             // console.log(response.data);
             if(response.status === 200){
                 this.subjects=response.data
             }
         },
         async store(){
+
             this.loading=true;
+            this.form.tahun=this.form.tahun.getFullYear();
         try{
-            let response = await axios.post('/api/mahasiswa/store', this.form)
+            let response = await axios.post('/api/thseleksi/store', this.form)
             if(response.status==200){
                 // console.log(response.data);
-                this.form.nama=""
-                this.form.nim=""
-                this.form.jk=""
-                this.form.jurusan=""
-                this.form.hp=""
+                this.form.tahun=""
+                this.form.kuota=""
+                this.form.status=""
                 this.loading=false
                 this.theErrors=[]
                 // this.successMessage=response.data.message
@@ -137,7 +154,7 @@ export default {
                     duration : 5000
                 });
 
-            this.$router.push('/mahasiswa/table')
+            this.$router.push('/thseleksi/table')
             }
             // console.log(response.data.message);
         }catch(e){

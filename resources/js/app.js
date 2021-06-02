@@ -21,6 +21,9 @@ import Toasted from 'vue-toasted';
 Vue.use(Toasted);
 Vue.use(VueRouter);
 
+import moment from 'moment'
+Vue.prototype.moment = moment
+
 import routes from './router/index'
 // import routes from './router.index.js'
 
