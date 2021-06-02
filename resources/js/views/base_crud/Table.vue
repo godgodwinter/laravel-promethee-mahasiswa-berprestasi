@@ -3,7 +3,7 @@
        <div class="container">
            <div class="row">
                <div class="col-lg-6">
-                  <h3>DATA MAHASISWA (ALTERNATIF)</h3>
+                  <h3>DATA KRITERIA AAA</h3>
                </div>
                <div class="col-lg-6 d-flex flex-row-reverse">
                   <router-link :to="{name:'mahasiswa.create'}" class="btn btn-primary btn-lg mb-2"><i class="feather icon-plus-square"></i>&nbsp;Tambah</router-link>

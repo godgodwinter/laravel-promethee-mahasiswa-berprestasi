@@ -46,9 +46,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/" to="/">
+            <router-link class="navbar-brand" href="/" to="/">
              <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      Navbar</a>
+      Navbar</router-link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -60,15 +60,15 @@
                         <router-link to="/" class="nav-link" exact>Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" :to="{name:'pages.about'}">Kriteria</router-link>
+                        <router-link class="nav-link" :to="{name:'kriteria.table'}">Kriteria</router-link>
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" :to="{name:'mahasiswa.table'}">Mahasiswa</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" :to="{name:'pages.about'}">Proses</router-link>
+                        <router-link class="nav-link" :to="{name:'thseleksi.table'}">Proses</router-link>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <router-link class="nav-link" :to="{name:'pages.about'}">Kriteria</router-link>
                     </li>
                     <li class="nav-item">
@@ -81,8 +81,8 @@
                         <router-link class="nav-link" :to="{name:'notes.create'} ">New Notes</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" :to="{name:'notes.table'} ">Table Notes</router-link>
-                    </li>
+                        <router-link class="nav-link" :to="{name:'notes.table'}">Table Notes</router-link>
+                    </li> -->
                     <!-- <li class="nav-item d-flex">
                         <a class="btn btn-light" @click="logout">Logout</a>
                     </li> -->

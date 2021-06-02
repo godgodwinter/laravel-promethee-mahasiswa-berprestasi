@@ -8,8 +8,20 @@ import EditNote from '../views/notes/Edit'
 // MAHASISWA
 import TableofMahasiswa from '../views/mahasiswa/Table'
 import MahasiswaCreate from '../views/mahasiswa/Create'
-// import MahasiswaShow from '../views/mahasiswa/Show'
 import MahasiswaEdit from '../views/mahasiswa/Edit'
+// import MahasiswaShow from '../views/mahasiswa/Show'
+
+// KRITERIA
+import kriteriaRead from '../views/kriteria/Table'
+import kriteriaCreate from '../views/kriteria/Create'
+import kriteriaEdit from '../views/kriteria/Edit'
+
+// THSELEKSI
+import thseleksiRead from '../views/thseleksi/Table'
+import thseleksiCreate from '../views/thseleksi/Create'
+import thseleksiEdit from '../views/thseleksi/Edit'
+
+
 
 
 export default {
@@ -25,7 +37,7 @@ export default {
               },
             component:Home
         },
-            // MAHASISWA
+            // MAHASISWAROUTER
         {
             path:'/mahasiswa/table',
             name:'mahasiswa.table',
@@ -51,7 +63,65 @@ export default {
             component:MahasiswaEdit
         },
 
-            //END MAHASISWA
+            //END MAHASISWAROUTER
+
+
+            // KRITERIAROUTER
+        {
+            path:'/kriteria/table',
+            name:'kriteria.table',
+            meta: {
+                auth: true
+              },
+            component:kriteriaRead
+        },
+        {
+            path:'/kriteria/create',
+            name:'kriteria.create',
+            meta: {
+                auth: true
+              },
+            component: kriteriaCreate
+        },
+        {
+            path:'/kriteria/:id/edit',
+            name:'kriteria.edit',
+            meta: {
+                auth: true
+              },
+            component:kriteriaEdit
+        },
+
+            //END KRITERIAROUTER
+
+
+            // THSELEKSIROUTER
+        {
+            path:'/thseleksi/table',
+            name:'thseleksi.table',
+            meta: {
+                auth: true
+              },
+            component:thseleksiRead
+        },
+        {
+            path:'/thseleksi/create',
+            name:'thseleksi.create',
+            meta: {
+                auth: true
+              },
+            component: thseleksiCreate
+        },
+        {
+            path:'/thseleksi/:id/edit',
+            name:'thseleksi.edit',
+            meta: {
+                auth: true
+              },
+            component:thseleksiEdit
+        },
+
+            //END THSELEKSIROUTER
 
         {
             path:'/about',

@@ -3,7 +3,7 @@
        <div class="container">
            <div class="row">
                <div class="col-lg-6">
-                  <h3>DATA MAHASISWA (ALTERNATIF)</h3>
+                  <h3>DATA PROSES SELEKSI</h3>
                </div>
                <div class="col-lg-6 d-flex flex-row-reverse">
                   <router-link :to="{name:'mahasiswa.create'}" class="btn btn-primary btn-lg mb-2"><i class="feather icon-plus-square"></i>&nbsp;Tambah</router-link>
@@ -14,11 +14,10 @@
                 <thead>
                     <tr>
                         <th width="5%">No</th>
-                        <th>Nama</th>
-                        <th>Jurusan</th>
-                        <th>Jenis Kelamin</th>
-                        <th>No HP</th>
-                        <th width="10%">Aksi</th>
+                        <th>Tahun</th>
+                        <th>Kuota</th>
+                        <th>Status</th>
+                        <th width="15%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,18 +26,18 @@
 
                         <!-- <td><router-link :to="{name:'mahasiswa.show',params:{dataId:data.id}}">{{data.nim}} - {{data.nama}}</router-link></td> -->
                         <!-- <td>{{note.subject}}</td> -->
-                        <td>{{data.nim}} - {{data.nama}}</td>
-                        <td>{{data.jurusan}}</td>
-                        <td>{{data.jk}}</td>
-                        <td>{{data.hp}}</td>
+                        <td>{{data.tahun}}</td>
+                        <td>{{data.kuota}}</td>
+                        <td>{{data.status}}</td>
                         <td>
                             <!-- <i class="fa fa-pencil-square-o"></i> -->
 
-                            <!-- <button class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></button> -->
-                            <router-link :to="{name:'mahasiswa.edit',params:{id:data.id}}" class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></router-link>
+                            <button class="btn btn-secondary btn-sm"><i class="feather icon-sunrise"></i> Detail</button>
+                            <button class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></button>
+                            <!-- <router-link :to="{name:'mahasiswa.edit',params:{id:data.id}}" class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></router-link>
 
-                            <delete-data class="btn btn-danger btn-sm" :endpoint="data.id"></delete-data>
-                            <!-- <button class="btn btn-danger btn-sm"><i class="feather icon-delete"></i></button> -->
+                            <delete-data class="btn btn-danger btn-sm" :endpoint="data.id"></delete-data> -->
+                            <button class="btn btn-danger btn-sm"><i class="feather icon-delete"></i></button>
                             <!-- <delete-note :endpoint="data.id" /> -->
                         </td>
                         <!-- <td><router-link :to="{name:'notes.edit',params:{noteSlug:note.slug}}">Edit   </router-link> || <delete-note :endpoint="note.slug" /> </td> -->
@@ -70,7 +69,7 @@ export default {
     methods:{
 
         async getNotes(){
-            let {data} = await axios.get('/api/mahasiswa');
+            let {data} = await axios.get('/api/thseleksi');
             this.datas = data.data
 
             // let response = await axios.get('/api/notes');

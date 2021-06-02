@@ -3,13 +3,12 @@
             <div class="row">
                 <div class="col-md-6 container-fluid">
                     <!-- <div v-if="successMessage" class="alert alert-success">{{successMessage}}</div> -->
-                    <h2 class="text-center mb-3">TAMBAH DATA</h2>
+                    <h2 class="text-center mb-3">EDIT DATA</h2>
                     <hr>
-
                             <!-- //submit.prevent == onclick.prevent d+i js  -->
-                        <form action="#" method="POST" @submit.prevent="store">
+                        <form action="#" method="POST" @submit.prevent="update">
                             <div class="form-group">
-                                <label for="Input-title" >NIM</label>
+                                <label for="Input-nim" >NIM</label>
                                 <input type="text" v-model="form.nim" id="Input-nim" class="form-control">
                                 <div v-if="theErrors.nim" class="mt-2 text-danger">{{ theErrors.nim[0]}}</div>
                             </div>
@@ -42,10 +41,11 @@
                                 <div v-if="theErrors.hp" class="mt-2 text-danger">{{ theErrors.hp[0]}}</div>
                             </div>
 
+
                         <div class="row">
 
                          <div class="col-lg-12 d-flex flex-row-reverse">
-                            <button type="submit" class="btn btn-outline-primary d-flex align-items-center mt-2"> Simpan
+                            <button type="submit" class="btn btn-outline-primary d-flex align-items-center mt-2"> Update
 
                                  <template v-if="loading">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="20px" height="20px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -77,10 +77,9 @@
                                 </div>
                             </div>
 
-
-
                         </form>
 
+                    </div>
                 </div>
             </div>
     </div>
@@ -91,46 +90,49 @@ export default {
     data(){
         return{
             //form data yang akan dikirim
-            form:{
-                nim:'',
-                nama:'',
-                jk:'',
-                jurusan:'',
-                hp:'',
-            },
+            form:[],
             // successMessage:'',
-            loading:false,
             subjects:[],
-            theErrors:[]
+            theErrors:[],
+            loading:false,
+            selected:'',
         };
     },
     mounted(){
-        this.getdatas();
+        this.getsubjects();
+        this.getDatas();
+
     },
     methods:{
-        async getdatas(){
-            let response = await axios.get('/api/mahasiswa')
+        async getsubjects(){
+            let response = await axios.get('/api/subjects')
             // console.log(response.data);
             if(response.status === 200){
                 this.subjects=response.data
             }
         },
-        async store(){
-            this.loading=true;
-        try{
-            let response = await axios.post('/api/mahasiswa/store', this.form)
-            if(response.status==200){
-                // console.log(response.data);
-                this.form.nama=""
-                this.form.nim=""
-                this.form.jk=""
-                this.form.jurusan=""
-                this.form.hp=""
+
+    async getDatas(){
+        let response = await axios.get(`/api/mahasiswa/${this.$route.params.id}`);
+        this.form = response.data.data
+        console.log(this.form);
+    },
+
+    selectedDatas(e){
+            // console.log(e.target.value);
+            this.selected=e.target.value
+
+                    //tampilkan yang oncgane selekted
+            // console.log(e);
+    },
+    async update(){
+        this.form['id']=this.selected || this.form.subjectId
+
+        let response = await axios.patch(`/api/mahasiswa/${this.$route.params.id}/edit`,this.form)
+        if (response.status==200){
                 this.loading=false
-                this.theErrors=[]
-                // this.successMessage=response.data.message
-                // this.$toasted.show(response.data.message)
-                let toast = this.$toasted.show(response.data.message, {
+            //   console.log(response.data)
+              let toast = this.$toasted.show(response.data.message, {
                     type:'success',
                     theme: "bubble",
                     position: "top-right",
@@ -138,20 +140,12 @@ export default {
                 });
 
             this.$router.push('/mahasiswa/table')
-            }
-            // console.log(response.data.message);
-        }catch(e){
+        }
+        // console.log(this.form);
+        // console.log('something');
 
-            this.loading=false
-            this.theErrors=e.response.data.errors;
-               let toast = this.$toasted.show("Terjadi kesalahan!", {
-                    type:'error',
-                    theme: "bubble",
-                    position: "top-right",
-                    duration : 5000
-                });
-        }
-        }
+    }
+
     }
 
 

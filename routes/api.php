@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Notes\NotesController;
 use App\Http\Controllers\mahasiswaController;
 use App\Http\Controllers\Notes\subjectController;
+use App\Http\Controllers\kriteriaController;
+use App\Http\Controllers\kriteriadetailController;
+use App\Http\Controllers\thseleksiController;
 
 
 //notes
@@ -18,6 +21,26 @@ use App\Http\Controllers\Notes\subjectController;
     Route::delete('mahasiswa/{id}', [mahasiswaController::class, 'destroy'])->name('mahasiswa.delete');
     Route::patch('mahasiswa/{id}/edit', [mahasiswaController::class, 'update'])->name('mahasiswa.update');
 
+    // KRITERIA
+    Route::get('kriteria', [kriteriaController::class, 'index'])->name('kriteria');
+    Route::get('kriteria/{id}', [kriteriaController::class, 'show'])->name('kriteria.show');
+    Route::post('kriteria/store', [kriteriaController::class, 'store'])->name('kriteria.store');
+    Route::delete('kriteria/{id}', [kriteriaController::class, 'destroy'])->name('kriteria.delete');
+    Route::patch('kriteria/{id}/edit', [kriteriaController::class, 'update'])->name('kriteria.update');
+
+    // KRITERIADETAIL
+    Route::get('kriteriadetail', [kriteriadetailController::class, 'index'])->name('kriteriadetail');
+    Route::get('kriteriadetail/{id}', [kriteriadetailController::class, 'show'])->name('kriteriadetail.show');
+    Route::post('kriteriadetail/store', [kriteriadetailController::class, 'store'])->name('kriteriadetail.store');
+    Route::delete('kriteriadetail/{id}', [kriteriadetailController::class, 'destroy'])->name('kriteriadetail.delete');
+    Route::patch('kriteriadetail/{id}/edit', [kriteriadetailController::class, 'update'])->name('kriteriadetail.update');
+
+    // THSELEKSI
+    Route::get('thseleksi', [thseleksiController::class, 'index'])->name('thseleksi');
+    Route::get('thseleksi/{id}', [thseleksiController::class, 'show'])->name('thseleksi.show');
+    Route::post('thseleksi/store', [thseleksiController::class, 'store'])->name('thseleksi.store');
+    Route::delete('thseleksi/{id}', [thseleksiController::class, 'destroy'])->name('thseleksi.delete');
+    Route::patch('thseleksi/{id}/edit', [thseleksiController::class, 'update'])->name('thseleksi.update');
 
 
     Route::post('notes/create-new-note', [NotesController::class, 'store'])->name('notes.store');

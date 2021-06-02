@@ -8,38 +8,16 @@
 
                             <!-- //submit.prevent == onclick.prevent d+i js  -->
                         <form action="#" method="POST" @submit.prevent="store">
-                            <div class="form-group">
-                                <label for="Input-title" >NIM</label>
-                                <input type="text" v-model="form.nim" id="Input-nim" class="form-control">
-                                <div v-if="theErrors.nim" class="mt-2 text-danger">{{ theErrors.nim[0]}}</div>
-                            </div>
+
                             <div class="form-group">
                                 <label for="Input-nama" >NAMA</label>
                                 <input type="text" v-model="form.nama" id="Input-nama" class="form-control">
                                 <div v-if="theErrors.nama" class="mt-2 text-danger">{{ theErrors.nama[0]}}</div>
                             </div>
                             <div class="form-group">
-                                <label for="Input-jk" >JENIS KELAMIN</label>
-                                <select type="text" v-model="form.jk" id="Input-jk" class="form-control">
-                                    <option>Laki-laki</option>
-                                    <option>Perempuan</option>
-                                </select>
-                                <div v-if="theErrors.jk" class="mt-2 text-danger">{{ theErrors.jk[0]}}</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Input-jurusan" >JURUSAN</label>
-                                <select type="text" v-model="form.jurusan" id="Input-jurusan" class="form-control">
-                                    <option>SISTEM INFORMASI</option>
-                                    <option>TEKNIK INFORMATIKA</option>
-                                    <option>PGSD</option>
-                                    <option>PENDIDIKAN MATEMATIKA</option>
-                                </select>
-                                <div v-if="theErrors.jurusan" class="mt-2 text-danger">{{ theErrors.jurusan[0]}}</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Input-hp" >HP</label>
-                                <input type="text" v-model="form.hp" id="Input-hp" class="form-control">
-                                <div v-if="theErrors.hp" class="mt-2 text-danger">{{ theErrors.hp[0]}}</div>
+                                <label for="Input-nilai" >NILAI</label>
+                                <input type="text" v-model="form.nilai" id="Input-nilai" class="form-control">
+                                <div v-if="theErrors.nilai" class="mt-2 text-danger">{{ theErrors.nilai[0]}}</div>
                             </div>
 
                         <div class="row">
@@ -92,11 +70,8 @@ export default {
         return{
             //form data yang akan dikirim
             form:{
-                nim:'',
                 nama:'',
-                jk:'',
-                jurusan:'',
-                hp:'',
+                nilai:'',
             },
             // successMessage:'',
             loading:false,
@@ -109,7 +84,7 @@ export default {
     },
     methods:{
         async getdatas(){
-            let response = await axios.get('/api/mahasiswa')
+            let response = await axios.get('/api/kriteria')
             // console.log(response.data);
             if(response.status === 200){
                 this.subjects=response.data
@@ -118,14 +93,11 @@ export default {
         async store(){
             this.loading=true;
         try{
-            let response = await axios.post('/api/mahasiswa/store', this.form)
+            let response = await axios.post('/api/kriteria/store', this.form)
             if(response.status==200){
                 // console.log(response.data);
                 this.form.nama=""
-                this.form.nim=""
-                this.form.jk=""
-                this.form.jurusan=""
-                this.form.hp=""
+                this.form.nilai=""
                 this.loading=false
                 this.theErrors=[]
                 // this.successMessage=response.data.message
@@ -137,7 +109,7 @@ export default {
                     duration : 5000
                 });
 
-            this.$router.push('/mahasiswa/table')
+            this.$router.push('/kriteria/table')
             }
             // console.log(response.data.message);
         }catch(e){
