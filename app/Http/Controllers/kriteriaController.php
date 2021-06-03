@@ -63,6 +63,7 @@ class kriteriaController extends Controller
     public function show(kriteria $id)
     {
         return kriteriaResource::make($id);
+        // return $id;
     }
 
     /**
@@ -85,6 +86,12 @@ class kriteriaController extends Controller
      */
     public function update(Request $datas)
     {
+
+        // return $request;
+        //   return response()->json([
+        //     'message'=>request('nama'),
+        //     'note'=>'aaa',
+        // ]);
         request()->validate([
             'nama'=>'required',
             'nilai'=>'required',

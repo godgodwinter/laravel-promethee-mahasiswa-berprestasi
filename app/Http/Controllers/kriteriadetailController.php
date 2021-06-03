@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\kriteriadetailResource;
+use App\Http\Resources\kriteriadetailshowResource;
 use App\Models\kriteriadetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class kriteriadetailController extends Controller
 {
@@ -62,9 +64,53 @@ class kriteriadetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(kriteriadetail $id)
+// public function ambilnamakritera($id)
+// {
+//     $namakriteria='asd';
+//     $datas = DB::table('kriteria')->where('id',$id)->get();
+//     // return view('admin.letakserver.edit',compact('datas'));
+//     return $namakriteria;
+// }
+
+    public function showdetail($id)
     {
-        return kriteriadetailResource::make($id);
+
+        // $datas=kriteriadetail::latest()->where('id',$id)->get();
+        // return kriteriadetailResource::collection($datas);
+
+
+        $datas=kriteriadetail::latest()->where('id',$id)->first();
+        return kriteriadetailResource::make($datas);
+        // return $datas;
+
+        // $datas = DB::table('kriteriadetail')->where('id',$id)->get();
+
+        // return kriteriadetailResource::make($datas);
+        // return kriteriaResource::collection($id);
+        // $datas = DB::table('kriteriadetail')->where('kriteria_id',$id)->get();
+        // kriteriadetailResource::collection($datas);
+
+        // return kriteriadetailResource::collection($id);
+        // $datas = DB::table('kriteriadetail')->where('kriteria_id',$id)->get();
+        // return kriteriadetailshowResource::make($datas);
+        // return $id;
+        // return $datas;
+    }
+
+    public function show($id)
+    {
+        // $i=1;
+        // $judul="asd";
+        $parrentdata = DB::table('kriteria')->where('id',$id)->get();
+        $datas = DB::table('kriteriadetail')->where('kriteria_id',$id)->get();
+        // return $datas;
+
+        return compact('datas','parrentdata');        // return $judul;
+        // foreach ($datas as $d ){
+
+        // }
+        // dd($datas);
+        // return kriteriadetailshowResource::make($array);
     }
 
     /**
@@ -85,12 +131,18 @@ class kriteriadetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $datas)
     {
+
+        // return request();
+
+        // return response()->json([
+        //     'message'=>request('nama'),
+        //     'note'=>'aaa',
+        // ]);
         request()->validate([
             'nama'=>'required',
             'bobot'=>'required',
-            'kriteria_id'=>'required',
 
         ]);
 
@@ -99,7 +151,6 @@ class kriteriadetailController extends Controller
         ->update([
             'nama'=>request('nama'),
             'bobot'=>request('bobot'),
-            'kriteria_id'=>request('kriteria_id'),
         ]);
 
         return response()->json([
@@ -114,9 +165,10 @@ class kriteriadetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(kriteriadetail $id)
+    public function destroy($kriteria_id,$id)
     {
-        $id->delete();
+        // $id->delete();
+         kriteriadetail::destroy($id);
 
         return $id;
         return response()->json([

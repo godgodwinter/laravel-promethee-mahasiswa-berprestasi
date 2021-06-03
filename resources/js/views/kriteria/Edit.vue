@@ -103,9 +103,10 @@ export default {
             // console.log(e);
     },
     async update(){
-        this.form['id']=this.selected || this.form.subjectId
 
+console.log(this.form);
         let response = await axios.patch(`/api/kriteria/${this.$route.params.id}/edit`,this.form)
+        // console.log(response.data.message);
         if (response.status==200){
                 this.loading=false
             //   console.log(response.data)

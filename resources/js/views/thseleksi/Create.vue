@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label for="Input-status" >STATUS</label>
                                 <select type="text" v-model="form.status" id="Input-status" class="form-control">
-                                    <option selected>proses</option>
+                                    <option selected>Proses</option>
                                 </select>
                                 <div v-if="theErrors.status" class="mt-2 text-danger">{{ theErrors.status[0]}}</div>
                             </div>

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    props:['endpoint'],
+    props:['endpoint_id','endpoint_kriteriaId'],
     mounted(){
             //    console.log(this.endpoint);
 
@@ -14,9 +14,9 @@ export default {
             let q = window.confirm("Apakah anda yakin menghapus data ini?");
 
             if (q ==true){
-               console.log(`/api/mahasiswa/${this.endpoint}/delete`);
+               console.log(`/api/kriteriadetail/${this.endpoint}/delete`);
 
-            let response = await axios.delete(`/api/mahasiswa/${this.endpoint}`);
+            let response = await axios.delete(`/api/kriteriadetail/${this.endpoint_kriteriaId}/${this.endpoint_id}`);
 
             if(response.status==200){
                  let toast = this.$toasted.show(response.data.message, {

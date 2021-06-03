@@ -7,38 +7,20 @@
                     <hr>
                             <!-- //submit.prevent == onclick.prevent d+i js  -->
                         <form action="#" method="POST" @submit.prevent="update">
-                            <div class="form-group">
-                                <label for="Input-nim" >NIM</label>
-                                <input type="text" v-model="form.nim" id="Input-nim" class="form-control">
-                                <div v-if="theErrors.nim" class="mt-2 text-danger">{{ theErrors.nim[0]}}</div>
-                            </div>
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label for="Input-nama" >NAMA</label>
                                 <input type="text" v-model="form.nama" id="Input-nama" class="form-control">
                                 <div v-if="theErrors.nama" class="mt-2 text-danger">{{ theErrors.nama[0]}}</div>
                             </div>
                             <div class="form-group">
-                                <label for="Input-jk" >JENIS KELAMIN</label>
-                                <select type="text" v-model="form.jk" id="Input-jk" class="form-control">
-                                    <option>Laki-laki</option>
-                                    <option>Perempuan</option>
-                                </select>
-                                <div v-if="theErrors.jk" class="mt-2 text-danger">{{ theErrors.jk[0]}}</div>
+                                <label for="Input-bobot" >Bobot</label>
+                                <input type="number" v-model="form.bobot" id="Input-bobot" class="form-control">
+                                <div v-if="theErrors.bobot" class="mt-2 text-danger">{{ theErrors.bobot[0]}}</div>
                             </div>
                             <div class="form-group">
-                                <label for="Input-jurusan" >JURUSAN</label>
-                                <select type="text" v-model="form.jurusan" id="Input-jurusan" class="form-control">
-                                    <option>SISTEM INFORMASI</option>
-                                    <option>TEKNIK INFORMATIKA</option>
-                                    <option>PGSD</option>
-                                    <option>PENDIDIKAN MATEMATIKA</option>
-                                </select>
-                                <div v-if="theErrors.jurusan" class="mt-2 text-danger">{{ theErrors.jurusan[0]}}</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Input-hp" >HP</label>
-                                <input type="text" v-model="form.hp" id="Input-hp" class="form-control">
-                                <div v-if="theErrors.hp" class="mt-2 text-danger">{{ theErrors.hp[0]}}</div>
+                                <!-- <label for="Input-kriteria_id" >Kriteria id</label> -->
+                                <input type="hidden" v-model="form.kriteria_id" id="Input-kriteria_id" class="form-control">
+                                <div v-if="theErrors.kriteria_id" class="mt-2 text-danger">{{ theErrors.kriteria_id[0]}}</div>
                             </div>
 
 
@@ -113,13 +95,27 @@ export default {
         },
 
     async getDatas(){
-        let response = await axios.get(`/api/mahasiswa/${this.$route.params.id}`);
+        let response = await axios.get(`/api/kriteriadetail/${this.$route.params.id}`);
         this.form = response.data.data
         console.log(this.form);
+
+    //         for(let value of Object.values(this.form)){
+    //         this.form["nama"]=value.nama;
+
+    //         // this.form.push(this.form.nama=(value.nama));
+    //         // this.form['nama']=(value.nama);
+    //         // this.form['bobot']=value.bobot;
+    //         // this.form['kriteria_id']=value.kriteria_id;
+    //         // console.log(value.kriteria_id);
+    //         }
+    // this.form.shift();
+    // delete this.form[0];
+
+        // console.log(this.form);
     },
 
     selectedDatas(e){
-            // console.log(e.target.value);
+            console.log(e.target.value);
             this.selected=e.target.value
 
                     //tampilkan yang oncgane selekted
@@ -128,7 +124,12 @@ export default {
     async update(){
         this.form['id']=this.selected || this.form.subjectId
 
-        let response = await axios.patch(`/api/mahasiswa/${this.$route.params.id}/edit`,this.form)
+            // console.log(this.selected);
+            // console.log(this.form);
+// console.log(this.form.bobot);
+// console.log(this.form.kriteria_id);
+        let response = await axios.patch(`/api/kriteriadetail/${this.$route.params.id}/update`,this.form)
+        // console.log(response.data.message);
         if (response.status==200){
                 this.loading=false
             //   console.log(response.data)
@@ -139,7 +140,7 @@ export default {
                     duration : 5000
                 });
 
-            this.$router.push('/mahasiswa/table')
+            this.$router.push(`/kriteriadetail/${this.form.kriteria_id}/show`)
         }
         // console.log(this.form);
         // console.log('something');

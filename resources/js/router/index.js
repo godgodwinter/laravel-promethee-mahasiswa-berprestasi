@@ -22,6 +22,13 @@ import thseleksiCreate from '../views/thseleksi/Create'
 import thseleksiEdit from '../views/thseleksi/Edit'
 
 
+// KRITERIADETAIL
+import kriteriadetailRead from '../views/kriteriadetail/Table'
+import kriteriadetailCreate from '../views/kriteriadetail/Create'
+import kriteriadetailEdit from '../views/kriteriadetail/Edit'
+import kriteriaShow from '../views/kriteriadetail/Show'
+
+
 
 
 export default {
@@ -122,6 +129,43 @@ export default {
         },
 
             //END THSELEKSIROUTER
+
+
+            // KRITERIADETAILROUTER
+        {
+            path:'/kriteriadetail/table',
+            name:'kriteriadetail.table',
+            meta: {
+                auth: true
+              },
+            component:kriteriadetailRead
+        },
+        {
+            path:'/kriteriadetail/:id/create',
+            name:'kriteriadetail.create',
+            meta: {
+                auth: true
+              },
+            component: kriteriadetailCreate
+        },
+        {
+            path:'/kriteriadetail/:id/edit',
+            name:'kriteriadetail.edit',
+            meta: {
+                auth: true
+              },
+            component:kriteriadetailEdit
+        },
+        {
+            path:'/kriteriadetail/:id/show',
+            name:'kriteriadetail.show',
+            meta: {
+                auth: true
+              },
+            component:kriteriaShow
+        },
+
+            //END KRITERIADETAILROUTER
 
         {
             path:'/about',

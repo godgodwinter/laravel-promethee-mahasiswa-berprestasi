@@ -28,8 +28,7 @@
                         <td>{{data.nama}}</td>
                         <td>{{data.nilai}}</td>
                         <td>
-
-                            <button class="btn btn-secondary btn-sm"><i class="feather icon-sunrise"></i> Detail</button>
+                            <router-link :to="{name:'kriteriadetail.show',params:{id:data.id}}" class="btn btn-secondary btn-sm"><i class="feather icon-sunrise"></i> Detail</router-link>
                             <router-link :to="{name:'kriteria.edit',params:{id:data.id}}" class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></router-link>
 
                             <delete-data class="btn btn-danger btn-sm" :endpoint="data.id"></delete-data>

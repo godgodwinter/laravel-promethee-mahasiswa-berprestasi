@@ -27,13 +27,15 @@ use App\Http\Controllers\thseleksiController;
     Route::post('kriteria/store', [kriteriaController::class, 'store'])->name('kriteria.store');
     Route::delete('kriteria/{id}', [kriteriaController::class, 'destroy'])->name('kriteria.delete');
     Route::patch('kriteria/{id}/edit', [kriteriaController::class, 'update'])->name('kriteria.update');
+    Route::get('kriteria/{id}/show', [kriteriaController::class, 'show'])->name('kriteria.show');
 
     // KRITERIADETAIL
     Route::get('kriteriadetail', [kriteriadetailController::class, 'index'])->name('kriteriadetail');
-    Route::get('kriteriadetail/{id}', [kriteriadetailController::class, 'show'])->name('kriteriadetail.show');
+    Route::get('kriteriadetail/{kritria_id}/show', [kriteriadetailController::class, 'show'])->name('kriteriadetail.show');
+    Route::get('kriteriadetail/{kritria_id}', [kriteriadetailController::class, 'showdetail'])->name('kriteriadetail.showdetail');
     Route::post('kriteriadetail/store', [kriteriadetailController::class, 'store'])->name('kriteriadetail.store');
-    Route::delete('kriteriadetail/{id}', [kriteriadetailController::class, 'destroy'])->name('kriteriadetail.delete');
-    Route::patch('kriteriadetail/{id}/edit', [kriteriadetailController::class, 'update'])->name('kriteriadetail.update');
+    Route::delete('kriteriadetail/{kritria_id}/{id}', [kriteriadetailController::class, 'destroy'])->name('kriteriadetail.delete');
+    Route::patch('kriteriadetail/{id}/update', [kriteriadetailController::class, 'update'])->name('kriteriadetail.update');
 
     // THSELEKSI
     Route::get('thseleksi', [thseleksiController::class, 'index'])->name('thseleksi');

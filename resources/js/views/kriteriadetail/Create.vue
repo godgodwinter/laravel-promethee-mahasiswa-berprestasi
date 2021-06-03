@@ -9,37 +9,19 @@
                             <!-- //submit.prevent == onclick.prevent d+i js  -->
                         <form action="#" method="POST" @submit.prevent="store">
                             <div class="form-group">
-                                <label for="Input-title" >NIM</label>
-                                <input type="text" v-model="form.nim" id="Input-nim" class="form-control">
-                                <div v-if="theErrors.nim" class="mt-2 text-danger">{{ theErrors.nim[0]}}</div>
-                            </div>
-                            <div class="form-group">
                                 <label for="Input-nama" >NAMA</label>
                                 <input type="text" v-model="form.nama" id="Input-nama" class="form-control">
                                 <div v-if="theErrors.nama" class="mt-2 text-danger">{{ theErrors.nama[0]}}</div>
                             </div>
                             <div class="form-group">
-                                <label for="Input-jk" >JENIS KELAMIN</label>
-                                <select type="text" v-model="form.jk" id="Input-jk" class="form-control">
-                                    <option>Laki-laki</option>
-                                    <option>Perempuan</option>
-                                </select>
-                                <div v-if="theErrors.jk" class="mt-2 text-danger">{{ theErrors.jk[0]}}</div>
+                                <label for="Input-bobot" >Bobot</label>
+                                <input type="number" v-model="form.bobot" id="Input-bobot" class="form-control">
+                                <div v-if="theErrors.bobot" class="mt-2 text-danger">{{ theErrors.bobot[0]}}</div>
                             </div>
                             <div class="form-group">
-                                <label for="Input-jurusan" >JURUSAN</label>
-                                <select type="text" v-model="form.jurusan" id="Input-jurusan" class="form-control">
-                                    <option>SISTEM INFORMASI</option>
-                                    <option>TEKNIK INFORMATIKA</option>
-                                    <option>PGSD</option>
-                                    <option>PENDIDIKAN MATEMATIKA</option>
-                                </select>
-                                <div v-if="theErrors.jurusan" class="mt-2 text-danger">{{ theErrors.jurusan[0]}}</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Input-hp" >HP</label>
-                                <input type="text" v-model="form.hp" id="Input-hp" class="form-control">
-                                <div v-if="theErrors.hp" class="mt-2 text-danger">{{ theErrors.hp[0]}}</div>
+                                <!-- <label for="Input-kriteria_id" >Kriteria id</label> -->
+                                <input type="hidden" v-model="form.kriteria_id" id="Input-kriteria_id" class="form-control">
+                                <div v-if="theErrors.kriteria_id" class="mt-2 text-danger">{{ theErrors.kriteria_id[0]}}</div>
                             </div>
 
                         <div class="row">
@@ -90,13 +72,12 @@
 export default {
     data(){
         return{
+
             //form data yang akan dikirim
             form:{
-                nim:'',
+                kriteria_id:'',
+                bobot:'',
                 nama:'',
-                jk:'',
-                jurusan:'',
-                hp:'',
             },
             // successMessage:'',
             loading:false,
@@ -105,6 +86,8 @@ export default {
         };
     },
     mounted(){
+                this.form.kriteria_id=this.$route.params.id;
+        console.log(this.form.kriteria_id);
         this.getdatas();
     },
     methods:{
@@ -118,14 +101,11 @@ export default {
         async store(){
             this.loading=true;
         try{
-            let response = await axios.post('/api/mahasiswa/store', this.form)
+            let response = await axios.post(`/api/kriteriadetail/store`, this.form)
             if(response.status==200){
                 // console.log(response.data);
                 this.form.nama=""
-                this.form.nim=""
-                this.form.jk=""
-                this.form.jurusan=""
-                this.form.hp=""
+                this.form.bobot=""
                 this.loading=false
                 this.theErrors=[]
                 // this.successMessage=response.data.message
@@ -137,7 +117,7 @@ export default {
                     duration : 5000
                 });
 
-            this.$router.push('/mahasiswa/table')
+            this.$router.push(`/kriteriadetail/${this.$route.params.id}/show`)
             }
             // console.log(response.data.message);
         }catch(e){
