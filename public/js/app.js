@@ -5518,11 +5518,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5533,21 +5528,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       datas: [],
+      kriterias: [],
       isModalVisible: false
     };
   },
   mounted: function mounted() {
-    this.getNotes();
+    this.getDatas();
+    this.getKriteria();
   },
   methods: {
     openModal: function openModal() {
       this.isModalVisible = true;
     },
     closeModal: function closeModal() {
-      this.getNotes();
+      this.getDatas();
       this.isModalVisible = false;
     },
-    getNotes: function getNotes() {
+    getDatas: function getDatas() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -5563,8 +5560,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 _yield$axios$get = _context.sent;
                 data = _yield$axios$get.data;
-                _this.datas = data.data; // let response = await axios.get('/api/notes');
-                // this.notes = response.data.dat
+                _this.datas = data.data;
 
               case 5:
               case "end":
@@ -5572,6 +5568,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    getKriteria: function getKriteria() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _yield$axios$get2, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('/api/kriteria/');
+
+              case 2:
+                _yield$axios$get2 = _context2.sent;
+                data = _yield$axios$get2.data;
+                _this2.kriterias = data.data;
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     } // console.log(this.notes);
 
@@ -53456,34 +53478,69 @@ var render = function() {
           staticClass: "table table-bordered table-striped table-hover table-sm"
         },
         [
-          _vm._m(1),
+          _c("thead", [
+            _c(
+              "tr",
+              { staticClass: "text-center" },
+              [
+                _c("th", { attrs: { width: "5%" } }, [_vm._v("No")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Nama")]),
+                _vm._v(" "),
+                _vm._l(_vm.kriterias, function(kriteria, index) {
+                  return _c("th", { attrs: { ":key": kriteria.id } }, [
+                    _vm._v(_vm._s(kriteria.nama))
+                  ])
+                }),
+                _vm._v(" "),
+                _c("th", { attrs: { width: "5%" } }, [_vm._v("Aksi")])
+              ],
+              2
+            )
+          ]),
           _vm._v(" "),
           _c(
             "tbody",
             _vm._l(_vm.datas, function(data, index) {
-              return _c("tr", { attrs: { ":key": data.id } }, [
-                _c("td", { staticClass: "text-center" }, [
-                  _vm._v(_vm._s(index + 1))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-left" }, [
-                  _vm._v(
-                    " " + _vm._s(data.nim) + " - " + _vm._s(data.nama) + " "
+              return _c(
+                "tr",
+                { attrs: { ":key": data.id } },
+                [
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(index + 1))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-left" }, [
+                    _vm._v(
+                      " " + _vm._s(data.nim) + " - " + _vm._s(data.nama) + " "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.kriterias, function(kriteria, index) {
+                    return _c(
+                      "td",
+                      {
+                        staticClass: "text-center",
+                        attrs: { ":key": kriteria.id }
+                      },
+                      [_vm._v(_vm._s(kriteria.nilai))]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "text-center" },
+                    [
+                      _c("delete-data", {
+                        staticClass: "btn btn-danger btn-sm",
+                        attrs: { endpoint: data.id }
+                      })
+                    ],
+                    1
                   )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "text-center" },
-                  [
-                    _c("delete-data", {
-                      staticClass: "btn btn-danger btn-sm",
-                      attrs: { endpoint: data.id }
-                    })
-                  ],
-                  1
-                )
-              ])
+                ],
+                2
+              )
             }),
             0
           )
@@ -53499,20 +53556,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-6" }, [
       _c("h3", [_vm._v("DATA PROSES")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", { staticClass: "text-center" }, [
-        _c("th", { attrs: { width: "5%" } }, [_vm._v("No")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Nama")]),
-        _vm._v(" "),
-        _c("th", { attrs: { width: "5%" } }, [_vm._v("Aksi")])
-      ])
     ])
   }
 ]

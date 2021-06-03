@@ -23,6 +23,7 @@
                     <tr class="text-center">
                         <th width="5%">No</th>
                         <th>Nama</th>
+                         <th v-for="kriteria,index in kriterias" ::key="kriteria.id">{{ kriteria.nama }}</th>
                         <th width="5%">Aksi</th>
                     </tr>
                 </thead>
@@ -33,15 +34,9 @@
                         <!-- <td><router-link :to="{name:'mahasiswa.show',params:{dataId:data.id}}">{{data.nim}} - {{data.nama}}</router-link></td> -->
                         <!-- <td>{{note.subject}}</td> -->
                         <td class="text-left">&nbsp;{{data.nim}} - {{data.nama}} </td>
+                        <td class="text-center" v-for="kriteria,index in kriterias" ::key="kriteria.id">{{ kriteria.nilai }}</td>
                         <td  class="text-center">
-                            <!-- <i class="fa fa-pencil-square-o"></i> -->
-
-                            <!-- <button class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></button> -->
-                            <!-- <router-link :to="{name:'mahasiswa.edit',params:{id:data.id}}" class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></router-link> -->
-
-                            <delete-data class="btn btn-danger btn-sm" :endpoint="data.id"></delete-data>
-                            <!-- <button class="btn btn-danger btn-sm"><i class="feather icon-delete"></i></button> -->
-                            <!-- <delete-note :endpoint="data.id" /> -->
+                           <delete-data class="btn btn-danger btn-sm" :endpoint="data.id"></delete-data>
                         </td>
                         <!-- <td><router-link :to="{name:'notes.edit',params:{noteSlug:note.slug}}">Edit   </router-link> || <delete-note :endpoint="note.slug" /> </td> -->
                     </tr>
@@ -63,12 +58,14 @@ export default {
     data(){
         return{
             datas:[],
+            kriterias:[],
             isModalVisible: false,
         }
     },
 
     mounted(){
-        this.getNotes();
+        this.getDatas();
+        this.getKriteria();
     },
 
     methods:{
@@ -77,15 +74,16 @@ export default {
         },
         closeModal() {
 
-        this.getNotes();
+        this.getDatas();
             this.isModalVisible = false;
         },
-        async getNotes(){
+        async getDatas(){
             let {data} = await axios.get('/api/dataproses/');
             this.datas = data.data
-
-            // let response = await axios.get('/api/notes');
-            // this.notes = response.data.dat
+        },
+        async getKriteria(){
+            let {data} = await axios.get('/api/kriteria/');
+            this.kriterias = data.data
         }
             // console.log(this.notes);
 
