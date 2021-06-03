@@ -3,7 +3,7 @@
        <div class="container">
            <div class="row">
                <div class="col-lg-6">
-                  <h3>DATA PROSES SELEKSI</h3>
+                  <h3>PILIH TAHUN SELEKSI</h3>
                </div>
                <div class="col-lg-6 d-flex flex-row-reverse">
                   <router-link :to="{name:'thseleksi.create'}" class="btn btn-primary btn-lg mb-2"><i class="feather icon-plus-square"></i>&nbsp;Tambah</router-link>
@@ -30,8 +30,8 @@
                         <td>{{data.kuota}}</td>
                         <td>{{data.status}}</td>
                         <td>
-                            <button class="btn btn-secondary btn-sm"><i class="feather icon-sunrise"></i> Detail</button>
-                            <router-link :to="{name:'thseleksi.edit',params:{id:data.id}}" class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></router-link>
+                           <router-link :to="{name:'dataproses.table',params:{id:data.id}}" class="btn btn-secondary btn-sm"><i class="feather icon-sunrise"></i> Detail</router-link>
+                             <router-link :to="{name:'thseleksi.edit',params:{id:data.id}}" class="btn btn-warning btn-sm"><i class="feather icon-edit"></i></router-link>
 
                             <delete-data class="btn btn-danger btn-sm" :endpoint="data.id"></delete-data>
 

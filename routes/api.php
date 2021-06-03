@@ -8,6 +8,7 @@ use App\Http\Controllers\Notes\subjectController;
 use App\Http\Controllers\kriteriaController;
 use App\Http\Controllers\kriteriadetailController;
 use App\Http\Controllers\thseleksiController;
+use App\Http\Controllers\dataprosesController;
 
 
 //notes
@@ -43,6 +44,14 @@ use App\Http\Controllers\thseleksiController;
     Route::post('thseleksi/store', [thseleksiController::class, 'store'])->name('thseleksi.store');
     Route::delete('thseleksi/{id}', [thseleksiController::class, 'destroy'])->name('thseleksi.delete');
     Route::patch('thseleksi/{id}/edit', [thseleksiController::class, 'update'])->name('thseleksi.update');
+
+
+    // DATAPOSES
+    Route::get('dataproses', [dataprosesController::class, 'index'])->name('dataproses');
+    Route::get('dataproses/{id}', [dataprosesController::class, 'show'])->name('dataproses.show');
+    Route::post('dataproses/store', [dataprosesController::class, 'store'])->name('dataproses.store');
+    Route::delete('dataproses/{id}', [dataprosesController::class, 'destroy'])->name('dataproses.delete');
+    Route::get('dataproses/getmhs/{id}', [dataprosesController::class, 'getmhs'])->name('dataproses.getmhs');
 
 
     Route::post('notes/create-new-note', [NotesController::class, 'store'])->name('notes.store');

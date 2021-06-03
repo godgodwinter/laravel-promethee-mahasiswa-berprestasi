@@ -28,6 +28,10 @@ import kriteriadetailCreate from '../views/kriteriadetail/Create'
 import kriteriadetailEdit from '../views/kriteriadetail/Edit'
 import kriteriaShow from '../views/kriteriadetail/Show'
 
+// DATAPROSES
+import dataprosesRead from '../views/dataproses/Table'
+
+
 
 
 
@@ -166,6 +170,21 @@ export default {
         },
 
             //END KRITERIADETAILROUTER
+
+            {
+                path:'/dataproses/table/:id',
+                name:'dataproses.table',
+                meta: {
+                    auth: true
+                  },
+                component:dataprosesRead
+            },
+
+
+
+            // DATAPROSESROUTER
+
+            //END DATAPROSESROUTER
 
         {
             path:'/about',
