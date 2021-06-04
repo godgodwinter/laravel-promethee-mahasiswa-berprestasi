@@ -54,6 +54,10 @@ use App\Http\Controllers\dataprosesController;
     Route::get('dataproses/getmhs/{id}', [dataprosesController::class, 'getmhs'])->name('dataproses.getmhs');
 
 
+    Route::get('dataprosesdetail', [dataprosesController::class, 'dpdetail'])->name('dataprosesdetail');
+    Route::get('dataprosesdetail/{id}', [dataprosesController::class, 'dpdetailshow'])->name('dataprosesdetail.show');
+
+
     Route::post('notes/create-new-note', [NotesController::class, 'store'])->name('notes.store');
     Route::get('notes', [NotesController::class, 'index'])->name('notes');
     // :slug berarti di field slug,jika tidak didefinisikan maka akan id

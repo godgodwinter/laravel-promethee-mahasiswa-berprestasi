@@ -5365,6 +5365,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'modal',
@@ -5388,6 +5389,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getDatas();
   },
   methods: {
+    refresh: function refresh() {
+      // console.log('aaa');
+      this.getDatas();
+    },
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -5635,6 +5640,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5646,10 +5668,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      firstload: null,
+      // firstload:null,
       dataInputModal: '',
       showModalisi: [],
       datas: [],
+      datasdetail: [],
+      ddetail: [],
       kriterias: [],
       isModalVisible: false,
       isModalktVisible: false
@@ -5658,18 +5682,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     this.getDatas();
     this.getKriteria();
+    this.getDatasDetail();
   },
   methods: {
     showModal: function showModal(dataId, KriteriaId) {
       this.showModalisi[dataId + '-' + KriteriaId] = dataId + '-' + KriteriaId;
       this.firstload = 1; // this.showModalisi=dataId;
+      // this.getDatas();
 
-      this.getDatas();
       console.log(this.showModalisi[dataId + '-' + KriteriaId]);
     },
     showModalfalse: function showModalfalse(dataId, KriteriaId) {
-      this.showModalisi[dataId + '-' + KriteriaId] = null;
-      this.getDatas(); // this.showModalisi=dataId;
+      this.showModalisi[dataId + '-' + KriteriaId] = null; // this.getDatas();
+      // this.showModalisi=dataId;
 
       console.log(this.showModalisi[dataId + '-' + KriteriaId]);
     },
@@ -5692,22 +5717,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _yield$axios$get, data;
+        var _yield$axios$get, data, datas;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('/api/dataproses/');
+                return axios.get("/api/dataproses/".concat(_this.$route.params.id));
 
               case 2:
                 _yield$axios$get = _context.sent;
                 data = _yield$axios$get.data;
                 _this.datas = data.data;
-                Array.from(_this.datas).forEach(function (data) {
-                  console.log(_this.dataid);
-                }); // console.log(this.datas);
+                datas = _this.datas; // console.log(this.datas);
 
               case 6:
               case "end":
@@ -5721,26 +5744,97 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var _yield$axios$get2, data;
+        var _yield$axios$get2, data, kriterias;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get('/api/kriteria/');
+                return axios.get("/api/kriteria/");
 
               case 2:
                 _yield$axios$get2 = _context2.sent;
                 data = _yield$axios$get2.data;
                 _this2.kriterias = data.data;
+                kriterias = _this2.kriterias;
 
-              case 5:
+              case 6:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
+      }))();
+    },
+    getDatasDetail: function getDatasDetail() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var ddetail, _yield$axios$get3, data, datasdetail, kriterias;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                ddetail = [];
+                _context3.next = 3;
+                return axios.get("/api/dataprosesdetail/".concat(_this3.$route.params.id));
+
+              case 3:
+                _yield$axios$get3 = _context3.sent;
+                data = _yield$axios$get3.data;
+                _this3.datasdetail = data.data;
+                datasdetail = _this3.datasdetail;
+                kriterias = _this3.kriterias; // dataModels[0] = {
+                //     childNodes: []
+                // };
+                // dataModels[0].childNodes[0] = {
+                //     appId: "foo"
+                // };
+
+                _this3.datas.forEach(function (e) {
+                  var showModalisi = [];
+                  var datae = e; //  console.log(e['id']);
+
+                  kriterias.forEach(function (x) {
+                    // was missing a )
+                    //  console.log(e['id']);
+                    var dataeId = e['id'];
+                    var dataxId = x['id']; // let KriteriaId=x['id'];
+
+                    showModalisi[dataeId + '-' + dataxId] = null; //    console.log([dataeId+'-'+dataxId]);
+                    // console.log(showModalisi);
+                  });
+                }); // console.log(this.datas);
+                // console.log(this.kriterias);
+                // console.log(this.datasdetail);
+                // this.datas.forEach(function(e,i){
+                //     // console.log(e['nama']);
+                //         this.kriterias.forEach(function(x,y){
+                //         console.log(x);
+                //     });
+                // });
+
+
+                _this3.datasdetail.forEach(function (e, i) {
+                  var nim = e['nim'];
+                  var kriteria_id = e['kriteria_id']; //    ddetail='aaa';
+
+                  ddetail[nim + '-' + kriteria_id] = e['bobot_kd']; // console.log(ddetail[nim+'-'+kriteria_id]);
+                });
+
+                _this3.ddetail = ddetail; // console.log(this.ddetail);
+                // this.datasdetail.forEach(function(e,i){
+                //         console.log(e['nim']);
+                // });
+
+              case 11:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     }
   }
@@ -14350,7 +14444,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .30s ease;\n}\n\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: top;\n} */\n\n\n/* .modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n} */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .30s ease;\n}\n\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: top;\n} */\n\n\n/* .modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53743,6 +53837,16 @@ var render = function() {
                 on: { click: _vm.closeModal }
               },
               [_vm._v("Close")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "button" },
+                on: { click: _vm.refresh }
+              },
+              [_vm._v("Refresh Data")]
             )
           ])
         ])
@@ -53838,9 +53942,9 @@ var render = function() {
               "tr",
               { staticClass: "text-center" },
               [
-                _c("th", { attrs: { width: "5%" } }, [_vm._v("No")]),
+                _c("th", { attrs: { width: "5%" } }, [_vm._v("NO")]),
                 _vm._v(" "),
-                _c("th", { attrs: { width: "20%" } }, [_vm._v("Nama")]),
+                _c("th", { attrs: { width: "20%" } }, [_vm._v("NAMA")]),
                 _vm._v(" "),
                 _vm._l(_vm.kriterias, function(kriteria, index) {
                   return _c(
@@ -53859,7 +53963,7 @@ var render = function() {
                   )
                 }),
                 _vm._v(" "),
-                _c("th", { attrs: { width: "5%" } }, [_vm._v("Aksi")])
+                _c("th", { attrs: { width: "5%" } }, [_vm._v("AKSI")])
               ],
               2
             )
@@ -53899,7 +54003,7 @@ var render = function() {
                         attrs: { ":key": kriteria.id }
                       },
                       [
-                        _vm.firstload == null
+                        _vm.showModalisi[data.id + "-" + kriteria.id] == null
                           ? _c("div", [
                               _vm._v(
                                 "\n      " +
@@ -53955,15 +54059,15 @@ var render = function() {
                                                           },
                                                           [
                                                             _vm._v(
-                                                              "\n                     " +
+                                                              "\n                      " +
                                                                 _vm._s(
-                                                                  data.id
+                                                                  _vm.ddetail[
+                                                                    data.nim +
+                                                                      "-" +
+                                                                      kriteria.id
+                                                                  ]
                                                                 ) +
-                                                                " - " +
-                                                                _vm._s(
-                                                                  kriteria.id
-                                                                ) +
-                                                                "\n\n                    "
+                                                                "\n\n\n                    "
                                                             )
                                                           ]
                                                         )
@@ -54011,21 +54115,52 @@ var render = function() {
                             )
                           : _vm._e(),
                         _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            on: {
-                              click: function($event) {
-                                return _vm.showModal(data.id, kriteria.id)
-                              }
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "feather icon-edit" }),
-                            _vm._v(" " + _vm._s(kriteria.nilai))
-                          ]
-                        )
+                        _vm.ddetail[data.nim + "-" + kriteria.id] != null
+                          ? _c("div", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "btn btn-outer-primary btn-sm btn-block col-12",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showModal(data.id, kriteria.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n " +
+                                      _vm._s(
+                                        _vm.ddetail[
+                                          data.nim + "-" + kriteria.id
+                                        ]
+                                      ) +
+                                      "\n\n  "
+                                  )
+                                ]
+                              )
+                            ])
+                          : _c("div", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "btn btn-warning btn-sm btn-block col-12",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showModal(data.id, kriteria.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "feather icon-edit" }),
+                                  _vm._v(
+                                    "\n\n                 Belum diisi\n\n  "
+                                  )
+                                ]
+                              )
+                            ])
                       ]
                     )
                   }),

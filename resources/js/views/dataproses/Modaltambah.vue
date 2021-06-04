@@ -53,6 +53,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" v-on:click="closeModal">Close</button>
+          <button type="button" class="btn btn-success" @click="refresh">Refresh Data</button>
         </div>
       </div>
     </div>
@@ -84,6 +85,11 @@ import TableData from './Table'
     },
 
     methods: {
+
+        refresh() {
+            // console.log('aaa');
+            this.getDatas();
+        },
       closeModal() {
         this.$emit('close-modal');
       },

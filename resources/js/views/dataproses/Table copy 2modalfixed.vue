@@ -21,10 +21,10 @@
         <table class="table table-bordered table-striped table-hover table-sm">
                 <thead>
                     <tr class="text-center">
-                        <th width="5%">NO</th>
-                        <th width="20%">NAMA</th>
+                        <th width="5%">No</th>
+                        <th width="20%">Nama</th>
                          <th width="26%" v-for="kriteria,index in kriterias" ::key="kriteria.id"><span class="d-inline-block text-truncate"  style="max-width: 15%x;">{{  kriteria.nama  }}</span></th>
-                        <th width="5%">AKSI</th>
+                        <th width="5%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,7 +57,7 @@
 </button> -->
 
 
-  <div v-if="showModalisi[data.id+'-'+kriteria.id]==null">
+  <div v-if="firstload==null">
       {{showModalisi[data.id+'-'+kriteria.id]=null}}
   </div>
 
@@ -71,9 +71,7 @@
               <div class="modal-body">
                 <form action="#" method="POST">
                     <div class="form-group">
-                     <!-- {{ data.id }} - {{ kriteria.id }} = -->
-                      {{ ddetail[data.nim+'-'+kriteria.id] }}
-
+                     {{ data.id }} - {{ kriteria.id }}
 
                     </div>
                 </form>
@@ -88,23 +86,8 @@
     </transition>
   </div>
 
-<div v-if="ddetail[data.nim+'-'+kriteria.id] != null">
-    <button @click="showModal(data.id,kriteria.id)" class="btn btn-outer-primary btn-sm btn-block col-12">
-        <!-- <i class="feather icon-edit"></i> -->
- {{ ddetail[data.nim+'-'+kriteria.id] }}
 
-  </button>
-
-</div>
-<div v-else>
-     <button @click="showModal(data.id,kriteria.id)" class="btn btn-warning btn-sm btn-block col-12"><i class="feather icon-edit"></i>
-
-                 Belum diisi
-
-  </button>
-
-</div>
-
+  <button @click="showModal(data.id,kriteria.id)" class="btn btn-primary"><i class="feather icon-edit"></i> {{ kriteria.nilai }}</button>
 
 
                             </td>
@@ -131,12 +114,10 @@ export default {
 
     data(){
         return{
-            // firstload:null,
+            firstload:null,
             dataInputModal:'',
             showModalisi:[],
             datas:[],
-            datasdetail:[],
-            ddetail:[],
             kriterias:[],
             isModalVisible: false,
             isModalktVisible: false,
@@ -146,117 +127,51 @@ export default {
     mounted(){
         this.getDatas();
         this.getKriteria();
-        this.getDatasDetail();
 
     },
 
     methods:{
-
         showModal(dataId,KriteriaId) {
             this.showModalisi[dataId+'-'+KriteriaId]=dataId+'-'+KriteriaId;
             this.firstload=1;
             // this.showModalisi=dataId;
-            // this.getDatas();
+            this.getDatas();
             console.log(this.showModalisi[dataId+'-'+KriteriaId]);
         },
         showModalfalse(dataId,KriteriaId) {
             this.showModalisi[dataId+'-'+KriteriaId]=null;
-            // this.getDatas();
+            this.getDatas();
             // this.showModalisi=dataId;
             console.log(this.showModalisi[dataId+'-'+KriteriaId]);
         },
-        openModal() {
-            this.isModalVisible = true;
-        },
-        openModalkt() {
-            // this.modalData = this.data;
-            // this.modalVisible = true
-            this.isModalktVisible = true;
-        },
-        closeModal() {
-            this.isModalVisible = false;
-             this.getDatas();
-        },
-        closeModalkt() {
-            this.isModalktVisible = false;
-        },
+        // openModal() {
+        //     this.isModalVisible = true;
+        // },
+        // openModalkt() {
+        //     // this.modalData = this.data;
+        //     // this.modalVisible = true
+        //     this.isModalktVisible = true;
+        // },
+        // closeModal() {
+        //     this.isModalVisible = false;
+        //      this.getDatas();
+        // },
+        // closeModalkt() {
+        //     this.isModalktVisible = false;
+        // },
         async getDatas(){
-            var {data} = await axios.get(`/api/dataproses/${this.$route.params.id}`);
+            let {data} = await axios.get('/api/dataproses/');
             this.datas = data.data
-            var datas= this.datas;
-
+            Array.from(this.datas).forEach(data => {
+                console.log(this.dataid);
+}           );
             // console.log(this.datas);
 
         },
         async getKriteria(){
-            var {data} = await axios.get(`/api/kriteria/`);
+            let {data} = await axios.get('/api/kriteria/');
             this.kriterias = data.data
-            var kriterias= this.kriterias;
-        },
-        async getDatasDetail(){
-            var ddetail=[];
-            var {data} = await axios.get(`/api/dataprosesdetail/${this.$route.params.id}`);
-            this.datasdetail = data.data
-            var datasdetail= this.datasdetail;
-
-            var kriterias = this.kriterias;
-
-            // dataModels[0] = {
-            //     childNodes: []
-            // };
-
-            // dataModels[0].childNodes[0] = {
-            //     appId: "foo"
-            // };
-
-            this.datas.forEach(function(e){
-                 var showModalisi=[];
-                 var datae=e;
-                //  console.log(e['id']);
-                kriterias.forEach(function(x) { // was missing a )
-
-                //  console.log(e['id']);
-                    var dataeId=e['id'];
-                    var dataxId=x['id'];
-                    // let KriteriaId=x['id'];
-                 showModalisi[dataeId+'-'+dataxId]=null;
-                //    console.log([dataeId+'-'+dataxId]);
-                // console.log(showModalisi);
-                });
-            });
-
-            // console.log(this.datas);
-            // console.log(this.kriterias);
-            // console.log(this.datasdetail);
-
-        // this.datas.forEach(function(e,i){
-        //     // console.log(e['nama']);
-        //         this.kriterias.forEach(function(x,y){
-        //         console.log(x);
-        //     });
-
-        // });
-
-
-        this.datasdetail.forEach(function(e,i){
-               let nim=e['nim'];
-               let kriteria_id=e['kriteria_id'];
-            //    ddetail='aaa';
-               ddetail[nim+'-'+kriteria_id]=e['bobot_kd'];
-                // console.log(ddetail[nim+'-'+kriteria_id]);
-
-
-            });
-            this.ddetail=ddetail;
-            // console.log(this.ddetail);
-
-
-            // this.datasdetail.forEach(function(e,i){
-            //         console.log(e['nim']);
-
-            // });
-        },
-
+        }
 
     }
 
