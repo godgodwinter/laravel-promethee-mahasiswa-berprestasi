@@ -88,22 +88,17 @@
     </transition>
   </div>
 
-<div v-if="ddetail[data.nim+'-'+kriteria.id] != null">
-    <button @click="showModal(data.id,kriteria.id)" class="btn btn-outer-primary btn-sm btn-block col-12">
-        <!-- <i class="feather icon-edit"></i> -->
- {{ ddetail[data.nim+'-'+kriteria.id] }}
+<button @click="showModal(data.id,kriteria.id)" class="btn btn-outer-primary btn-sm btn-block col-12"><i class="feather icon-edit"></i>
 
-  </button>
+            <div v-if="ddetail[data.nim+'-'+kriteria.id] != null">
 
-</div>
-<div v-else>
-     <button @click="showModal(data.id,kriteria.id)" class="btn btn-warning btn-sm btn-block col-12"><i class="feather icon-edit"></i>
-
+                {{ ddetail[data.nim+'-'+kriteria.id] }}
+            </div>
+            <div v-else>
                  Belum diisi
+            </div>
 
   </button>
-
-</div>
 
 
 
@@ -154,15 +149,16 @@ export default {
 
         showModal(dataId,KriteriaId) {
             this.showModalisi[dataId+'-'+KriteriaId]=dataId+'-'+KriteriaId;
-            this.firstload=1;
+            // this.firstload=1;
             // this.showModalisi=dataId;
-            // this.getDatas();
+            this.getDatas();
             console.log(this.showModalisi[dataId+'-'+KriteriaId]);
         },
         showModalfalse(dataId,KriteriaId) {
             this.showModalisi[dataId+'-'+KriteriaId]=null;
             // this.getDatas();
             // this.showModalisi=dataId;
+            this.getDatas();
             console.log(this.showModalisi[dataId+'-'+KriteriaId]);
         },
         openModal() {
