@@ -69,13 +69,29 @@
             <div class="modal-content">
 
               <div class="modal-body">
-                <form action="#" method="POST">
+                <form action="#" method="POST" @submit.prevent="kirimdata(data.nim,data.id,kriteria.id)">
                     <div class="form-group">
                      <!-- {{ data.id }} - {{ kriteria.id }} = -->
-                      {{ ddetail[data.nim+'-'+kriteria.id] }}
+                      {{ ddetailnama[data.nim+'-'+kriteria.id] }}
+                        <div class="form-group">
+                             <!-- <input type="text" v-model="form.nim" id="Input-nama" class="form-control"> -->
+                             <input type="hidden" v-model="form.thseleksi_id" id="Input-nama" class="form-control">
+                                <!-- <label for="Input-jurusan" >JURUSAN</label> -->
+                                <select type="text" v-model="ddetail[data.nim+'-'+kriteria.id]" id="Input-kriteria_id" class="form-control" required>
+                                    <option v-if="ddetail[data.nim+'-'+kriteria.id]!=null">{{ ddetailnama[data.nim+'-'+kriteria.id] }}</option>
+                                    <!-- <option v-if="ddetail[data.nim+'-'+kriteria.id]==null" disabled >--</option> -->
 
+
+
+                                    <option v-for="ks,index in kriteriasShow" ::key="ks.id" v-bind:value="ks.id"> {{ ks.nama }}</option>
+
+
+                                </select>
+                                <!-- <div v-if="theErrors.kriteria_id" class="mt-2 text-danger">{{ theErrors.kriteria_id[0]}}</div> -->
+                            </div>
 
                     </div>
+                     <button type="submit" class="btn btn-outline-primary d-flex align-items-center mt-2"> Update</button>
                 </form>
 
                 <button type="button" class="btn btn-secondary" @click="showModalfalse(data.id,kriteria.id)" ><i class="feather icon-x"></i> </button>
@@ -92,7 +108,7 @@
 
             <div v-if="ddetail[data.nim+'-'+kriteria.id] != null">
 
-                {{ ddetail[data.nim+'-'+kriteria.id] }}
+                {{ ddetailnama[data.nim+'-'+kriteria.id] }}
             </div>
             <div v-else>
                  Belum diisi
@@ -127,12 +143,20 @@ export default {
     data(){
         return{
             // firstload:null,
+             form:{
+                id:'',
+                nim:'',
+                kriteria_id:'',
+                thseleksi_id:this.$route.params.id,
+            },
             dataInputModal:'',
+            // form.kriteria_id:'',
             showModalisi:[],
             datas:[],
             datasdetail:[],
             ddetail:[],
             kriterias:[],
+            kriteriasShow:[],
             isModalVisible: false,
             isModalktVisible: false,
         }
@@ -146,8 +170,51 @@ export default {
     },
 
     methods:{
+    async kirimdata(dataNim,dataId,KriteriaId){
+        this.form.id=dataId;
+        this.form.nim=dataNim;
+        this.form.thseleksi_id=this.form.thseleksi_id;
+        this.form.kriteria_id=KriteriaId;
+        this.form.kriteriadetail_id=this.ddetail[dataNim+'-'+KriteriaId];
+        console.log(this.form.id);
 
+            try{
+                let response = await axios.post(`/api/dataprosesdetail/store`, this.form)
+                if(response.status==200){
+                    // console.log(response.data);
+                    // this.form.nama=""
+                    // this.form.bobot=""
+                    this.loading=false
+                    this.theErrors=[]
+                    // this.successMessage=response.data.message
+                    // this.$toasted.show(response.data.message)
+                    let toast = this.$toasted.show(response.data.message, {
+                        type:'success',
+                        theme: "bubble",
+                        position: "top-right",
+                        duration : 5000
+                    });
+
+                this.getDatasDetail();
+                this.showModalisi[dataId+'-'+KriteriaId]=null;
+                console.log('berhasil');
+                // this.$router.push(`/kriteriadetail/${this.$route.params.id}/show`)
+                }
+                // console.log(response.data.message);
+            }catch(e){
+
+                this.loading=false
+                this.theErrors=e.response.data.errors;
+                let toast = this.$toasted.show("Terjadi kesalahan!", {
+                        type:'error',
+                        theme: "bubble",
+                        position: "top-right",
+                        duration : 5000
+                    });
+            }
+            },
         showModal(dataId,KriteriaId) {
+            this.getKriteriaDetail(KriteriaId);
             this.showModalisi[dataId+'-'+KriteriaId]=dataId+'-'+KriteriaId;
             // this.firstload=1;
             // this.showModalisi=dataId;
@@ -159,6 +226,7 @@ export default {
             // this.getDatas();
             // this.showModalisi=dataId;
             this.getDatas();
+        this.getDatasDetail();
             console.log(this.showModalisi[dataId+'-'+KriteriaId]);
         },
         openModal() {
@@ -189,8 +257,17 @@ export default {
             this.kriterias = data.data
             var kriterias= this.kriterias;
         },
+        async getKriteriaDetail(id){
+            console.log(`/api/kriteriadetail/${id}/show`);
+            var {data} = await axios.get(`/api/dataproses/getkriteria/${id}`);
+            this.kriteriasShow = data.data
+            var kriteriasShow= this.kriteriasShow;
+            // console.log(kriteriasShow);
+        },
         async getDatasDetail(){
             var ddetail=[];
+            var ddetailnama=[];
+            var form=[];
             var {data} = await axios.get(`/api/dataprosesdetail/${this.$route.params.id}`);
             this.datasdetail = data.data
             var datasdetail= this.datasdetail;
@@ -239,12 +316,16 @@ export default {
                let kriteria_id=e['kriteria_id'];
             //    ddetail='aaa';
                ddetail[nim+'-'+kriteria_id]=e['bobot_kd'];
+               ddetailnama[nim+'-'+kriteria_id]=e['nama'];
+            //    formkriteria_id[nim+'-'+kriteria_id]=e['bobot_kd'];
                 // console.log(ddetail[nim+'-'+kriteria_id]);
 
 
             });
             this.ddetail=ddetail;
-            // console.log(this.ddetail);
+            this.ddetailnama=ddetailnama;
+            // this.form=form;
+            // console.log(this.form);
 
 
             // this.datasdetail.forEach(function(e,i){
@@ -260,7 +341,7 @@ export default {
 </script>
 
 <style>
-/* .modal-mask {
+.modal-mask {
   position: fixed;
   z-index: 9998;
   top: 0;
@@ -275,7 +356,7 @@ export default {
 .modal-wrapper {
   display: table-cell;
   vertical-align: top;
-} */
+}
 
 
 /* .modal-mask {

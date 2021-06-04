@@ -52,10 +52,12 @@ use App\Http\Controllers\dataprosesController;
     Route::post('dataproses/store', [dataprosesController::class, 'store'])->name('dataproses.store');
     Route::delete('dataproses/{id}', [dataprosesController::class, 'destroy'])->name('dataproses.delete');
     Route::get('dataproses/getmhs/{id}', [dataprosesController::class, 'getmhs'])->name('dataproses.getmhs');
+    Route::get('dataproses/getkriteria/{id}', [dataprosesController::class, 'getkriteria'])->name('dataproses.getkriteria');
 
-
+    // DETAILDATAPROSES
     Route::get('dataprosesdetail', [dataprosesController::class, 'dpdetail'])->name('dataprosesdetail');
     Route::get('dataprosesdetail/{id}', [dataprosesController::class, 'dpdetailshow'])->name('dataprosesdetail.show');
+    Route::post('dataprosesdetail/store', [dataprosesController::class, 'dpdetailstore'])->name('dataprosesdetail.store');
 
 
     Route::post('notes/create-new-note', [NotesController::class, 'store'])->name('notes.store');

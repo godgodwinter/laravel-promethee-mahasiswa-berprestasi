@@ -5652,6 +5652,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5664,12 +5680,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       // firstload:null,
+      form: {
+        id: '',
+        nim: '',
+        kriteria_id: '',
+        thseleksi_id: this.$route.params.id
+      },
       dataInputModal: '',
+      // form.kriteria_id:'',
       showModalisi: [],
       datas: [],
       datasdetail: [],
       ddetail: [],
       kriterias: [],
+      kriteriasShow: [],
       isModalVisible: false,
       isModalktVisible: false
     };
@@ -5680,7 +5704,76 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getDatasDetail();
   },
   methods: {
+    kirimdata: function kirimdata(dataNim, dataId, KriteriaId) {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response, toast, _toast;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.form.id = dataId;
+                _this.form.nim = dataNim;
+                _this.form.thseleksi_id = _this.form.thseleksi_id;
+                _this.form.kriteria_id = KriteriaId;
+                _this.form.kriteriadetail_id = _this.ddetail[dataNim + '-' + KriteriaId];
+                console.log(_this.form.id);
+                _context.prev = 6;
+                _context.next = 9;
+                return axios.post("/api/dataprosesdetail/store", _this.form);
+
+              case 9:
+                response = _context.sent;
+
+                if (response.status == 200) {
+                  // console.log(response.data);
+                  // this.form.nama=""
+                  // this.form.bobot=""
+                  _this.loading = false;
+                  _this.theErrors = []; // this.successMessage=response.data.message
+                  // this.$toasted.show(response.data.message)
+
+                  toast = _this.$toasted.show(response.data.message, {
+                    type: 'success',
+                    theme: "bubble",
+                    position: "top-right",
+                    duration: 5000
+                  });
+
+                  _this.getDatasDetail();
+
+                  _this.showModalisi[dataId + '-' + KriteriaId] = null;
+                  console.log('berhasil'); // this.$router.push(`/kriteriadetail/${this.$route.params.id}/show`)
+                } // console.log(response.data.message);
+
+
+                _context.next = 18;
+                break;
+
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](6);
+                _this.loading = false;
+                _this.theErrors = _context.t0.response.data.errors;
+                _toast = _this.$toasted.show("Terjadi kesalahan!", {
+                  type: 'error',
+                  theme: "bubble",
+                  position: "top-right",
+                  duration: 5000
+                });
+
+              case 18:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[6, 13]]);
+      }))();
+    },
     showModal: function showModal(dataId, KriteriaId) {
+      this.getKriteriaDetail(KriteriaId);
       this.showModalisi[dataId + '-' + KriteriaId] = dataId + '-' + KriteriaId; // this.firstload=1;
       // this.showModalisi=dataId;
 
@@ -5692,6 +5785,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // this.showModalisi=dataId;
 
       this.getDatas();
+      this.getDatasDetail();
       console.log(this.showModalisi[dataId + '-' + KriteriaId]);
     },
     openModal: function openModal() {
@@ -5710,50 +5804,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.isModalktVisible = false;
     },
     getDatas: function getDatas() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _yield$axios$get, data, datas;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios.get("/api/dataproses/".concat(_this.$route.params.id));
-
-              case 2:
-                _yield$axios$get = _context.sent;
-                data = _yield$axios$get.data;
-                _this.datas = data.data;
-                datas = _this.datas; // console.log(this.datas);
-
-              case 6:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    getKriteria: function getKriteria() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var _yield$axios$get2, data, kriterias;
+        var _yield$axios$get, data, datas;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.get("/api/kriteria/");
+                return axios.get("/api/dataproses/".concat(_this2.$route.params.id));
 
               case 2:
-                _yield$axios$get2 = _context2.sent;
-                data = _yield$axios$get2.data;
-                _this2.kriterias = data.data;
-                kriterias = _this2.kriterias;
+                _yield$axios$get = _context2.sent;
+                data = _yield$axios$get.data;
+                _this2.datas = data.data;
+                datas = _this2.datas; // console.log(this.datas);
 
               case 6:
               case "end":
@@ -5763,33 +5830,90 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    getDatasDetail: function getDatasDetail() {
+    getKriteria: function getKriteria() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var ddetail, _yield$axios$get3, data, datasdetail, kriterias;
+        var _yield$axios$get2, data, kriterias;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                ddetail = [];
-                _context3.next = 3;
-                return axios.get("/api/dataprosesdetail/".concat(_this3.$route.params.id));
+                _context3.next = 2;
+                return axios.get("/api/kriteria/");
+
+              case 2:
+                _yield$axios$get2 = _context3.sent;
+                data = _yield$axios$get2.data;
+                _this3.kriterias = data.data;
+                kriterias = _this3.kriterias;
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    getKriteriaDetail: function getKriteriaDetail(id) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var _yield$axios$get3, data, kriteriasShow;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                console.log("/api/kriteriadetail/".concat(id, "/show"));
+                _context4.next = 3;
+                return axios.get("/api/dataproses/getkriteria/".concat(id));
 
               case 3:
-                _yield$axios$get3 = _context3.sent;
+                _yield$axios$get3 = _context4.sent;
                 data = _yield$axios$get3.data;
-                _this3.datasdetail = data.data;
-                datasdetail = _this3.datasdetail;
-                kriterias = _this3.kriterias; // dataModels[0] = {
+                _this4.kriteriasShow = data.data;
+                kriteriasShow = _this4.kriteriasShow; // console.log(kriteriasShow);
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    getDatasDetail: function getDatasDetail() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var ddetail, ddetailnama, form, _yield$axios$get4, data, datasdetail, kriterias;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                ddetail = [];
+                ddetailnama = [];
+                form = [];
+                _context5.next = 5;
+                return axios.get("/api/dataprosesdetail/".concat(_this5.$route.params.id));
+
+              case 5:
+                _yield$axios$get4 = _context5.sent;
+                data = _yield$axios$get4.data;
+                _this5.datasdetail = data.data;
+                datasdetail = _this5.datasdetail;
+                kriterias = _this5.kriterias; // dataModels[0] = {
                 //     childNodes: []
                 // };
                 // dataModels[0].childNodes[0] = {
                 //     appId: "foo"
                 // };
 
-                _this3.datas.forEach(function (e) {
+                _this5.datas.forEach(function (e) {
                   var showModalisi = [];
                   var datae = e; //  console.log(e['id']);
 
@@ -5813,24 +5937,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 // });
 
 
-                _this3.datasdetail.forEach(function (e, i) {
+                _this5.datasdetail.forEach(function (e, i) {
                   var nim = e['nim'];
                   var kriteria_id = e['kriteria_id']; //    ddetail='aaa';
 
-                  ddetail[nim + '-' + kriteria_id] = e['bobot_kd']; // console.log(ddetail[nim+'-'+kriteria_id]);
+                  ddetail[nim + '-' + kriteria_id] = e['bobot_kd'];
+                  ddetailnama[nim + '-' + kriteria_id] = e['nama']; //    formkriteria_id[nim+'-'+kriteria_id]=e['bobot_kd'];
+                  // console.log(ddetail[nim+'-'+kriteria_id]);
                 });
 
-                _this3.ddetail = ddetail; // console.log(this.ddetail);
+                _this5.ddetail = ddetail;
+                _this5.ddetailnama = ddetailnama; // this.form=form;
+                // console.log(this.form);
                 // this.datasdetail.forEach(function(e,i){
                 //         console.log(e['nim']);
                 // });
 
-              case 11:
+              case 14:
               case "end":
-                return _context3.stop();
+                return _context5.stop();
             }
           }
-        }, _callee3);
+        }, _callee5);
       }))();
     }
   }
@@ -14440,7 +14568,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .30s ease;\n}\n\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: top;\n} */\n\n\n/* .modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n} */\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .30s ease;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: top;\n}\n\n\n/* .modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -54044,6 +54172,18 @@ var render = function() {
                                                         attrs: {
                                                           action: "#",
                                                           method: "POST"
+                                                        },
+                                                        on: {
+                                                          submit: function(
+                                                            $event
+                                                          ) {
+                                                            $event.preventDefault()
+                                                            return _vm.kirimdata(
+                                                              data.nim,
+                                                              data.id,
+                                                              kriteria.id
+                                                            )
+                                                          }
                                                         }
                                                       },
                                                       [
@@ -54057,15 +54197,212 @@ var render = function() {
                                                             _vm._v(
                                                               "\n                      " +
                                                                 _vm._s(
-                                                                  _vm.ddetail[
+                                                                  _vm
+                                                                    .ddetailnama[
                                                                     data.nim +
                                                                       "-" +
                                                                       kriteria.id
                                                                   ]
                                                                 ) +
-                                                                "\n\n\n                    "
+                                                                "\n                        "
+                                                            ),
+                                                            _c(
+                                                              "div",
+                                                              {
+                                                                staticClass:
+                                                                  "form-group"
+                                                              },
+                                                              [
+                                                                _c("input", {
+                                                                  directives: [
+                                                                    {
+                                                                      name:
+                                                                        "model",
+                                                                      rawName:
+                                                                        "v-model",
+                                                                      value:
+                                                                        _vm.form
+                                                                          .thseleksi_id,
+                                                                      expression:
+                                                                        "form.thseleksi_id"
+                                                                    }
+                                                                  ],
+                                                                  staticClass:
+                                                                    "form-control",
+                                                                  attrs: {
+                                                                    type:
+                                                                      "hidden",
+                                                                    id:
+                                                                      "Input-nama"
+                                                                  },
+                                                                  domProps: {
+                                                                    value:
+                                                                      _vm.form
+                                                                        .thseleksi_id
+                                                                  },
+                                                                  on: {
+                                                                    input: function(
+                                                                      $event
+                                                                    ) {
+                                                                      if (
+                                                                        $event
+                                                                          .target
+                                                                          .composing
+                                                                      ) {
+                                                                        return
+                                                                      }
+                                                                      _vm.$set(
+                                                                        _vm.form,
+                                                                        "thseleksi_id",
+                                                                        $event
+                                                                          .target
+                                                                          .value
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                }),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "select",
+                                                                  {
+                                                                    directives: [
+                                                                      {
+                                                                        name:
+                                                                          "model",
+                                                                        rawName:
+                                                                          "v-model",
+                                                                        value:
+                                                                          _vm
+                                                                            .ddetail[
+                                                                            data.nim +
+                                                                              "-" +
+                                                                              kriteria.id
+                                                                          ],
+                                                                        expression:
+                                                                          "ddetail[data.nim+'-'+kriteria.id]"
+                                                                      }
+                                                                    ],
+                                                                    staticClass:
+                                                                      "form-control",
+                                                                    attrs: {
+                                                                      type:
+                                                                        "text",
+                                                                      id:
+                                                                        "Input-kriteria_id",
+                                                                      required:
+                                                                        ""
+                                                                    },
+                                                                    on: {
+                                                                      change: function(
+                                                                        $event
+                                                                      ) {
+                                                                        var $$selectedVal = Array.prototype.filter
+                                                                          .call(
+                                                                            $event
+                                                                              .target
+                                                                              .options,
+                                                                            function(
+                                                                              o
+                                                                            ) {
+                                                                              return o.selected
+                                                                            }
+                                                                          )
+                                                                          .map(
+                                                                            function(
+                                                                              o
+                                                                            ) {
+                                                                              var val =
+                                                                                "_value" in
+                                                                                o
+                                                                                  ? o._value
+                                                                                  : o.value
+                                                                              return val
+                                                                            }
+                                                                          )
+                                                                        _vm.$set(
+                                                                          _vm.ddetail,
+                                                                          data.nim +
+                                                                            "-" +
+                                                                            kriteria.id,
+                                                                          $event
+                                                                            .target
+                                                                            .multiple
+                                                                            ? $$selectedVal
+                                                                            : $$selectedVal[0]
+                                                                        )
+                                                                      }
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _vm.ddetail[
+                                                                      data.nim +
+                                                                        "-" +
+                                                                        kriteria.id
+                                                                    ] != null
+                                                                      ? _c(
+                                                                          "option",
+                                                                          [
+                                                                            _vm._v(
+                                                                              _vm._s(
+                                                                                _vm
+                                                                                  .ddetailnama[
+                                                                                  data.nim +
+                                                                                    "-" +
+                                                                                    kriteria.id
+                                                                                ]
+                                                                              )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e(),
+                                                                    _vm._v(" "),
+                                                                    _vm._l(
+                                                                      _vm.kriteriasShow,
+                                                                      function(
+                                                                        ks,
+                                                                        index
+                                                                      ) {
+                                                                        return _c(
+                                                                          "option",
+                                                                          {
+                                                                            attrs: {
+                                                                              ":key":
+                                                                                ks.id
+                                                                            },
+                                                                            domProps: {
+                                                                              value:
+                                                                                ks.id
+                                                                            }
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              " " +
+                                                                                _vm._s(
+                                                                                  ks.nama
+                                                                                )
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      }
+                                                                    )
+                                                                  ],
+                                                                  2
+                                                                )
+                                                              ]
                                                             )
                                                           ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "btn btn-outline-primary d-flex align-items-center mt-2",
+                                                            attrs: {
+                                                              type: "submit"
+                                                            }
+                                                          },
+                                                          [_vm._v(" Update")]
                                                         )
                                                       ]
                                                     ),
@@ -54130,7 +54467,7 @@ var render = function() {
                                   _vm._v(
                                     "\n\n                " +
                                       _vm._s(
-                                        _vm.ddetail[
+                                        _vm.ddetailnama[
                                           data.nim + "-" + kriteria.id
                                         ]
                                       ) +

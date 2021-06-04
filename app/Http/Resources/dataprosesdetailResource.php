@@ -21,6 +21,7 @@ class dataprosesdetailResource extends JsonResource
             'thseleksi_id'=>$this->thseleksi_id,
             'kriteria_id'=>$this->kriteria_id,
             'bobot_kd'=>$this->bobot_kd,
+            'nama'=>$this->nama,
             'publish'=>Carbon::parse($this->created_at)->diffForHumans(),
             // 'link' => route('mahasiswa.show',[$this->id])
         ];
