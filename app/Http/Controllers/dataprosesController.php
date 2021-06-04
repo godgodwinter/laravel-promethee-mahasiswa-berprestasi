@@ -173,8 +173,19 @@ class dataprosesController extends Controller
             ->count();
 
         if($ambildatasebelumnya>0){
+
+            DB::table('dataprosesdetail')
+        ->where('thseleksi_id',$request->thseleksi_id)
+        ->where('nim',$request->nim)
+        ->where('kriteria_id',$request->kriteria_id)
+        ->update([
+            'kriteriadetail_id'=>$request->kriteriadetail_id,
+            'bobot_kd'=>$bobot_kd['bobot'],
+        ]);
+
+
             return response()->json([
-            'message'=>'Gagal Data Data sudah ada',
+            'message'=>'Data telah di ubah',
             'data'=>$ambildatasebelumnya,
         ]);
         // break;
