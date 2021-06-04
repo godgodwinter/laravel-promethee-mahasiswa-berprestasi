@@ -32,6 +32,8 @@ import kriteriaShow from '../views/kriteriadetail/Show'
 import dataprosesRead from '../views/dataproses/Table'
 
 
+// PROSESHITUNG
+import proseshitungRead from '../views/proseshitung/Table'
 
 
 
@@ -178,6 +180,14 @@ export default {
                     auth: true
                   },
                 component:dataprosesRead
+            },
+            {
+                path:'/proseshitung/table/:id',
+                name:'proseshitung.table',
+                meta: {
+                    auth: true
+                  },
+                component:proseshitungRead
             },
 
 
