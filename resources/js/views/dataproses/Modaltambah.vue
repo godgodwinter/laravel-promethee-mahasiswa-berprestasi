@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Tambah</h4>
+          <h4 class="modal-title">Tambah Peserta</h4>
           <button type="button" class="btn btn-sm" v-on:click="closeModal">
           <span aria-hidden="true">&times;</span>
           </button>
