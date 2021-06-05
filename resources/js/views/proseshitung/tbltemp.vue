@@ -116,7 +116,6 @@
         </table>
        </div>
 
-
 <div class="container">
            <div class="row mt-4">
                <div class="col-lg-12">
@@ -130,53 +129,40 @@
                     <tr class="text-center">
                         <th width="5%">NO</th>
                         <th width="20%">NAMA</th>
-                         <th width="26%" v-for="datadua,indexdua in datasdua" ::key="datadua.id"><span class="d-inline-block text-truncate"  style="max-width: 15%x;">
-                              A {{ indexdua+1 }} = {{  datadua.nama  }}</span></th>
+                         <th width="26%" v-for="datadua,indexdua in datasdua" ::key="datadua.id"><span class="d-inline-block text-truncate"  style="max-width: 15%x;"> A {{ indexdua+1 }} = {{  datadua.nama  }}</span></th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="data,index in datas" ::key="data.id">
-                        <td  class="text-center">
-
-                             A{{ index+1 }}
-                            <!-- A {{ indexdatasatu=data.nim }} -->
-
-                        </td>
+                        <td  class="text-center"> A {{ indexdatasatu=index+1 }} </td>
                         <td ><span class="d-inline-block text-truncate"  style="max-width: 200px;"> &nbsp;{{data.nim}} - {{data.nama}}</span></td>
 
 
-                        <td class="text-center" v-for="datadua,indexdua in datasdua" ::key="datadua.id">
+                    <td class="text-center" v-for="datadua,indexdua in datasdua" ::key="datadua.id">
 
-                            <!-- <i>A {{ indexdatasatu }} -  A {{ indexdatadua=datadua.nim }}</i>
-                            <hr> -->
-                            <div v-if="data.nim==datadua.nim">
-                                    0
-                                            <!-- {{ checknull(1) }} -->
-                            </div>
-                            <div v-if="data.nim!=datadua.nim">
+                          <i>A {{ indexdatasatu }} -  A {{ indexdata=indexdua+1 }}</i>
+                          <hr>
+                        <div v-if="index==indexdua">0</div>
+                        <div v-if="index!=indexdua">
 
-                                    <div class="text-center" v-for="kriteria,indexkit in kriterias" ::key="kriteria.id">
+                                <div class="text-center" v-for="kriteria,index in kriterias" ::key="kriteria.id">
 
-                                        <div>
+                                    <div>
 
-                                            <!-- {{ checknull(1) }} -->
-
-                                            <!-- (A{{ data.nim }}) -->
-                                                <b> {{ a_satu=checknull(ddetail[data.nim+'-'+kriteria.id]) }}</b>
-                                                -
-                                            <!-- (A{{ datadua.nim }})  -->
-                                            <b>{{ a_dua=checknull(ddetail[datadua.nim+'-'+kriteria.id]) }} </b>
-                                            = <b>{{ hasilpenjumlahan=a_satu-a_dua }}</b> <i>diubah jadi </i>
-                                             {{ hasilf[data.nim+'-'+datadua.nim+'-'+kriteria.id]=hasilsatuornol(hasilpenjumlahan) }}
-
-
-                                        </div>
-
+                                        (A{{ indexdatasatu }}) <b>{{ a_satu=checknull(ddetail[data.nim+'-'+kriteria.id]) }} </b> -
+                                        (A{{ indexdua+1 }}) <b> {{ a_dua=checknull(ddetail[datadua.nim+'-'+kriteria.id]) }} </b>
+                                        = <b>{{ hasilpenjumlahan=a_satu-a_dua }}</b> <i>diubah jadi </i> {{ hasilf[indexdatasatu+'-'+indexdua+'-'+index]=hasilsatuornol(hasilpenjumlahan) }}
                                     </div>
-                            </div>
 
-                        </td>
+                                    <!-- {{ hasilf[indexdatasatu+'-'+indexdua] }}==
+                                     {{  indexdatasatu }} -  {{  indexdua }} == -->
+
+                                </div>
+                        </div>
+
+                    </td>
+
 
                     </tr>
 
@@ -199,57 +185,43 @@
                     <tr class="text-center">
                         <th width="5%">NO</th>
                         <th width="20%">NAMA</th>
-                         <th width="26%" v-for="datadua,indexdua in datasdua" ::key="datadua.id"><span class="d-inline-block text-truncate"  style="max-width: 15%x;">
-                              A {{ indexdua+1 }} = {{  datadua.nama  }}</span></th>
+                         <th width="26%" v-for="datadua,indexdua in datasdua" ::key="datadua.id"><span class="d-inline-block text-truncate"  style="max-width: 15%x;"> A {{ indexdua+1 }} = {{  datadua.nama  }}</span></th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="data,index in datas" ::key="data.id">
-                        <td  class="text-center">
-
-                             A{{ index+1 }}
-                            <!-- A {{ indexdatasatu=data.nim }} -->
-
-                        </td>
-                        <td ><span class="d-inline-block text-truncate"  style="max-width: 200px;"> &nbsp;{{data.nim}} - {{data.nama}}</span></td>
+                        <td  class="text-center"> A {{ indexdatasatu=index+1 }} </td>
+                        <td ><span class="d-inline-block text-truncate"  style="max-width: 200px;"> {{data.nama}}</span></td>
 
 
-                        <td class="text-center" v-for="datadua,indexdua in datasdua" ::key="datadua.id">
+                    <td class="text-center" v-for="datadua,indexdua in datasdua" ::key="datadua.id">
 
-                            <input type="hidden" v-text="hasiljml_untukentring[datadua.nim]=0">
+                            <input type="hidden" v-text="hasiljml_untukentring[indexdua]=0">
                             <!-- <div v-text="hasiljml_k[indexdatasatu+'-'+indexdua]=0"></div> -->
-                            <input type="hidden" v-text="hasiljml_k[data.nim+'-'+datadua.nim]=0">
-                            <!-- <hr> -->
-                            <div v-if="data.nim==datadua.nim">
-                                    0
-                                            <!-- {{ checknull(1) }} -->
-                            </div>
-                            <div v-if="data.nim!=datadua.nim">
+                            <input type="hidden" v-text="hasiljml_k[indexdatasatu+'-'+indexdua]=0">
+                          <i>A {{ indexdatasatu }} -  A {{ indexdua+1 }}</i>
+                          <hr>
+                        <div v-if="index==indexdua">0</div>
+                        <div v-if="index!=indexdua">
 
                                 <div class="text-center" v-for="kriteria,index in kriterias" ::key="kriteria.id">
-                                        <div>
-                                            <!-- {{  data.nim }} --  {{  datadua.nim }} == -->
-                                            k1({{ index }}) = {{ hasilf[data.nim+'-'+datadua.nim+'-'+kriteria.id] }}
-                                            <input type="hidden" v-text="hasiljml_k[data.nim+'-'+datadua.nim]+=hasilf[data.nim+'-'+datadua.nim+'-'+kriteria.id]">
-                                        </div>
+
+                                    <div>
+                                        <!-- {{  indexdatasatu }} --  {{  indexdua }} == -->
+                                        k1({{ index }}) = {{ hasilf[indexdatasatu+'-'+indexdua+'-'+index] }}
+                                        <input type="hidden" v-text="hasiljml_k[indexdatasatu+'-'+indexdua]+=hasilf[indexdatasatu+'-'+indexdua+'-'+index]">
+                                    </div>
+
                                 </div>
+                                Jumlah k : <b>{{ hasiljml_k[indexdatasatu+'-'+indexdua] }}</b>
+                                    <br>
+                                Dibagi kriteri (k/jmlh kriteria) : {{ hasiljml_k[indexdatasatu+'-'+indexdua] }} / {{ kriterias.length }} =
+                                <b>{{ hasil_k_per_jmlh_k[indexdatasatu+'-'+indexdua]=check_k_null(hasiljml_k[indexdatasatu+'-'+indexdua],kriterias.length)}}</b>
+                        </div>
 
-                                Jumlah k : <b>{{ hasiljml_k[data.nim+'-'+datadua.nim] }}</b>
-                                <br>
+                    </td>
 
-                                Dibagi kriteri (k/jmlh kriteria) : {{ hasiljml_k[data.nim+'-'+datadua.nim] }} / {{ kriterias.length }} =
-
-                            <div v-if="hasiljml_k[data.nim+'-'+datadua.nim]==0">
-                                {{ hasil_k_per_jmlh_k[data.nim+'-'+datadua.nim]=0 }}
-                            </div>
-                            <div v-if="hasiljml_k[data.nim+'-'+datadua.nim]!=0">
-                               <b> {{ hasil_k_per_jmlh_k[data.nim+'-'+datadua.nim]=(hasiljml_k[data.nim+'-'+datadua.nim]/kriterias.length)}}</b>
-                            </div>
-                                <!-- <b>{{ hasil_k_per_jmlh_k[data.nim+'-'+datadua.nim]=check_k_null(hasiljml_k[data.nim+'-'+datadua.nim],kriterias.length)}}</b> -->
-                            </div>
-
-                        </td>
 
                     </tr>
 
@@ -262,10 +234,11 @@
 <div class="container">
            <div class="row mt-4">
                <div class="col-lg-12">
-                   <h3>LANGKAH 4 : Menghitung Leaving Flow dan Entring Flow</h3>
+                  <h3>LANGKAH 4 : Menghitung Leaving Flow dan Entring Flow</h3>
                   <p>*)Leaving Flow = Jumlahkan hasil proses sebelumnya per data pertama. Kemudia gunakan rumus 1/jumlah kriteria-1 kemudian di kali hasil penjumlahan per data pertama</p>
                    <p>*)Entring Flow = Jumlahkan hasil proses sebelumnya per data kedua. Kemudia gunakan rumus 1/jumlah kriteria-1 kemudian di kali hasil penjumlahan per data kedua</p>
- </div>
+
+               </div>
 
            </div>
         <table class="table table-bordered table-striped table-hover table-sm">
@@ -273,8 +246,7 @@
                     <tr class="text-center">
                         <th width="5%">NO</th>
                         <th width="10%">NAMA</th>
-                         <th width="5%" v-for="datadua,indexdua in datasdua" ::key="datadua.id"><span class="d-inline-block text-truncate"  style="max-width: 15%x;">
-                              A {{ indexdua+1 }} = {{  datadua.nama  }}</span></th>
+                         <th width="5%" v-for="datadua,indexdua in datasdua" ::key="datadua.id"><span class="d-inline-block text-truncate"  style="max-width: 15%x;"> A {{ indexdua+1 }} = {{  datadua.nama  }}</span></th>
                         <th width="5%">JUMLAH</th>
                         <th width="15%">LEAVING FLOW<br>
                         1/({{ kriterias.length }}-1) * jumlah
@@ -286,63 +258,58 @@
                 </thead>
                 <tbody>
                     <tr v-for="data,index in datas" ::key="data.id">
-                        <td  class="text-center">
-
-                            <input type="hidden" v-text="hasiljml_untukleaving[data.nim]=0">
-                             A{{ index+1 }}
-                            <!-- A {{ indexdatasatu=data.nim }} -->
-
-                        </td>
-                        <td ><span class="d-inline-block text-truncate"  style="max-width: 200px;"> &nbsp;{{data.nim}} - {{data.nama}}</span></td>
+                        <td  class="text-center"> A {{ indexdatasatu=index+1 }} </td>
+                            <input type="hidden" v-text="hasiljml_untukleaving[indexdatasatu]=0">
+                        <td ><span class="d-inline-block text-truncate"  style="max-width: 200px;"> {{data.nama}}</span></td>
 
 
-                        <td class="text-center" v-for="datadua,indexdua in datasdua" ::key="datadua.id">
-
+                    <td class="text-center" v-for="datadua,indexdua in datasdua" ::key="datadua.id">
                             <!-- <div v-text="hasiljml_k[indexdatasatu+'-'+indexdua]=0"></div> -->
-                            <input type="hidden" v-text="hasiljml_k[data.nim+'-'+datadua.nim]=0">
-                            <!-- <hr> -->
-                            <div v-if="data.nim==datadua.nim">
-                                    0
-                                            <!-- {{ checknull(1) }} -->
-                            </div>
-                            <div v-if="data.nim!=datadua.nim">
+
+                          <i>A {{ indexdatasatu }} -  A {{ indexdua+1 }}</i>
+                          <hr>
+                        <div v-if="index==indexdua">0</div>
+                        <div v-if="index!=indexdua">
+
+                                <div class="text-center" v-for="kriteria,index in kriterias" ::key="kriteria.id">
 
 
+                                </div>
 
-                            <input type="hidden" v-text="hasiljml_untukleaving[data.nim]+=hasil_k_per_jmlh_k[data.nim+'-'+datadua.nim]">
-                            <input type="hidden" v-text="hasiljml_untukentring[datadua.nim]+=hasil_k_per_jmlh_k[data.nim+'-'+datadua.nim]">
+                            <input type="hidden" v-text="hasiljml_untukleaving[indexdatasatu]+=hasil_k_per_jmlh_k[indexdatasatu+'-'+indexdua]">
+                            <input type="hidden" v-text="hasiljml_untukentring[indexdua]+=hasil_k_per_jmlh_k[indexdatasatu+'-'+indexdua]">
 
-                                <b>{{ hasil_k_per_jmlh_k[data.nim+'-'+datadua.nim]}}</b>
+                                <b>{{ hasil_k_per_jmlh_k[indexdatasatu+'-'+indexdua]}}</b>
 
-                            </div>
+                        </div>
 
-                        </td>
+                    </td>
+                    <td class="text-center">
+                        {{ hasiljml_untukleaving[indexdatasatu].toFixed(2) }}
+                    </td>
+                    <td class="text-center">
+                        1/{{ kriterias.length-1 }} * {{ hasiljml_untukleaving[indexdatasatu].toFixed(2) }}=
+                        <br>
+                       <b> {{ leavingflow[data.nim]=((1/(kriterias.length-1))*hasiljml_untukleaving[indexdatasatu].toFixed(4)) }}</b>
+                    </td>
 
-                        <td class="text-center">
-                            {{ hasiljml_untukleaving[data.nim].toFixed(2) }}
-                        </td>
-                        <td class="text-center">
-                            1/{{ kriterias.length-1 }} * {{ hasiljml_untukleaving[data.nim].toFixed(2) }}=
-                            <br>
-                            <b> {{ leavingflow[data.nim]=((1/(kriterias.length-1))*hasiljml_untukleaving[data.nim].toFixed(2)) }}</b>
-                        </td>
                     </tr>
                     <tr>
                         <td colspan="2"><b>JUMLAH</b>
                           <td class="text-center" v-for="datadua,indexdua in datasdua" ::key="datadua.id">
-                                {{ hasiljml_untukentring[datadua.nim].toFixed(2)  }}
+                                {{ hasiljml_untukentring[indexdua] }}
                           </td>
                         </td>
                         <td class="text-center">-</td>
                         <td class="text-center">-</td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td colspan="2"><b>ENTRING FLOW <br>
                         1/({{ kriterias.length }}-1) * jumlah</b></td>
                           <td class="text-center" v-for="datadua,indexdua in datasdua" ::key="datadua.id">
-                               1/{{ kriterias.length-1 }} * {{ hasiljml_untukentring[datadua.nim].toFixed(2) }}=
+                               1/{{ kriterias.length-1 }} * {{ hasiljml_untukentring[indexdua].toFixed(4) }}=
 
-                               <b> {{ entringflow[datadua.nim]=((1/(kriterias.length-1))*hasiljml_untukentring[datadua.nim].toFixed(2)) }}</b>
+                               <b> {{ entringflow[datadua.nim]=((1/(kriterias.length-1))*hasiljml_untukentring[indexdua].toFixed(4)) }}</b>
 
 
                           </td>
@@ -353,6 +320,9 @@
                 </tbody>
         </table>
        </div>
+
+
+
 
 
 <div class="container">
@@ -405,8 +375,6 @@
                 </tbody>
         </table>
        </div>
-
-
 
     </div>
 </template>
@@ -464,15 +432,15 @@ export default {
         do_arr_untuk_sorting(nim,netflow){
             // console.log(nim+'===='+netflow);
         },
-        // check_k_null(isi_k,jml_kriteria){
-        //     // console.log(jml_kriteria);
-        //     if(isi_k!=0){
-        //         this.hasil_check_k_null=isi_k/jml_kriteria;
-        //         return this.hasil_check_k_null;
-        //     }else{
-        //         return 0;
-        //     }
-        // },
+        check_k_null(isi_k,jml_kriteria){
+            // console.log(jml_kriteria);
+            if(isi_k==0){
+                return 0;
+            }else{
+                this.hasil_check_k_null=isi_k/jml_kriteria;
+                return this.hasil_check_k_null;
+            }
+        },
         hasilsatuornol(isi){
             if(isi>0){
                 this.hasilceksatuornol=1;
@@ -482,13 +450,12 @@ export default {
             return this.hasilceksatuornol;
         },
         checknull(isi){
-            // console.log(isi);
             if(isi!=null){
-                return this.hasilchecknull=isi;
+                this.hasilchecknull=isi;
             }else{
-                return this.hasilchecknull=0;
+                this.hasilchecknull=0;
             }
-                // this.hasilchecknull;
+            return this.hasilchecknull;
         },
     async kirimdata(dataNim,dataId,KriteriaId){
         this.form.id=dataId;

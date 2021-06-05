@@ -8965,6 +8965,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -8995,6 +9036,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       leavingflow: [],
       entringflow: [],
       netflow: [],
+      arrHasilakhirtemp: [],
+      arrHasilakhir: [],
       isModalVisible: false,
       isModalktVisible: false
     };
@@ -9005,14 +9048,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getDatasDetail();
   },
   methods: {
-    check_k_null: function check_k_null(isi_k, jml_kriteria) {
-      if (isi_k == 0) {
-        return 0;
-      } else {
-        this.hasil_check_k_null = isi_k / jml_kriteria;
-        return this.hasil_check_k_null;
-      }
+    do_arr_untuk_sorting: function do_arr_untuk_sorting(nim, netflow) {// console.log(nim+'===='+netflow);
     },
+    // check_k_null(isi_k,jml_kriteria){
+    //     // console.log(jml_kriteria);
+    //     if(isi_k!=0){
+    //         this.hasil_check_k_null=isi_k/jml_kriteria;
+    //         return this.hasil_check_k_null;
+    //     }else{
+    //         return 0;
+    //     }
+    // },
     hasilsatuornol: function hasilsatuornol(isi) {
       if (isi > 0) {
         this.hasilceksatuornol = 1;
@@ -9023,13 +9069,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.hasilceksatuornol;
     },
     checknull: function checknull(isi) {
+      // console.log(isi);
       if (isi != null) {
-        this.hasilchecknull = isi;
+        return this.hasilchecknull = isi;
       } else {
-        this.hasilchecknull = 0;
-      }
+        return this.hasilchecknull = 0;
+      } // this.hasilchecknull;
 
-      return this.hasilchecknull;
     },
     kirimdata: function kirimdata(dataNim, dataId, KriteriaId) {
       var _this = this;
@@ -59296,7 +59342,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            " A " +
+                            "\n                              A " +
                               _vm._s(indexdua + 1) +
                               " = " +
                               _vm._s(datadua.nama)
@@ -59320,7 +59366,9 @@ var render = function() {
                 [
                   _c("td", { staticClass: "text-center" }, [
                     _vm._v(
-                      " A " + _vm._s((_vm.indexdatasatu = index + 1)) + " "
+                      "\n\n                             A" +
+                        _vm._s(index + 1) +
+                        "\n                            "
                     )
                   ]),
                   _vm._v(" "),
@@ -59347,23 +59395,21 @@ var render = function() {
                         attrs: { ":key": datadua.id }
                       },
                       [
-                        _c("i", [
-                          _vm._v(
-                            "A " +
-                              _vm._s(_vm.indexdatasatu) +
-                              " -  A " +
-                              _vm._s((_vm.indexdata = indexdua + 1))
-                          )
-                        ]),
+                        data.nim == datadua.nim
+                          ? _c("div", [
+                              _vm._v(
+                                "\n                                    0\n                                            "
+                              )
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        index == indexdua ? _c("div", [_vm._v("0")]) : _vm._e(),
-                        _vm._v(" "),
-                        index != indexdua
+                        data.nim != datadua.nim
                           ? _c(
                               "div",
-                              _vm._l(_vm.kriterias, function(kriteria, index) {
+                              _vm._l(_vm.kriterias, function(
+                                kriteria,
+                                indexkit
+                              ) {
                                 return _c(
                                   "div",
                                   {
@@ -59372,44 +59418,35 @@ var render = function() {
                                   },
                                   [
                                     _c("div", [
+                                      _c("b", [
+                                        _vm._v(
+                                          " " +
+                                            _vm._s(
+                                              (_vm.a_satu = _vm.checknull(
+                                                _vm.ddetail[
+                                                  data.nim + "-" + kriteria.id
+                                                ]
+                                              ))
+                                            )
+                                        )
+                                      ]),
                                       _vm._v(
-                                        "\n\n                                        (A" +
-                                          _vm._s(_vm.indexdatasatu) +
-                                          ") "
+                                        "\n                                                -\n                                            "
                                       ),
+                                      _vm._v(" "),
                                       _c("b", [
                                         _vm._v(
                                           _vm._s(
-                                            (_vm.a_satu = _vm.checknull(
+                                            (_vm.a_dua = _vm.checknull(
                                               _vm.ddetail[
-                                                data.nim + "-" + kriteria.id
+                                                datadua.nim + "-" + kriteria.id
                                               ]
                                             ))
                                           ) + " "
                                         )
                                       ]),
                                       _vm._v(
-                                        " -\n                                        (A" +
-                                          _vm._s(indexdua + 1) +
-                                          ") "
-                                      ),
-                                      _c("b", [
-                                        _vm._v(
-                                          " " +
-                                            _vm._s(
-                                              (_vm.a_dua = _vm.checknull(
-                                                _vm.ddetail[
-                                                  datadua.nim +
-                                                    "-" +
-                                                    kriteria.id
-                                                ]
-                                              ))
-                                            ) +
-                                            " "
-                                        )
-                                      ]),
-                                      _vm._v(
-                                        "\n                                        = "
+                                        "\n                                            = "
                                       ),
                                       _c("b", [
                                         _vm._v(
@@ -59422,19 +59459,19 @@ var render = function() {
                                       _vm._v(" "),
                                       _c("i", [_vm._v("diubah jadi ")]),
                                       _vm._v(
-                                        " " +
+                                        "\n                                             " +
                                           _vm._s(
                                             (_vm.hasilf[
-                                              _vm.indexdatasatu +
+                                              data.nim +
                                                 "-" +
-                                                indexdua +
+                                                datadua.nim +
                                                 "-" +
-                                                index
+                                                kriteria.id
                                             ] = _vm.hasilsatuornol(
                                               _vm.hasilpenjumlahan
                                             ))
                                           ) +
-                                          "\n                                    "
+                                          "\n\n\n                                        "
                                       )
                                     ])
                                   ]
@@ -59487,7 +59524,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            " A " +
+                            "\n                              A " +
                               _vm._s(indexdua + 1) +
                               " = " +
                               _vm._s(datadua.nama)
@@ -59511,7 +59548,9 @@ var render = function() {
                 [
                   _c("td", { staticClass: "text-center" }, [
                     _vm._v(
-                      " A " + _vm._s((_vm.indexdatasatu = index + 1)) + " "
+                      "\n\n                             A" +
+                        _vm._s(index + 1) +
+                        "\n                            "
                     )
                   ]),
                   _vm._v(" "),
@@ -59542,7 +59581,7 @@ var render = function() {
                           attrs: { type: "hidden" },
                           domProps: {
                             textContent: _vm._s(
-                              (_vm.hasiljml_untukentring[indexdua] = 0)
+                              (_vm.hasiljml_untukentring[datadua.nim] = 0)
                             )
                           }
                         }),
@@ -59551,27 +59590,20 @@ var render = function() {
                           attrs: { type: "hidden" },
                           domProps: {
                             textContent: _vm._s(
-                              (_vm.hasiljml_k[
-                                _vm.indexdatasatu + "-" + indexdua
-                              ] = 0)
+                              (_vm.hasiljml_k[data.nim + "-" + datadua.nim] = 0)
                             )
                           }
                         }),
                         _vm._v(" "),
-                        _c("i", [
-                          _vm._v(
-                            "A " +
-                              _vm._s(_vm.indexdatasatu) +
-                              " -  A " +
-                              _vm._s(indexdua + 1)
-                          )
-                        ]),
+                        data.nim == datadua.nim
+                          ? _c("div", [
+                              _vm._v(
+                                "\n                                    0\n                                            "
+                              )
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        index == indexdua ? _c("div", [_vm._v("0")]) : _vm._e(),
-                        _vm._v(" "),
-                        index != indexdua
+                        data.nim != datadua.nim
                           ? _c(
                               "div",
                               [
@@ -59588,39 +59620,33 @@ var render = function() {
                                     [
                                       _c("div", [
                                         _vm._v(
-                                          "\n                                     " +
-                                            _vm._s(_vm.indexdatasatu) +
-                                            " --  " +
-                                            _vm._s(indexdua) +
-                                            " ==\n                                       k1(" +
+                                          "\n                                            k1(" +
                                             _vm._s(index) +
                                             ") = " +
                                             _vm._s(
                                               _vm.hasilf[
-                                                _vm.indexdatasatu +
+                                                data.nim +
                                                   "-" +
-                                                  indexdua +
+                                                  datadua.nim +
                                                   "-" +
-                                                  index
+                                                  kriteria.id
                                               ]
                                             ) +
-                                            "\n                                       "
+                                            "\n                                            "
                                         ),
                                         _c("input", {
                                           attrs: { type: "hidden" },
                                           domProps: {
                                             textContent: _vm._s(
                                               (_vm.hasiljml_k[
-                                                _vm.indexdatasatu +
-                                                  "-" +
-                                                  indexdua
+                                                data.nim + "-" + datadua.nim
                                               ] +=
                                                 _vm.hasilf[
-                                                  _vm.indexdatasatu +
+                                                  data.nim +
                                                     "-" +
-                                                    indexdua +
+                                                    datadua.nim +
                                                     "-" +
-                                                    index
+                                                    kriteria.id
                                                 ])
                                             )
                                           }
@@ -59630,13 +59656,13 @@ var render = function() {
                                   )
                                 }),
                                 _vm._v(
-                                  "\n                                Jumlah k : "
+                                  "\n\n                                Jumlah k : "
                                 ),
                                 _c("b", [
                                   _vm._v(
                                     _vm._s(
                                       _vm.hasiljml_k[
-                                        _vm.indexdatasatu + "-" + indexdua
+                                        data.nim + "-" + datadua.nim
                                       ]
                                     )
                                   )
@@ -59644,30 +59670,49 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("br"),
                                 _vm._v(
-                                  "\n                                Dibagi kriteri (k/jmlh kriteria) : " +
+                                  "\n\n                                Dibagi kriteri (k/jmlh kriteria) : " +
                                     _vm._s(
                                       _vm.hasiljml_k[
-                                        _vm.indexdatasatu + "-" + indexdua
+                                        data.nim + "-" + datadua.nim
                                       ]
                                     ) +
                                     " / " +
                                     _vm._s(_vm.kriterias.length) +
-                                    " =\n                                "
+                                    " =\n\n                            "
                                 ),
-                                _c("b", [
-                                  _vm._v(
-                                    _vm._s(
-                                      (_vm.hasil_k_per_jmlh_k[
-                                        _vm.indexdatasatu + "-" + indexdua
-                                      ] = _vm.check_k_null(
-                                        _vm.hasiljml_k[
-                                          _vm.indexdatasatu + "-" + indexdua
-                                        ],
-                                        _vm.kriterias.length
-                                      ))
-                                    )
-                                  )
-                                ])
+                                _vm.hasiljml_k[data.nim + "-" + datadua.nim] ==
+                                0
+                                  ? _c("div", [
+                                      _vm._v(
+                                        "\n                                " +
+                                          _vm._s(
+                                            (_vm.hasil_k_per_jmlh_k[
+                                              data.nim + "-" + datadua.nim
+                                            ] = 0)
+                                          ) +
+                                          "\n                            "
+                                      )
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.hasiljml_k[data.nim + "-" + datadua.nim] !=
+                                0
+                                  ? _c("div", [
+                                      _c("b", [
+                                        _vm._v(
+                                          " " +
+                                            _vm._s(
+                                              (_vm.hasil_k_per_jmlh_k[
+                                                data.nim + "-" + datadua.nim
+                                              ] =
+                                                _vm.hasiljml_k[
+                                                  data.nim + "-" + datadua.nim
+                                                ] / _vm.kriterias.length)
+                                            )
+                                        )
+                                      ])
+                                    ])
+                                  : _vm._e()
                               ],
                               2
                             )
@@ -59701,12 +59746,12 @@ var render = function() {
               [
                 _c("th", { attrs: { width: "5%" } }, [_vm._v("NO")]),
                 _vm._v(" "),
-                _c("th", { attrs: { width: "20%" } }, [_vm._v("NAMA")]),
+                _c("th", { attrs: { width: "10%" } }, [_vm._v("NAMA")]),
                 _vm._v(" "),
                 _vm._l(_vm.datasdua, function(datadua, indexdua) {
                   return _c(
                     "th",
-                    { attrs: { width: "20%", ":key": datadua.id } },
+                    { attrs: { width: "5%", ":key": datadua.id } },
                     [
                       _c(
                         "span",
@@ -59716,7 +59761,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            " A " +
+                            "\n                              A " +
                               _vm._s(indexdua + 1) +
                               " = " +
                               _vm._s(datadua.nama)
@@ -59752,19 +59797,20 @@ var render = function() {
                   { attrs: { ":key": data.id } },
                   [
                     _c("td", { staticClass: "text-center" }, [
+                      _c("input", {
+                        attrs: { type: "hidden" },
+                        domProps: {
+                          textContent: _vm._s(
+                            (_vm.hasiljml_untukleaving[data.nim] = 0)
+                          )
+                        }
+                      }),
                       _vm._v(
-                        " A " + _vm._s((_vm.indexdatasatu = index + 1)) + " "
+                        "\n                             A" +
+                          _vm._s(index + 1) +
+                          "\n                            "
                       )
                     ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: { type: "hidden" },
-                      domProps: {
-                        textContent: _vm._s(
-                          (_vm.hasiljml_untukleaving[_vm.indexdatasatu] = 0)
-                        )
-                      }
-                    }),
                     _vm._v(" "),
                     _c("td", [
                       _c(
@@ -59789,73 +59835,61 @@ var render = function() {
                           attrs: { ":key": datadua.id }
                         },
                         [
-                          _c("i", [
-                            _vm._v(
-                              "A " +
-                                _vm._s(_vm.indexdatasatu) +
-                                " -  A " +
-                                _vm._s(indexdua + 1)
-                            )
-                          ]),
+                          _c("input", {
+                            attrs: { type: "hidden" },
+                            domProps: {
+                              textContent: _vm._s(
+                                (_vm.hasiljml_k[
+                                  data.nim + "-" + datadua.nim
+                                ] = 0)
+                              )
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("hr"),
-                          _vm._v(" "),
-                          index == indexdua
-                            ? _c("div", [_vm._v("0")])
+                          data.nim == datadua.nim
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n                                    0\n                                            "
+                                )
+                              ])
                             : _vm._e(),
                           _vm._v(" "),
-                          index != indexdua
-                            ? _c(
-                                "div",
-                                [
-                                  _vm._l(_vm.kriterias, function(
-                                    kriteria,
-                                    index
-                                  ) {
-                                    return _c("div", {
-                                      staticClass: "text-center",
-                                      attrs: { ":key": kriteria.id }
-                                    })
-                                  }),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    attrs: { type: "hidden" },
-                                    domProps: {
-                                      textContent: _vm._s(
-                                        (_vm.hasiljml_untukleaving[
-                                          _vm.indexdatasatu
-                                        ] +=
-                                          _vm.hasil_k_per_jmlh_k[
-                                            _vm.indexdatasatu + "-" + indexdua
-                                          ])
-                                      )
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    attrs: { type: "hidden" },
-                                    domProps: {
-                                      textContent: _vm._s(
-                                        (_vm.hasiljml_untukentring[indexdua] +=
-                                          _vm.hasil_k_per_jmlh_k[
-                                            _vm.indexdatasatu + "-" + indexdua
-                                          ])
-                                      )
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("b", [
-                                    _vm._v(
-                                      _vm._s(
+                          data.nim != datadua.nim
+                            ? _c("div", [
+                                _c("input", {
+                                  attrs: { type: "hidden" },
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      (_vm.hasiljml_untukleaving[data.nim] +=
                                         _vm.hasil_k_per_jmlh_k[
-                                          _vm.indexdatasatu + "-" + indexdua
-                                        ]
-                                      )
+                                          data.nim + "-" + datadua.nim
+                                        ])
                                     )
-                                  ])
-                                ],
-                                2
-                              )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("input", {
+                                  attrs: { type: "hidden" },
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      (_vm.hasiljml_untukentring[datadua.nim] +=
+                                        _vm.hasil_k_per_jmlh_k[
+                                          data.nim + "-" + datadua.nim
+                                        ])
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("b", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.hasil_k_per_jmlh_k[
+                                        data.nim + "-" + datadua.nim
+                                      ]
+                                    )
+                                  )
+                                ])
+                              ])
                             : _vm._e()
                         ]
                       )
@@ -59863,27 +59897,23 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", { staticClass: "text-center" }, [
                       _vm._v(
-                        "\n                        " +
+                        "\n                            " +
                           _vm._s(
-                            _vm.hasiljml_untukleaving[
-                              _vm.indexdatasatu
-                            ].toFixed(4)
+                            _vm.hasiljml_untukleaving[data.nim].toFixed(2)
                           ) +
-                          "\n                    "
+                          "\n                        "
                       )
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "text-center" }, [
                       _vm._v(
-                        "\n                        1/" +
+                        "\n                            1/" +
                           _vm._s(_vm.kriterias.length - 1) +
                           " * " +
                           _vm._s(
-                            _vm.hasiljml_untukleaving[
-                              _vm.indexdatasatu
-                            ].toFixed(4)
+                            _vm.hasiljml_untukleaving[data.nim].toFixed(2)
                           ) +
-                          "=\n                        "
+                          "=\n                            "
                       ),
                       _c("br"),
                       _vm._v(" "),
@@ -59893,9 +59923,7 @@ var render = function() {
                             _vm._s(
                               (_vm.leavingflow[data.nim] =
                                 (1 / (_vm.kriterias.length - 1)) *
-                                _vm.hasiljml_untukleaving[
-                                  _vm.indexdatasatu
-                                ].toFixed(4))
+                                _vm.hasiljml_untukleaving[data.nim].toFixed(2))
                             )
                         )
                       ])
@@ -59919,7 +59947,9 @@ var render = function() {
                       [
                         _vm._v(
                           "\n                                " +
-                            _vm._s(_vm.hasiljml_untukentring[indexdua]) +
+                            _vm._s(
+                              _vm.hasiljml_untukentring[datadua.nim].toFixed(2)
+                            ) +
                             "\n                          "
                         )
                       ]
@@ -59961,7 +59991,7 @@ var render = function() {
                             _vm._s(_vm.kriterias.length - 1) +
                             " * " +
                             _vm._s(
-                              _vm.hasiljml_untukentring[indexdua].toFixed(4)
+                              _vm.hasiljml_untukentring[datadua.nim].toFixed(2)
                             ) +
                             "=\n\n                               "
                         ),
@@ -59971,9 +60001,9 @@ var render = function() {
                               _vm._s(
                                 (_vm.entringflow[datadua.nim] =
                                   (1 / (_vm.kriterias.length - 1)) *
-                                  _vm.hasiljml_untukentring[indexdua].toFixed(
-                                    4
-                                  ))
+                                  _vm.hasiljml_untukentring[
+                                    datadua.nim
+                                  ].toFixed(2))
                               )
                           )
                         ])
@@ -60007,8 +60037,8 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.datas, function(data, index) {
-              return _c("tr", { attrs: { ":key": data.id } }, [
+            _vm._l(_vm.datas, function(dataakhir, index) {
+              return _c("tr", { attrs: { ":key": dataakhir.id } }, [
                 _c("td", { staticClass: "text-center" }, [
                   _vm._v(" A " + _vm._s((_vm.indexdatasatu = index + 1)) + " ")
                 ]),
@@ -60031,7 +60061,10 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "  " + _vm._s(data.nim) + " - " + _vm._s(data.nama)
+                        "  " +
+                          _vm._s(dataakhir.nim) +
+                          " - " +
+                          _vm._s(dataakhir.nama)
                       )
                     ]
                   )
@@ -60040,7 +60073,7 @@ var render = function() {
                 _c("td", { staticClass: "text-center" }, [
                   _vm._v(
                     "\n                            " +
-                      _vm._s(_vm.leavingflow[data.nim]) +
+                      _vm._s(_vm.leavingflow[dataakhir.nim]) +
                       "\n                        "
                   )
                 ]),
@@ -60048,7 +60081,7 @@ var render = function() {
                 _c("td", { staticClass: "text-center" }, [
                   _vm._v(
                     "\n                            " +
-                      _vm._s(_vm.entringflow[data.nim]) +
+                      _vm._s(_vm.entringflow[dataakhir.nim]) +
                       "\n                        "
                   )
                 ]),
@@ -60057,11 +60090,19 @@ var render = function() {
                   _vm._v(
                     "\n                            " +
                       _vm._s(
-                        (_vm.netflow[data.nim] = (
-                          _vm.leavingflow[data.nim] - _vm.entringflow[data.nim]
+                        (_vm.netflow[dataakhir.nim] = (
+                          _vm.leavingflow[dataakhir.nim] -
+                          _vm.entringflow[dataakhir.nim]
                         ).toFixed(4))
                       ) +
-                      "\n                        "
+                      "\n\n                            "
+                  ),
+                  _vm._v(
+                    "\n                             " +
+                      _vm._s(
+                        _vm.do_arr_untuk_sorting(dataakhir.nim, dataakhir.nim)
+                      ) +
+                      "\n\n                             "
                   )
                 ])
               ])
