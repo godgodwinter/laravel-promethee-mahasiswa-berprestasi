@@ -9014,6 +9014,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -9040,12 +9081,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       nim: '',
       hasilhitung: '',
       thseleksi_id: this.$route.params.id
-    }), _defineProperty(_ref, "datas", []), _defineProperty(_ref, "datasdua", []), _defineProperty(_ref, "datasdetail", []), _defineProperty(_ref, "ddetail", []), _defineProperty(_ref, "kriterias", []), _defineProperty(_ref, "kriteriasShow", []), _defineProperty(_ref, "hasilf", []), _defineProperty(_ref, "hasilchecknull", ''), _defineProperty(_ref, "hasiljml_k", []), _defineProperty(_ref, "hasil_check_k_null", ''), _defineProperty(_ref, "hasil_k_per_jmlh_k", []), _defineProperty(_ref, "hasiljml_untukleaving", []), _defineProperty(_ref, "hasiljml_untukentring", []), _defineProperty(_ref, "leavingflow", []), _defineProperty(_ref, "entringflow", []), _defineProperty(_ref, "netflow", []), _defineProperty(_ref, "netflowisnan", ''), _defineProperty(_ref, "looppushto", 0), _defineProperty(_ref, "arrHasilakhirtemp", []), _defineProperty(_ref, "arrHasilakhir", []), _defineProperty(_ref, "isModalVisible", false), _defineProperty(_ref, "isModalktVisible", false), _ref;
+    }), _defineProperty(_ref, "datas", []), _defineProperty(_ref, "datasperingkat", []), _defineProperty(_ref, "datasdua", []), _defineProperty(_ref, "datasdetail", []), _defineProperty(_ref, "datasSeleksi", []), _defineProperty(_ref, "ddetail", []), _defineProperty(_ref, "kriterias", []), _defineProperty(_ref, "kriteriasShow", []), _defineProperty(_ref, "hasilf", []), _defineProperty(_ref, "hasilchecknull", ''), _defineProperty(_ref, "hasiljml_k", []), _defineProperty(_ref, "hasil_check_k_null", ''), _defineProperty(_ref, "hasil_k_per_jmlh_k", []), _defineProperty(_ref, "hasiljml_untukleaving", []), _defineProperty(_ref, "hasiljml_untukentring", []), _defineProperty(_ref, "leavingflow", []), _defineProperty(_ref, "entringflow", []), _defineProperty(_ref, "netflow", []), _defineProperty(_ref, "netflowisnan", ''), _defineProperty(_ref, "looppushto", 0), _defineProperty(_ref, "arrHasilakhirtemp", []), _defineProperty(_ref, "arrHasilakhir", []), _defineProperty(_ref, "isModalVisible", false), _defineProperty(_ref, "isModalktVisible", false), _ref;
   },
   mounted: function mounted() {
+    this.getThSeleksi();
     this.getDatas();
     this.getKriteria();
     this.getDatasDetail();
+    this.getDatasPeringkat();
   },
   methods: {
     do_pushto: function do_pushto(nim, hasilhitung) {
@@ -9329,107 +9372,134 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee3);
       }))();
     },
-    getKriteria: function getKriteria() {
+    getDatasPeringkat: function getDatasPeringkat() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var _yield$axios$get3, data, kriterias, _yield$axios$get4;
+        var _yield$axios$get3, data, datasperingkat;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.prev = 0;
-                _context4.next = 3;
-                return axios.get("/api/dataprosesdetailhitung/".concat(_this4.$route.params.id));
+                _context4.next = 2;
+                return axios.get("/api/dataprosesperingkat/".concat(_this4.$route.params.id));
 
-              case 3:
+              case 2:
                 _yield$axios$get3 = _context4.sent;
                 data = _yield$axios$get3.data;
-                _this4.kriterias = data.data;
-                kriterias = _this4.kriterias; // console.log(response.data.message);
+                _this4.datasperingkat = data.data;
+                datasperingkat = _this4.datasperingkat;
 
-                _context4.next = 17;
-                break;
-
-              case 9:
-                _context4.prev = 9;
-                _context4.t0 = _context4["catch"](0);
-                _context4.next = 13;
-                return axios.get("/api/kriteria");
-
-              case 13:
-                _yield$axios$get4 = _context4.sent;
-                data = _yield$axios$get4.data;
-                _this4.kriterias = data.data;
-                kriterias = _this4.kriterias;
-
-              case 17:
+              case 6:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 9]]);
+        }, _callee4);
       }))();
     },
-    getKriteriaDetail: function getKriteriaDetail(id) {
+    getKriteria: function getKriteria() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var _yield$axios$get5, data, kriteriasShow;
+        var _yield$axios$get4, data, kriterias, _yield$axios$get5;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                console.log("/api/kriteriadetail/".concat(id, "/show"));
+                _context5.prev = 0;
                 _context5.next = 3;
-                return axios.get("/api/dataproses/getkriteria/".concat(id));
+                return axios.get("/api/dataprosesdetailhitung/".concat(_this5.$route.params.id));
 
               case 3:
+                _yield$axios$get4 = _context5.sent;
+                data = _yield$axios$get4.data;
+                _this5.kriterias = data.data;
+                kriterias = _this5.kriterias; // console.log(response.data.message);
+
+                _context5.next = 17;
+                break;
+
+              case 9:
+                _context5.prev = 9;
+                _context5.t0 = _context5["catch"](0);
+                _context5.next = 13;
+                return axios.get("/api/kriteria");
+
+              case 13:
                 _yield$axios$get5 = _context5.sent;
                 data = _yield$axios$get5.data;
-                _this5.kriteriasShow = data.data;
-                kriteriasShow = _this5.kriteriasShow; // console.log(kriteriasShow);
+                _this5.kriterias = data.data;
+                kriterias = _this5.kriterias;
 
-              case 7:
+              case 17:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5);
+        }, _callee5, null, [[0, 9]]);
       }))();
     },
-    getDatasDetail: function getDatasDetail() {
+    getKriteriaDetail: function getKriteriaDetail(id) {
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-        var ddetail, jmllangkahsatu, ddetailnama, form, _yield$axios$get6, data, datasdetail, kriterias;
+        var _yield$axios$get6, data, kriteriasShow;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
+                console.log("/api/kriteriadetail/".concat(id, "/show"));
+                _context6.next = 3;
+                return axios.get("/api/dataproses/getkriteria/".concat(id));
+
+              case 3:
+                _yield$axios$get6 = _context6.sent;
+                data = _yield$axios$get6.data;
+                _this6.kriteriasShow = data.data;
+                kriteriasShow = _this6.kriteriasShow; // console.log(kriteriasShow);
+
+              case 7:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    getDatasDetail: function getDatasDetail() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var ddetail, jmllangkahsatu, ddetailnama, form, _yield$axios$get7, data, datasdetail, kriterias;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
                 ddetail = [];
                 jmllangkahsatu = [];
                 ddetailnama = [];
                 form = [];
-                _context6.next = 6;
-                return axios.get("/api/dataprosesdetail/".concat(_this6.$route.params.id));
+                _context7.next = 6;
+                return axios.get("/api/dataprosesdetail/".concat(_this7.$route.params.id));
 
               case 6:
-                _yield$axios$get6 = _context6.sent;
-                data = _yield$axios$get6.data;
-                _this6.datasdetail = data.data;
-                datasdetail = _this6.datasdetail;
-                kriterias = _this6.kriterias; // dataModels[0] = {
+                _yield$axios$get7 = _context7.sent;
+                data = _yield$axios$get7.data;
+                _this7.datasdetail = data.data;
+                datasdetail = _this7.datasdetail;
+                kriterias = _this7.kriterias; // dataModels[0] = {
                 //     childNodes: []
                 // };
                 // dataModels[0].childNodes[0] = {
                 //     appId: "foo"
                 // };
 
-                _this6.datas.forEach(function (e) {
+                _this7.datas.forEach(function (e) {
                   var showModalisi = [];
                   var datae = e; //  console.log(e['id']);
 
@@ -9453,7 +9523,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 // });
 
 
-                _this6.datasdetail.forEach(function (e, i) {
+                _this7.datasdetail.forEach(function (e, i) {
                   //    jmllangkahsatu['kriteria_id']+=jmllangkahsatu['kriteria_id'];
                   var nim = e['nim'];
                   var kriteria_id = e['kriteria_id']; //    ddetail='aaa';
@@ -9463,8 +9533,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   // console.log(ddetail[nim+'-'+kriteria_id]);
                 });
 
-                _this6.ddetail = ddetail;
-                _this6.ddetailnama = ddetailnama; // this.form=form;
+                _this7.ddetail = ddetail;
+                _this7.ddetailnama = ddetailnama; // this.form=form;
                 // console.log(this.form);
                 // this.datasdetail.forEach(function(e,i){
                 //         console.log(e['nim']);
@@ -9472,10 +9542,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 15:
               case "end":
-                return _context6.stop();
+                return _context7.stop();
             }
           }
-        }, _callee6);
+        }, _callee7);
+      }))();
+    },
+    getThSeleksi: function getThSeleksi() {
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.next = 2;
+                return axios.get("/api/thseleksi/".concat(_this8.$route.params.id));
+
+              case 2:
+                response = _context8.sent;
+                _this8.datasSeleksi = response.data.data;
+                console.log(_this8.datasSeleksi.kuota); // this.datasSeleksi = data.data
+                // let response = await axios.get('/api/notes');
+                // this.notes = response.data.dat
+
+              case 5:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
       }))();
     }
   }
@@ -54572,7 +54669,7 @@ var render = function() {
                 },
                 [_c("use", { attrs: { "xlink:href": "#bootstrap" } })]
               ),
-              _vm._v("\n    Navbar")
+              _vm._v("\n    PROMETHEE")
             ]
           ),
           _vm._v(" "),
@@ -54768,9 +54865,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _vm._v("\n    Ini Home Page\n")
-  ])
+  return _c("div", { staticClass: "container" }, [_vm._v("\n    Beranda\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -60244,6 +60339,75 @@ var render = function() {
           )
         ]
       )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row mt-4" }, [
+        _c("div", { staticClass: "col-lg-12" }, [
+          _c("h3", [_vm._v("LANGKAH 6 : Urutkan berdasarkan Netflow")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "Refresh halaman jika data belum terproses! Kuota : " +
+                _vm._s(_vm.datasSeleksi.kuota) +
+                " Orang"
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered table-striped table-hover table-sm"
+        },
+        [
+          _vm._m(9),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.datasperingkat, function(dp, index) {
+              return _c("tr", { attrs: { ":key": dp.id } }, [
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(" A " + _vm._s((_vm.indexdatasatu = index + 1)) + " ")
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "d-inline-block text-truncate",
+                      staticStyle: { "max-width": "200px" }
+                    },
+                    [_vm._v("  " + _vm._s(dp.nim) + " - " + _vm._s(dp.nama))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(" " + _vm._s(dp.hasilhitung) + " ")
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(" " + _vm._s(_vm.indexdatasatu) + " ")
+                ]),
+                _vm._v(" "),
+                index + 1 <= _vm.datasSeleksi.kuota
+                  ? _c("td", { staticClass: "text-center" }, [
+                      _vm._v(" LOLOS ")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                index + 1 > _vm.datasSeleksi.kuota
+                  ? _c("td", { staticClass: "text-center" }, [
+                      _vm._v(" TIDAK LOLOS ")
+                    ])
+                  : _vm._e()
+              ])
+            }),
+            0
+          )
+        ]
+      )
     ])
   ])
 }
@@ -60375,6 +60539,24 @@ var staticRenderFns = [
         _c("th", { attrs: { width: "20%" } }, [_vm._v("ENTERING FLOW")]),
         _vm._v(" "),
         _c("th", { attrs: { width: "20%" } }, [_vm._v("NET FLOW")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "text-center" }, [
+        _c("th", { attrs: { width: "5%" } }, [_vm._v("NO")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "10%" } }, [_vm._v("NAMA")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "10%" } }, [_vm._v("NET FLOW")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "10%" } }, [_vm._v("PERINGKAT")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "10%" } }, [_vm._v("STATUS")])
       ])
     ])
   }

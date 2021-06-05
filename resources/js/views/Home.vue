@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        Ini Home Page
+        Beranda
     </div>
 </template>
 

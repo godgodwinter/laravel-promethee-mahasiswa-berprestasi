@@ -48,7 +48,7 @@
         <div class="container-fluid">
             <router-link class="navbar-brand" href="/" to="/">
              <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      Navbar</router-link>
+      PROMETHEE</router-link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">

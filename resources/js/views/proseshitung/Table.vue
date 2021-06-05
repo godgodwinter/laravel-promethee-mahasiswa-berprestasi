@@ -412,6 +412,47 @@
        </div>
 
 
+<div class="container">
+           <div class="row mt-4">
+               <div class="col-lg-12">
+                  <h3>LANGKAH 6 : Urutkan berdasarkan Netflow</h3>
+                  <p>Refresh halaman jika data belum terproses! Kuota : {{ datasSeleksi.kuota }} Orang</p>
+
+
+               </div>
+
+           </div>
+        <table class="table table-bordered table-striped table-hover table-sm">
+                <thead>
+                    <tr class="text-center">
+                        <th width="5%">NO</th>
+                        <th width="10%">NAMA</th>
+                        <th width="10%">NET FLOW</th>
+                        <th width="10%">PERINGKAT</th>
+                        <th width="10%">STATUS</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr v-for="dp,index in datasperingkat" ::key="dp.id">
+                        <td  class="text-center"> A {{ indexdatasatu=index+1 }} </td>
+                        <td ><span class="d-inline-block text-truncate"  style="max-width: 200px;"> &nbsp;{{dp.nim}} - {{dp.nama}}</span></td>
+
+                        <td class="text-center"> {{ dp.hasilhitung }} </td>
+                        <td class="text-center"> {{ indexdatasatu }} </td>
+                        <td class="text-center" v-if="index+1<=datasSeleksi.kuota"> LOLOS </td>
+                        <td class="text-center" v-if="index+1>datasSeleksi.kuota"> TIDAK LOLOS </td>
+
+
+
+
+                    </tr>
+
+                </tbody>
+        </table>
+       </div>
+
 
 
     </div>
@@ -449,8 +490,10 @@ export default {
                 thseleksi_id:this.$route.params.id,
             },
             datas:[],
+            datasperingkat:[],
             datasdua:[],
             datasdetail:[],
+            datasSeleksi:[],
             ddetail:[],
             kriterias:[],
             kriteriasShow:[],
@@ -474,9 +517,11 @@ export default {
     },
 
     mounted(){
+        this.getThSeleksi();
         this.getDatas();
         this.getKriteria();
         this.getDatasDetail();
+        this.getDatasPeringkat();
 
     },
 
@@ -721,6 +766,13 @@ export default {
             // console.log(this.datas);
 
         },
+        async getDatasPeringkat(){
+            var {data} = await axios.get(`/api/dataprosesperingkat/${this.$route.params.id}`);
+            this.datasperingkat = data.data
+            var datasperingkat= this.datasperingkat;
+
+
+        },
         async getKriteria(){
 
 
@@ -820,6 +872,16 @@ export default {
 
             // });
         },
+        async getThSeleksi(){
+            // let {data} = await axios.get(`/api/thseleksi/${this.$route.params.id}`);
+              let response = await axios.get(`/api/thseleksi/${this.$route.params.id}`);
+            this.datasSeleksi = response.data.data
+            console.log(this.datasSeleksi.kuota);
+            // this.datasSeleksi = data.data
+
+            // let response = await axios.get('/api/notes');
+            // this.notes = response.data.dat
+        }
 
 
     }
