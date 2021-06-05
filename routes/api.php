@@ -60,6 +60,7 @@ use App\Http\Controllers\dataprosesController;
     Route::post('dataprosesdetail/store', [dataprosesController::class, 'dpdetailstore'])->name('dataprosesdetail.store');
 
     Route::get('dataprosesdetailhitung/{id}', [dataprosesController::class, 'dpdetailshowhitung'])->name('dataprosesdetailhitung.show');
+    Route::patch('dataprosesdetailhitung/edit', [dataprosesController::class, 'update'])->name('dataprosesdetail.update');
 
 
     Route::post('notes/create-new-note', [NotesController::class, 'store'])->name('notes.store');

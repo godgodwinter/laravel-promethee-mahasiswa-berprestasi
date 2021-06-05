@@ -4,6 +4,7 @@
            <div class="row">
                <div class="col-lg-6">
                   <h3>PROSES PERHITUNGAN</h3>
+
                </div>
                 <div class="col-lg-6 d-flex flex-row-reverse">
                    <router-link :to="{name:'dataproses.table',params:{id:this.$route.params.id}}" class="btn btn-warning btn-lg mb-2"><i class="feather icon-skip-back"></i>&nbsp;KEMBALI</router-link> &nbsp;
@@ -373,7 +374,6 @@
                         <th width="20%">ENTERING FLOW</th>
                         <th width="20%">NET FLOW</th>
 
-
                     </tr>
                 </thead>
                 <tbody>
@@ -390,8 +390,13 @@
                         <td class="text-center">
                             {{ netflow[dataakhir.nim]=(leavingflow[dataakhir.nim]-entringflow[dataakhir.nim]).toFixed(4) }}
 
+                            {{ do_pushto(dataakhir.nim,netflow[dataakhir.nim]) }}
+                              <!-- {{ do_update(dataakhir.id,dataakhir.nim,netflow[dataakhir.nim]) }} -->
+
+                            <input type="hidden" v-text="">
+
                             <!-- proses masukkan ke arrHasilakhir -->
-                             {{ do_arr_untuk_sorting(dataakhir.nim,dataakhir.nim) }}
+                             <!-- {{ do_arr_untuk_sorting(dataakhir.nim,dataakhir.nim) }} -->
 
                              <!-- {{ arrHasilakhirtemp }}
                              <input type="hidden" v-text="arrHasilakhir=hasil_k_per_jmlh_k[indexdatasatu+'-'+indexdua]"> -->
@@ -405,6 +410,7 @@
                 </tbody>
         </table>
        </div>
+
 
 
 
@@ -430,6 +436,18 @@ export default {
             dataInputModal:'',
             // form.kriteria_id:'',
             showModalisi:[],
+              form:{
+                id:'',
+                nim:'',
+                hasilhitung:'',
+                thseleksi_id:this.$route.params.id,
+            },
+            formdoupdate:{
+                id:'',
+                nim:'',
+                hasilhitung:'',
+                thseleksi_id:this.$route.params.id,
+            },
             datas:[],
             datasdua:[],
             datasdetail:[],
@@ -446,6 +464,8 @@ export default {
             leavingflow:[],
             entringflow:[],
             netflow:[],
+            netflowisnan:'',
+            looppushto:0,
             arrHasilakhirtemp:[],
             arrHasilakhir:[],
             isModalVisible: false,
@@ -461,8 +481,125 @@ export default {
     },
 
     methods:{
-        do_arr_untuk_sorting(nim,netflow){
-            // console.log(nim+'===='+netflow);
+        do_pushto(nim,hasilhitung){
+
+        // let response = await axios.patch(`/api/dataprosesdetailhitung/edit`,this.form)
+            if(this.looppushto<this.datas.length){
+
+                if (isNaN(hasilhitung)){
+
+                }else{
+                // this.form.id=`${id}`;
+                this.form.nim=`${nim}`;
+                this.form.hasilhitung=`${hasilhitung}`;
+                this.form.thseleksi_id=`${this.$route.params.id}`;
+
+                console.log(this.form);
+
+
+        // let response = await axios.patch(`/api/dataprosesdetailhitung/edit`,this.form)
+            //   if (response.status==200){
+            //     this.loading=false;
+            // //   console.log(response.data)
+            //   let toast = this.$toasted.show(response.data.message, {
+            //         type:'success',
+            //         theme: "bubble",
+            //         position: "top-right",
+            //         duration : 5000
+            //     });
+            //   }
+
+            this.goupdate();
+            this.formclear();
+                    console.log(this.form);
+                    // console.log(response);
+                    // console.log(nim);
+                    // console.log(hasilhitung);
+                            this.looppushto++;
+
+
+                }
+
+            }
+        },
+        async goupdate(){
+            let response = await axios.patch(`/api/dataprosesdetailhitung/edit`,this.form)
+              if (response.status==200){
+                this.loading=false;
+            //   console.log(response.data)
+              let toast = this.$toasted.show(response.data.message, {
+                    type:'success',
+                    theme: "bubble",
+                    position: "top-right",
+                    duration : 5000
+                });
+              }
+
+        },
+        do_update(satugo){
+            if(this.netflowisnan==''){
+                this.arrHasilakhirtemp[1]='aaa';
+                this.arrHasilakhirtemp[2]='bbb';
+                this.arrHasilakhirtemp=['bbb'];
+
+                    console.log(this.arrHasilakhirtemp);
+                    console.log(this.arrHasilakhirtemp.length);
+
+            this.arrHasilakhirtemp.forEach(function myFunction(item, index) {
+                    console.log(item);
+            });
+
+
+                    console.log(this.netflow);
+
+            // this.netflow.forEach(function myFunction(item, index) {
+            //         console.log(item);
+            // });
+
+
+                    // console.log(this.form);
+                //    this.netflow.forEach((value,index)=>{
+                //         // var showModalisi=[];
+                //         var datae=value;
+                //         console.log(value);
+                //    });
+
+
+
+
+                    this.netflowisnan=1;
+                }
+                // this.netflowisnan=netflow;
+                // if (isNaN(this.netflowisnan)){
+
+                // }else{
+                // this.formclear();
+                //     console.log(this.netflowisnan);
+                // this.form.id=`${id}`;
+                // this.form.nim=`${nim}`;
+                // this.form.hasilhitung=`${netflow}`;
+                // this.form.thseleksi_id=`${this.$route.params.id}`;
+
+
+
+                //     console.log(this.form);
+
+            //   let response = await axios.patch(`/api/dataprosesdetailhitung/edit`,this.form)
+        //     this.formclear();
+        // if (response.status==200){
+        //         this.loading=false;
+        //     //   console.log(response.data)
+        //       let toast = this.$toasted.show(response.data.message, {
+        //             type:'success',
+        //             theme: "bubble",
+        //             position: "top-right",
+        //             duration : 5000
+        //         });
+        //     console.log(response.data);
+        //     // this.$router.push('/mahasiswa/table')
+        // }
+        //         // return netflow;
+                // }
         },
         // check_k_null(isi_k,jml_kriteria){
         //     // console.log(jml_kriteria);
@@ -473,6 +610,14 @@ export default {
         //         return 0;
         //     }
         // },
+                //
+        formclear(){
+               this.form.id=``;
+                this.form.nim=``;
+                this.form.hasilhitung=``;
+                this.form.hasilhitung2=``;
+        },
+
         hasilsatuornol(isi){
             if(isi>0){
                 this.hasilceksatuornol=1;
@@ -577,9 +722,24 @@ export default {
 
         },
         async getKriteria(){
+
+
+            try{
             var {data} = await axios.get(`/api/dataprosesdetailhitung/${this.$route.params.id}`);
-            this.kriterias = data.data
-            var kriterias= this.kriterias;
+                this.kriterias = data.data
+                var kriterias= this.kriterias;
+
+                // console.log(response.data.message);
+            }catch(e){
+                    var {data} = await axios.get(`/api/kriteria`);
+                    this.kriterias = data.data
+                    var kriterias= this.kriterias;
+
+            }
+
+
+
+
         },
         async getKriteriaDetail(id){
             console.log(`/api/kriteriadetail/${id}/show`);

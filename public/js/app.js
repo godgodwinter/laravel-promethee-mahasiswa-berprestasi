@@ -8593,6 +8593,14 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9009,7 +9017,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       // firstload:null,
       form: {
         id: '',
@@ -9019,28 +9029,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       dataInputModal: '',
       // form.kriteria_id:'',
-      showModalisi: [],
-      datas: [],
-      datasdua: [],
-      datasdetail: [],
-      ddetail: [],
-      kriterias: [],
-      kriteriasShow: [],
-      hasilf: [],
-      hasilchecknull: '',
-      hasiljml_k: [],
-      hasil_check_k_null: '',
-      hasil_k_per_jmlh_k: [],
-      hasiljml_untukleaving: [],
-      hasiljml_untukentring: [],
-      leavingflow: [],
-      entringflow: [],
-      netflow: [],
-      arrHasilakhirtemp: [],
-      arrHasilakhir: [],
-      isModalVisible: false,
-      isModalktVisible: false
-    };
+      showModalisi: []
+    }, _defineProperty(_ref, "form", {
+      id: '',
+      nim: '',
+      hasilhitung: '',
+      thseleksi_id: this.$route.params.id
+    }), _defineProperty(_ref, "formdoupdate", {
+      id: '',
+      nim: '',
+      hasilhitung: '',
+      thseleksi_id: this.$route.params.id
+    }), _defineProperty(_ref, "datas", []), _defineProperty(_ref, "datasdua", []), _defineProperty(_ref, "datasdetail", []), _defineProperty(_ref, "ddetail", []), _defineProperty(_ref, "kriterias", []), _defineProperty(_ref, "kriteriasShow", []), _defineProperty(_ref, "hasilf", []), _defineProperty(_ref, "hasilchecknull", ''), _defineProperty(_ref, "hasiljml_k", []), _defineProperty(_ref, "hasil_check_k_null", ''), _defineProperty(_ref, "hasil_k_per_jmlh_k", []), _defineProperty(_ref, "hasiljml_untukleaving", []), _defineProperty(_ref, "hasiljml_untukentring", []), _defineProperty(_ref, "leavingflow", []), _defineProperty(_ref, "entringflow", []), _defineProperty(_ref, "netflow", []), _defineProperty(_ref, "netflowisnan", ''), _defineProperty(_ref, "looppushto", 0), _defineProperty(_ref, "arrHasilakhirtemp", []), _defineProperty(_ref, "arrHasilakhir", []), _defineProperty(_ref, "isModalVisible", false), _defineProperty(_ref, "isModalktVisible", false), _ref;
   },
   mounted: function mounted() {
     this.getDatas();
@@ -9048,7 +9048,118 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getDatasDetail();
   },
   methods: {
-    do_arr_untuk_sorting: function do_arr_untuk_sorting(nim, netflow) {// console.log(nim+'===='+netflow);
+    do_pushto: function do_pushto(nim, hasilhitung) {
+      // let response = await axios.patch(`/api/dataprosesdetailhitung/edit`,this.form)
+      if (this.looppushto < this.datas.length) {
+        if (isNaN(hasilhitung)) {} else {
+          // this.form.id=`${id}`;
+          this.form.nim = "".concat(nim);
+          this.form.hasilhitung = "".concat(hasilhitung);
+          this.form.thseleksi_id = "".concat(this.$route.params.id);
+          console.log(this.form); // let response = await axios.patch(`/api/dataprosesdetailhitung/edit`,this.form)
+          //   if (response.status==200){
+          //     this.loading=false;
+          // //   console.log(response.data)
+          //   let toast = this.$toasted.show(response.data.message, {
+          //         type:'success',
+          //         theme: "bubble",
+          //         position: "top-right",
+          //         duration : 5000
+          //     });
+          //   }
+
+          this.goupdate();
+          this.formclear();
+          console.log(this.form); // console.log(response);
+          // console.log(nim);
+          // console.log(hasilhitung);
+
+          this.looppushto++;
+        }
+      }
+    },
+    goupdate: function goupdate() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response, toast;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.patch("/api/dataprosesdetailhitung/edit", _this.form);
+
+              case 2:
+                response = _context.sent;
+
+                if (response.status == 200) {
+                  _this.loading = false; //   console.log(response.data)
+
+                  toast = _this.$toasted.show(response.data.message, {
+                    type: 'success',
+                    theme: "bubble",
+                    position: "top-right",
+                    duration: 5000
+                  });
+                }
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    do_update: function do_update(satugo) {
+      if (this.netflowisnan == '') {
+        this.arrHasilakhirtemp[1] = 'aaa';
+        this.arrHasilakhirtemp[2] = 'bbb';
+        this.arrHasilakhirtemp = ['bbb'];
+        console.log(this.arrHasilakhirtemp);
+        console.log(this.arrHasilakhirtemp.length);
+        this.arrHasilakhirtemp.forEach(function myFunction(item, index) {
+          console.log(item);
+        });
+        console.log(this.netflow); // this.netflow.forEach(function myFunction(item, index) {
+        //         console.log(item);
+        // });
+        // console.log(this.form);
+        //    this.netflow.forEach((value,index)=>{
+        //         // var showModalisi=[];
+        //         var datae=value;
+        //         console.log(value);
+        //    });
+
+        this.netflowisnan = 1;
+      } // this.netflowisnan=netflow;
+      // if (isNaN(this.netflowisnan)){
+      // }else{
+      // this.formclear();
+      //     console.log(this.netflowisnan);
+      // this.form.id=`${id}`;
+      // this.form.nim=`${nim}`;
+      // this.form.hasilhitung=`${netflow}`;
+      // this.form.thseleksi_id=`${this.$route.params.id}`;
+      //     console.log(this.form);
+      //   let response = await axios.patch(`/api/dataprosesdetailhitung/edit`,this.form)
+      //     this.formclear();
+      // if (response.status==200){
+      //         this.loading=false;
+      //     //   console.log(response.data)
+      //       let toast = this.$toasted.show(response.data.message, {
+      //             type:'success',
+      //             theme: "bubble",
+      //             position: "top-right",
+      //             duration : 5000
+      //         });
+      //     console.log(response.data);
+      //     // this.$router.push('/mahasiswa/table')
+      // }
+      //         // return netflow;
+      // }
+
     },
     // check_k_null(isi_k,jml_kriteria){
     //     // console.log(jml_kriteria);
@@ -9059,6 +9170,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //         return 0;
     //     }
     // },
+    //
+    formclear: function formclear() {
+      this.form.id = "";
+      this.form.nim = "";
+      this.form.hasilhitung = "";
+      this.form.hasilhitung2 = "";
+    },
     hasilsatuornol: function hasilsatuornol(isi) {
       if (isi > 0) {
         this.hasilceksatuornol = 1;
@@ -9078,59 +9196,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     },
     kirimdata: function kirimdata(dataNim, dataId, KriteriaId) {
-      var _this = this;
+      var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var response, toast, _toast;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _this.form.id = dataId;
-                _this.form.nim = dataNim;
-                _this.form.thseleksi_id = _this.form.thseleksi_id;
-                _this.form.kriteria_id = KriteriaId;
-                _this.form.kriteriadetail_id = _this.ddetail[dataNim + '-' + KriteriaId]; // console.log(this.form.id);
+                _this2.form.id = dataId;
+                _this2.form.nim = dataNim;
+                _this2.form.thseleksi_id = _this2.form.thseleksi_id;
+                _this2.form.kriteria_id = KriteriaId;
+                _this2.form.kriteriadetail_id = _this2.ddetail[dataNim + '-' + KriteriaId]; // console.log(this.form.id);
 
-                _context.prev = 5;
-                _context.next = 8;
-                return axios.post("/api/dataprosesdetail/store", _this.form);
+                _context2.prev = 5;
+                _context2.next = 8;
+                return axios.post("/api/dataprosesdetail/store", _this2.form);
 
               case 8:
-                response = _context.sent;
+                response = _context2.sent;
 
                 if (response.status == 200) {
                   // console.log(response.data);
                   // this.form.nama=""
                   // this.form.bobot=""
-                  _this.loading = false;
-                  _this.theErrors = []; // this.successMessage=response.data.message
+                  _this2.loading = false;
+                  _this2.theErrors = []; // this.successMessage=response.data.message
                   // this.$toasted.show(response.data.message)
 
-                  toast = _this.$toasted.show(response.data.message, {
+                  toast = _this2.$toasted.show(response.data.message, {
                     type: 'success',
                     theme: "bubble",
                     position: "top-right",
                     duration: 5000
                   });
 
-                  _this.getDatasDetail();
+                  _this2.getDatasDetail();
 
-                  _this.showModalisi[dataId + '-' + KriteriaId] = null; // console.log('berhasil');
+                  _this2.showModalisi[dataId + '-' + KriteriaId] = null; // console.log('berhasil');
                   // this.$router.push(`/kriteriadetail/${this.$route.params.id}/show`)
                 } // console.log(response.data.message);
 
 
-                _context.next = 17;
+                _context2.next = 17;
                 break;
 
               case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](5);
-                _this.loading = false;
-                _this.theErrors = _context.t0.response.data.errors;
-                _toast = _this.$toasted.show("Terjadi kesalahan!", {
+                _context2.prev = 12;
+                _context2.t0 = _context2["catch"](5);
+                _this2.loading = false;
+                _this2.theErrors = _context2.t0.response.data.errors;
+                _toast = _this2.$toasted.show("Terjadi kesalahan!", {
                   type: 'error',
                   theme: "bubble",
                   position: "top-right",
@@ -9139,10 +9257,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 17:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, null, [[5, 12]]);
+        }, _callee2, null, [[5, 12]]);
       }))();
     },
     // showModal(dataId,KriteriaId) {
@@ -9177,60 +9295,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //     this.isModalktVisible = false;
     // },
     getDatas: function getDatas() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var _yield$axios$get, data, datas, _yield$axios$get2, datasdua;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.get("/api/dataproses/".concat(_this2.$route.params.id));
-
-              case 2:
-                _yield$axios$get = _context2.sent;
-                data = _yield$axios$get.data;
-                _this2.datas = data.data;
-                datas = _this2.datas;
-                _context2.next = 8;
-                return axios.get("/api/dataproses/".concat(_this2.$route.params.id));
-
-              case 8:
-                _yield$axios$get2 = _context2.sent;
-                data = _yield$axios$get2.data;
-                _this2.datasdua = data.data;
-                datasdua = _this2.datasdua; // console.log(this.datas);
-
-              case 12:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    getKriteria: function getKriteria() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var _yield$axios$get3, data, kriterias;
+        var _yield$axios$get, data, datas, _yield$axios$get2, datasdua;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios.get("/api/dataprosesdetailhitung/".concat(_this3.$route.params.id));
+                return axios.get("/api/dataproses/".concat(_this3.$route.params.id));
 
               case 2:
-                _yield$axios$get3 = _context3.sent;
-                data = _yield$axios$get3.data;
-                _this3.kriterias = data.data;
-                kriterias = _this3.kriterias;
+                _yield$axios$get = _context3.sent;
+                data = _yield$axios$get.data;
+                _this3.datas = data.data;
+                datas = _this3.datas;
+                _context3.next = 8;
+                return axios.get("/api/dataproses/".concat(_this3.$route.params.id));
 
-              case 6:
+              case 8:
+                _yield$axios$get2 = _context3.sent;
+                data = _yield$axios$get2.data;
+                _this3.datasdua = data.data;
+                datasdua = _this3.datasdua; // console.log(this.datas);
+
+              case 12:
               case "end":
                 return _context3.stop();
             }
@@ -9238,64 +9329,107 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    getKriteriaDetail: function getKriteriaDetail(id) {
+    getKriteria: function getKriteria() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var _yield$axios$get4, data, kriteriasShow;
+        var _yield$axios$get3, data, kriterias, _yield$axios$get4;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                console.log("/api/kriteriadetail/".concat(id, "/show"));
+                _context4.prev = 0;
                 _context4.next = 3;
-                return axios.get("/api/dataproses/getkriteria/".concat(id));
+                return axios.get("/api/dataprosesdetailhitung/".concat(_this4.$route.params.id));
 
               case 3:
+                _yield$axios$get3 = _context4.sent;
+                data = _yield$axios$get3.data;
+                _this4.kriterias = data.data;
+                kriterias = _this4.kriterias; // console.log(response.data.message);
+
+                _context4.next = 17;
+                break;
+
+              case 9:
+                _context4.prev = 9;
+                _context4.t0 = _context4["catch"](0);
+                _context4.next = 13;
+                return axios.get("/api/kriteria");
+
+              case 13:
                 _yield$axios$get4 = _context4.sent;
                 data = _yield$axios$get4.data;
-                _this4.kriteriasShow = data.data;
-                kriteriasShow = _this4.kriteriasShow; // console.log(kriteriasShow);
+                _this4.kriterias = data.data;
+                kriterias = _this4.kriterias;
 
-              case 7:
+              case 17:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4);
+        }, _callee4, null, [[0, 9]]);
       }))();
     },
-    getDatasDetail: function getDatasDetail() {
+    getKriteriaDetail: function getKriteriaDetail(id) {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var ddetail, jmllangkahsatu, ddetailnama, form, _yield$axios$get5, data, datasdetail, kriterias;
+        var _yield$axios$get5, data, kriteriasShow;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
+                console.log("/api/kriteriadetail/".concat(id, "/show"));
+                _context5.next = 3;
+                return axios.get("/api/dataproses/getkriteria/".concat(id));
+
+              case 3:
+                _yield$axios$get5 = _context5.sent;
+                data = _yield$axios$get5.data;
+                _this5.kriteriasShow = data.data;
+                kriteriasShow = _this5.kriteriasShow; // console.log(kriteriasShow);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    getDatasDetail: function getDatasDetail() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var ddetail, jmllangkahsatu, ddetailnama, form, _yield$axios$get6, data, datasdetail, kriterias;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
                 ddetail = [];
                 jmllangkahsatu = [];
                 ddetailnama = [];
                 form = [];
-                _context5.next = 6;
-                return axios.get("/api/dataprosesdetail/".concat(_this5.$route.params.id));
+                _context6.next = 6;
+                return axios.get("/api/dataprosesdetail/".concat(_this6.$route.params.id));
 
               case 6:
-                _yield$axios$get5 = _context5.sent;
-                data = _yield$axios$get5.data;
-                _this5.datasdetail = data.data;
-                datasdetail = _this5.datasdetail;
-                kriterias = _this5.kriterias; // dataModels[0] = {
+                _yield$axios$get6 = _context6.sent;
+                data = _yield$axios$get6.data;
+                _this6.datasdetail = data.data;
+                datasdetail = _this6.datasdetail;
+                kriterias = _this6.kriterias; // dataModels[0] = {
                 //     childNodes: []
                 // };
                 // dataModels[0].childNodes[0] = {
                 //     appId: "foo"
                 // };
 
-                _this5.datas.forEach(function (e) {
+                _this6.datas.forEach(function (e) {
                   var showModalisi = [];
                   var datae = e; //  console.log(e['id']);
 
@@ -9319,7 +9453,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 // });
 
 
-                _this5.datasdetail.forEach(function (e, i) {
+                _this6.datasdetail.forEach(function (e, i) {
                   //    jmllangkahsatu['kriteria_id']+=jmllangkahsatu['kriteria_id'];
                   var nim = e['nim'];
                   var kriteria_id = e['kriteria_id']; //    ddetail='aaa';
@@ -9329,8 +9463,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   // console.log(ddetail[nim+'-'+kriteria_id]);
                 });
 
-                _this5.ddetail = ddetail;
-                _this5.ddetailnama = ddetailnama; // this.form=form;
+                _this6.ddetail = ddetail;
+                _this6.ddetailnama = ddetailnama; // this.form=form;
                 // console.log(this.form);
                 // this.datasdetail.forEach(function(e,i){
                 //         console.log(e['nim']);
@@ -9338,10 +9472,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 15:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5);
+        }, _callee6);
       }))();
     }
   }
@@ -60095,15 +60229,14 @@ var render = function() {
                           _vm.entringflow[dataakhir.nim]
                         ).toFixed(4))
                       ) +
-                      "\n\n                            "
-                  ),
-                  _vm._v(
-                    "\n                             " +
+                      "\n\n                            " +
                       _vm._s(
-                        _vm.do_arr_untuk_sorting(dataakhir.nim, dataakhir.nim)
+                        _vm.do_pushto(dataakhir.nim, _vm.netflow[dataakhir.nim])
                       ) +
-                      "\n\n                             "
-                  )
+                      "\n                              "
+                  ),
+                  _vm._v(" "),
+                  _c("input", { attrs: { type: "hidden" } })
                 ])
               ])
             }),

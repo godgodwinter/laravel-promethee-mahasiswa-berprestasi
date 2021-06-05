@@ -224,6 +224,23 @@ class dataprosesController extends Controller
         $datas=kriteriadetail::latest()->where('kriteria_id',$id)->get();
         return kriteriadetailResource::collection($datas);
     }
+        public function update(Request $request)
+        {
+                // return $request;
+            DB::table('dataproses')
+        // ->where('id', request('id'))
+        ->where('nim',$request->nim)
+        ->where('thseleksi_id',$request->thseleksi_id)
+        ->update([
+            'hasilhitung'=>request('hasilhitung'),
+        ]);
+
+
+                return response()->json([
+                'message'=>'Data berhasil diupdate',
+                'data'=>$request,
+            ]);
+        }
 
     public function dpdetailstore(Request $request)
     {
