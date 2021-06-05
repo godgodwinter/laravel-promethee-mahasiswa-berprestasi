@@ -50,7 +50,7 @@ use App\Http\Controllers\dataprosesController;
     Route::get('dataproses', [dataprosesController::class, 'index'])->name('dataproses');
     Route::get('dataproses/{id}', [dataprosesController::class, 'show'])->name('dataproses.show');
     Route::post('dataproses/store', [dataprosesController::class, 'store'])->name('dataproses.store');
-    Route::delete('dataproses/{id}', [dataprosesController::class, 'destroy'])->name('dataproses.delete');
+    Route::delete('dataproses/{id}/delete/{thseleksi_id}', [dataprosesController::class, 'destroy'])->name('dataproses.delete');
     Route::get('dataproses/getmhs/{id}', [dataprosesController::class, 'getmhs'])->name('dataproses.getmhs');
     Route::get('dataproses/getkriteria/{id}', [dataprosesController::class, 'getkriteria'])->name('dataproses.getkriteria');
 
@@ -58,6 +58,8 @@ use App\Http\Controllers\dataprosesController;
     Route::get('dataprosesdetail', [dataprosesController::class, 'dpdetail'])->name('dataprosesdetail');
     Route::get('dataprosesdetail/{id}', [dataprosesController::class, 'dpdetailshow'])->name('dataprosesdetail.show');
     Route::post('dataprosesdetail/store', [dataprosesController::class, 'dpdetailstore'])->name('dataprosesdetail.store');
+
+    Route::get('dataprosesdetailhitung/{id}', [dataprosesController::class, 'dpdetailshowhitung'])->name('dataprosesdetailhitung.show');
 
 
     Route::post('notes/create-new-note', [NotesController::class, 'store'])->name('notes.store');

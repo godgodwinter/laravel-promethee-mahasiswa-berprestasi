@@ -255,7 +255,7 @@ export default {
 
         },
         async getKriteria(){
-            var {data} = await axios.get(`/api/kriteria/`);
+            var {data} = await axios.get(`/api/kriteria`);
             this.kriterias = data.data
             var kriterias= this.kriterias;
         },
@@ -267,6 +267,7 @@ export default {
             // console.log(kriteriasShow);
         },
         async getDatasDetail(){
+            var jmldatakriteria=[];
             var ddetail=[];
             var ddetailnama=[];
             var form=[];
@@ -300,7 +301,16 @@ export default {
                 });
             });
 
-            // console.log(this.datas);
+             kriterias.forEach(function(x) { // was missing a )
+
+                    var dataxId=x['id'];
+                    // let KriteriaId=x['id'];
+                 jmldatakriteria[dataxId]=x['jmldata'];
+                //    console.log([dataeId+'-'+dataxId]);
+                // console.log(showModalisi);
+            // console.log(jmldatakriteria);
+                });
+
             // console.log(this.kriterias);
             // console.log(this.datasdetail);
 

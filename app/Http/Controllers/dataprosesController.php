@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Resources\dataprosesdetailResource;
 use App\Http\Resources\dataprosesResource;
 use App\Http\Resources\kriteriadetailResource;
+use App\Http\Resources\kriteriaResource;
 use App\Http\Resources\mahasiswaResource;
 use App\Models\dataproses;
 use App\Models\dataprosesdetail;
+use App\Models\kriteria;
 use App\Models\kriteriadetail;
 use App\Models\mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class dataprosesController extends Controller
 {
@@ -49,6 +52,7 @@ class dataprosesController extends Controller
 
         $datas=DB::table('dataprosesdetail')
             ->join('kriteriadetail', 'dataprosesdetail.kriteriadetail_id', '=', 'kriteriadetail.id')
+            ->where('dataprosesdetail.thseleksi_id',$id)
             ->get(array(
                 'dataprosesdetail.id',
                 'dataprosesdetail.nim',
@@ -95,6 +99,65 @@ class dataprosesController extends Controller
 
         // return dataprosesResource::make($datas);
     }
+
+    public function dpdetailshowhitung($id)
+    {
+
+        $datas=dataprosesdetail::latest()
+        ->where('thseleksi_id',$id)
+        ->get();
+
+        $hasildatas=dataprosesdetailResource::collection($datas);
+
+        $dhkriteria=kriteria::latest()->get();
+        $hasildhkriteria=kriteriaResource::collection($dhkriteria);
+
+        foreach ($hasildatas as $hd){
+            foreach ($hasildhkriteria as $hk){
+                $jmldata[$hk->id]=0;
+                $arrjmldatakhsatu[$hk->id]=0;
+            }
+        }
+
+
+        foreach ($hasildatas as $hd){
+            foreach ($hasildhkriteria as $hk){
+                if(($hk->id)==($hd->kriteria_id)){
+
+                    $jmldata[$hk->id]+=$hd->bobot_kd;
+                }
+                // dd($hk->id);
+            }
+        }
+        $datakt=[];
+
+
+        $arrjmldatakhsatu=[];
+
+        foreach ($hasildhkriteria as $hksatu){
+
+            $arrjmldata=[];
+            foreach ($hasildhkriteria as $hk){
+                if($hksatu->id==$hk->id){
+                    $arrjmldata=['id'=>$hk->id];
+                    $arrjmldata+=['nama'=>$hk->nama];
+                    $arrjmldata+=['nilai'=>$hk->nilai];
+                    $arrjmldata+=['created_at'=>$hk->created_at];
+                    $arrjmldata+=['jmldata'=>$jmldata[$hk->id]];
+                    // array_push($arrjmldata,$jmldata[$hk->id]);
+                // continue;
+            }
+        }
+
+            array_push($arrjmldatakhsatu,$arrjmldata);
+
+        }
+
+                $data=$arrjmldatakhsatu;
+            return compact('data');
+
+    }
+
     public function store(Request $request)
     {
         request()->validate([
@@ -116,10 +179,19 @@ class dataprosesController extends Controller
         ]);
     }
 
-    public function destroy($id)
+    public function destroy($id,$thseleksi_id)
     {
-        dataproses::destroy($id);
+        $datas=dataproses::latest()
+        ->where('id',$id)
+        ->first();
 
+        dataprosesdetail::where('nim',$datas->nim)->where('thseleksi_id',$thseleksi_id)->delete();
+        dataproses::where('id',$id)->delete();
+
+        // return $datas->nim;
+        // dataproses::destroy($id);
+        // dataproses::whereIn('id',$ids)->delete();
+        // inventaris::whereIn('id',$ids)->delete();
         // return $id;
         return response()->json([
             'message'=>'Data berhasil hapus!',

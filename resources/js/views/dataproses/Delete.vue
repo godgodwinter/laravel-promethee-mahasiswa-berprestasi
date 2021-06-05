@@ -14,9 +14,9 @@ export default {
             let q = window.confirm("Apakah anda yakin menghapus data ini?");
 
             if (q ==true){
-               console.log(`/api/dataproses/${this.endpoint}/delete`);
+               console.log(`/api/dataproses/${this.endpoint}/delete/${this.$route.params.id}`);
 
-            let response = await axios.delete(`/api/dataproses/${this.endpoint}`);
+            let response = await axios.delete(`/api/dataproses/${this.endpoint}/delete/${this.$route.params.id}`);
 
             if(response.status==200){
                  let toast = this.$toasted.show(response.data.message, {

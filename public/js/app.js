@@ -5186,9 +5186,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
-                console.log("/api/dataproses/".concat(_this.endpoint, "/delete"));
+                console.log("/api/dataproses/".concat(_this.endpoint, "/delete/").concat(_this.$route.params.id));
                 _context.next = 5;
-                return axios["delete"]("/api/dataproses/".concat(_this.endpoint));
+                return axios["delete"]("/api/dataproses/".concat(_this.endpoint, "/delete/").concat(_this.$route.params.id));
 
               case 5:
                 response = _context.sent;
@@ -5843,7 +5843,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios.get("/api/kriteria/");
+                return axios.get("/api/kriteria");
 
               case 2:
                 _yield$axios$get2 = _context3.sent;
@@ -5891,19 +5891,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var ddetail, ddetailnama, form, _yield$axios$get4, data, datasdetail, kriterias;
+        var jmldatakriteria, ddetail, ddetailnama, form, _yield$axios$get4, data, datasdetail, kriterias;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
+                jmldatakriteria = [];
                 ddetail = [];
                 ddetailnama = [];
                 form = [];
-                _context5.next = 5;
+                _context5.next = 6;
                 return axios.get("/api/dataprosesdetail/".concat(_this5.$route.params.id));
 
-              case 5:
+              case 6:
                 _yield$axios$get4 = _context5.sent;
                 data = _yield$axios$get4.data;
                 _this5.datasdetail = data.data;
@@ -5928,8 +5929,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     showModalisi[dataeId + '-' + dataxId] = null; //    console.log([dataeId+'-'+dataxId]);
                     // console.log(showModalisi);
                   });
-                }); // console.log(this.datas);
-                // console.log(this.kriterias);
+                });
+
+                kriterias.forEach(function (x) {
+                  // was missing a )
+                  var dataxId = x['id']; // let KriteriaId=x['id'];
+
+                  jmldatakriteria[dataxId] = x['jmldata']; //    console.log([dataeId+'-'+dataxId]);
+                  // console.log(showModalisi);
+                  // console.log(jmldatakriteria);
+                }); // console.log(this.kriterias);
                 // console.log(this.datasdetail);
                 // this.datas.forEach(function(e,i){
                 //     // console.log(e['nama']);
@@ -5937,7 +5946,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //         console.log(x);
                 //     });
                 // });
-
 
                 _this5.datasdetail.forEach(function (e, i) {
                   var nim = e['nim'];
@@ -5955,7 +5963,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //         console.log(e['nim']);
                 // });
 
-              case 14:
+              case 16:
               case "end":
                 return _context5.stop();
             }
@@ -8726,6 +8734,237 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -8741,10 +8980,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // form.kriteria_id:'',
       showModalisi: [],
       datas: [],
+      datasdua: [],
       datasdetail: [],
       ddetail: [],
       kriterias: [],
       kriteriasShow: [],
+      hasilf: [],
+      hasilchecknull: '',
+      hasiljml_k: [],
+      hasil_check_k_null: '',
+      hasil_k_per_jmlh_k: [],
+      hasiljml_untukleaving: [],
+      hasiljml_untukentring: [],
+      leavingflow: [],
+      entringflow: [],
+      netflow: [],
       isModalVisible: false,
       isModalktVisible: false
     };
@@ -8755,6 +9005,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getDatasDetail();
   },
   methods: {
+    check_k_null: function check_k_null(isi_k, jml_kriteria) {
+      if (isi_k == 0) {
+        return 0;
+      } else {
+        this.hasil_check_k_null = isi_k / jml_kriteria;
+        return this.hasil_check_k_null;
+      }
+    },
+    hasilsatuornol: function hasilsatuornol(isi) {
+      if (isi > 0) {
+        this.hasilceksatuornol = 1;
+      } else {
+        this.hasilceksatuornol = 0;
+      }
+
+      return this.hasilceksatuornol;
+    },
+    checknull: function checknull(isi) {
+      if (isi != null) {
+        this.hasilchecknull = isi;
+      } else {
+        this.hasilchecknull = 0;
+      }
+
+      return this.hasilchecknull;
+    },
     kirimdata: function kirimdata(dataNim, dataId, KriteriaId) {
       var _this = this;
 
@@ -8769,13 +9045,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.form.nim = dataNim;
                 _this.form.thseleksi_id = _this.form.thseleksi_id;
                 _this.form.kriteria_id = KriteriaId;
-                _this.form.kriteriadetail_id = _this.ddetail[dataNim + '-' + KriteriaId];
-                console.log(_this.form.id);
-                _context.prev = 6;
-                _context.next = 9;
+                _this.form.kriteriadetail_id = _this.ddetail[dataNim + '-' + KriteriaId]; // console.log(this.form.id);
+
+                _context.prev = 5;
+                _context.next = 8;
                 return axios.post("/api/dataprosesdetail/store", _this.form);
 
-              case 9:
+              case 8:
                 response = _context.sent;
 
                 if (response.status == 200) {
@@ -8795,17 +9071,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   _this.getDatasDetail();
 
-                  _this.showModalisi[dataId + '-' + KriteriaId] = null;
-                  console.log('berhasil'); // this.$router.push(`/kriteriadetail/${this.$route.params.id}/show`)
+                  _this.showModalisi[dataId + '-' + KriteriaId] = null; // console.log('berhasil');
+                  // this.$router.push(`/kriteriadetail/${this.$route.params.id}/show`)
                 } // console.log(response.data.message);
 
 
-                _context.next = 18;
+                _context.next = 17;
                 break;
 
-              case 13:
-                _context.prev = 13;
-                _context.t0 = _context["catch"](6);
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](5);
                 _this.loading = false;
                 _this.theErrors = _context.t0.response.data.errors;
                 _toast = _this.$toasted.show("Terjadi kesalahan!", {
@@ -8815,12 +9091,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   duration: 5000
                 });
 
-              case 18:
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[6, 13]]);
+        }, _callee, null, [[5, 12]]);
       }))();
     },
     // showModal(dataId,KriteriaId) {
@@ -8858,7 +9134,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var _yield$axios$get, data, datas;
+        var _yield$axios$get, data, datas, _yield$axios$get2, datasdua;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
@@ -8871,9 +9147,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _yield$axios$get = _context2.sent;
                 data = _yield$axios$get.data;
                 _this2.datas = data.data;
-                datas = _this2.datas; // console.log(this.datas);
+                datas = _this2.datas;
+                _context2.next = 8;
+                return axios.get("/api/dataproses/".concat(_this2.$route.params.id));
 
-              case 6:
+              case 8:
+                _yield$axios$get2 = _context2.sent;
+                data = _yield$axios$get2.data;
+                _this2.datasdua = data.data;
+                datasdua = _this2.datasdua; // console.log(this.datas);
+
+              case 12:
               case "end":
                 return _context2.stop();
             }
@@ -8885,18 +9169,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var _yield$axios$get2, data, kriterias;
+        var _yield$axios$get3, data, kriterias;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios.get("/api/kriteria/");
+                return axios.get("/api/dataprosesdetailhitung/".concat(_this3.$route.params.id));
 
               case 2:
-                _yield$axios$get2 = _context3.sent;
-                data = _yield$axios$get2.data;
+                _yield$axios$get3 = _context3.sent;
+                data = _yield$axios$get3.data;
                 _this3.kriterias = data.data;
                 kriterias = _this3.kriterias;
 
@@ -8912,7 +9196,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var _yield$axios$get3, data, kriteriasShow;
+        var _yield$axios$get4, data, kriteriasShow;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
@@ -8923,8 +9207,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.get("/api/dataproses/getkriteria/".concat(id));
 
               case 3:
-                _yield$axios$get3 = _context4.sent;
-                data = _yield$axios$get3.data;
+                _yield$axios$get4 = _context4.sent;
+                data = _yield$axios$get4.data;
                 _this4.kriteriasShow = data.data;
                 kriteriasShow = _this4.kriteriasShow; // console.log(kriteriasShow);
 
@@ -8940,21 +9224,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var ddetail, ddetailnama, form, _yield$axios$get4, data, datasdetail, kriterias;
+        var ddetail, jmllangkahsatu, ddetailnama, form, _yield$axios$get5, data, datasdetail, kriterias;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 ddetail = [];
+                jmllangkahsatu = [];
                 ddetailnama = [];
                 form = [];
-                _context5.next = 5;
+                _context5.next = 6;
                 return axios.get("/api/dataprosesdetail/".concat(_this5.$route.params.id));
 
-              case 5:
-                _yield$axios$get4 = _context5.sent;
-                data = _yield$axios$get4.data;
+              case 6:
+                _yield$axios$get5 = _context5.sent;
+                data = _yield$axios$get5.data;
                 _this5.datasdetail = data.data;
                 datasdetail = _this5.datasdetail;
                 kriterias = _this5.kriterias; // dataModels[0] = {
@@ -8989,6 +9274,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
                 _this5.datasdetail.forEach(function (e, i) {
+                  //    jmllangkahsatu['kriteria_id']+=jmllangkahsatu['kriteria_id'];
                   var nim = e['nim'];
                   var kriteria_id = e['kriteria_id']; //    ddetail='aaa';
 
@@ -9004,7 +9290,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //         console.log(e['nim']);
                 // });
 
-              case 14:
+              case 15:
               case "end":
                 return _context5.stop();
             }
@@ -58851,7 +59137,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "container mt-4" }, [
+    _c("div", { staticClass: "container mt-7" }, [
       _vm._m(1),
       _vm._v(" "),
       _c(
@@ -58892,13 +59178,150 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
+            [
+              _vm._l(_vm.datas, function(data, index) {
+                return _c(
+                  "tr",
+                  { attrs: { ":key": data.id } },
+                  [
+                    _c("td", { staticClass: "text-center" }, [
+                      _vm._v(_vm._s(index + 1) + " ")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "d-inline-block text-truncate",
+                          staticStyle: { "max-width": "200px" }
+                        },
+                        [
+                          _vm._v(
+                            "  " + _vm._s(data.nim) + " - " + _vm._s(data.nama)
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.kriterias, function(kriteria, index) {
+                      return _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { ":key": kriteria.id }
+                        },
+                        [
+                          _vm.ddetail[data.nim + "-" + kriteria.id] != null
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n\n                                " +
+                                    _vm._s(
+                                      _vm.ddetail[data.nim + "-" + kriteria.id]
+                                    ) +
+                                    "\n                            "
+                                )
+                              ])
+                            : _c("div", [
+                                _vm._v(
+                                  "\n                                0\n                            "
+                                )
+                              ])
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "tr",
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._l(_vm.kriterias, function(kriteria, index) {
+                    return _c(
+                      "td",
+                      {
+                        staticClass: "text-center",
+                        attrs: { ":key": kriteria.id }
+                      },
+                      [
+                        _vm._v(
+                          " " +
+                            _vm._s(kriteria.jmldata) +
+                            "\n                          "
+                        )
+                      ]
+                    )
+                  })
+                ],
+                2
+              )
+            ],
+            2
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _vm._m(3),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered table-striped table-hover table-sm"
+        },
+        [
+          _c("thead", [
+            _c(
+              "tr",
+              { staticClass: "text-center" },
+              [
+                _c("th", { attrs: { width: "5%" } }, [_vm._v("NO")]),
+                _vm._v(" "),
+                _c("th", { attrs: { width: "20%" } }, [_vm._v("NAMA")]),
+                _vm._v(" "),
+                _vm._l(_vm.datasdua, function(datadua, indexdua) {
+                  return _c(
+                    "th",
+                    { attrs: { width: "26%", ":key": datadua.id } },
+                    [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "d-inline-block text-truncate",
+                          staticStyle: { "max-width": "15%x" }
+                        },
+                        [
+                          _vm._v(
+                            " A " +
+                              _vm._s(indexdua + 1) +
+                              " = " +
+                              _vm._s(datadua.nama)
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
             _vm._l(_vm.datas, function(data, index) {
               return _c(
                 "tr",
                 { attrs: { ":key": data.id } },
                 [
                   _c("td", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(index + 1) + " ")
+                    _vm._v(
+                      " A " + _vm._s((_vm.indexdatasatu = index + 1)) + " "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", [
@@ -58916,33 +59339,732 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._l(_vm.kriterias, function(kriteria, index) {
+                  _vm._l(_vm.datasdua, function(datadua, indexdua) {
                     return _c(
                       "td",
                       {
                         staticClass: "text-center",
-                        attrs: { ":key": kriteria.id }
+                        attrs: { ":key": datadua.id }
                       },
                       [
-                        _vm.ddetail[data.nim + "-" + kriteria.id] != null
-                          ? _c("div", [
-                              _vm._v(
-                                "\n\n                " +
-                                  _vm._s(
-                                    _vm.ddetail[data.nim + "-" + kriteria.id]
-                                  ) +
-                                  "\n            "
-                              )
-                            ])
-                          : _c("div", [
-                              _vm._v("\n                0\n            ")
-                            ])
+                        _c("i", [
+                          _vm._v(
+                            "A " +
+                              _vm._s(_vm.indexdatasatu) +
+                              " -  A " +
+                              _vm._s((_vm.indexdata = indexdua + 1))
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("hr"),
+                        _vm._v(" "),
+                        index == indexdua ? _c("div", [_vm._v("0")]) : _vm._e(),
+                        _vm._v(" "),
+                        index != indexdua
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.kriterias, function(kriteria, index) {
+                                return _c(
+                                  "div",
+                                  {
+                                    staticClass: "text-center",
+                                    attrs: { ":key": kriteria.id }
+                                  },
+                                  [
+                                    _c("div", [
+                                      _vm._v(
+                                        "\n\n                                        (A" +
+                                          _vm._s(_vm.indexdatasatu) +
+                                          ") "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          _vm._s(
+                                            (_vm.a_satu = _vm.checknull(
+                                              _vm.ddetail[
+                                                data.nim + "-" + kriteria.id
+                                              ]
+                                            ))
+                                          ) + " "
+                                        )
+                                      ]),
+                                      _vm._v(
+                                        " -\n                                        (A" +
+                                          _vm._s(indexdua + 1) +
+                                          ") "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          " " +
+                                            _vm._s(
+                                              (_vm.a_dua = _vm.checknull(
+                                                _vm.ddetail[
+                                                  datadua.nim +
+                                                    "-" +
+                                                    kriteria.id
+                                                ]
+                                              ))
+                                            ) +
+                                            " "
+                                        )
+                                      ]),
+                                      _vm._v(
+                                        "\n                                        = "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          _vm._s(
+                                            (_vm.hasilpenjumlahan =
+                                              _vm.a_satu - _vm.a_dua)
+                                          )
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("i", [_vm._v("diubah jadi ")]),
+                                      _vm._v(
+                                        " " +
+                                          _vm._s(
+                                            (_vm.hasilf[
+                                              _vm.indexdatasatu +
+                                                "-" +
+                                                indexdua +
+                                                "-" +
+                                                index
+                                            ] = _vm.hasilsatuornol(
+                                              _vm.hasilpenjumlahan
+                                            ))
+                                          ) +
+                                          "\n                                    "
+                                      )
+                                    ])
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e()
                       ]
                     )
                   })
                 ],
                 2
               )
+            }),
+            0
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _vm._m(4),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered table-striped table-hover table-sm"
+        },
+        [
+          _c("thead", [
+            _c(
+              "tr",
+              { staticClass: "text-center" },
+              [
+                _c("th", { attrs: { width: "5%" } }, [_vm._v("NO")]),
+                _vm._v(" "),
+                _c("th", { attrs: { width: "20%" } }, [_vm._v("NAMA")]),
+                _vm._v(" "),
+                _vm._l(_vm.datasdua, function(datadua, indexdua) {
+                  return _c(
+                    "th",
+                    { attrs: { width: "26%", ":key": datadua.id } },
+                    [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "d-inline-block text-truncate",
+                          staticStyle: { "max-width": "15%x" }
+                        },
+                        [
+                          _vm._v(
+                            " A " +
+                              _vm._s(indexdua + 1) +
+                              " = " +
+                              _vm._s(datadua.nama)
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.datas, function(data, index) {
+              return _c(
+                "tr",
+                { attrs: { ":key": data.id } },
+                [
+                  _c("td", { staticClass: "text-center" }, [
+                    _vm._v(
+                      " A " + _vm._s((_vm.indexdatasatu = index + 1)) + " "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "d-inline-block text-truncate",
+                        staticStyle: { "max-width": "200px" }
+                      },
+                      [
+                        _vm._v(
+                          "  " + _vm._s(data.nim) + " - " + _vm._s(data.nama)
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.datasdua, function(datadua, indexdua) {
+                    return _c(
+                      "td",
+                      {
+                        staticClass: "text-center",
+                        attrs: { ":key": datadua.id }
+                      },
+                      [
+                        _c("input", {
+                          attrs: { type: "hidden" },
+                          domProps: {
+                            textContent: _vm._s(
+                              (_vm.hasiljml_untukentring[indexdua] = 0)
+                            )
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: { type: "hidden" },
+                          domProps: {
+                            textContent: _vm._s(
+                              (_vm.hasiljml_k[
+                                _vm.indexdatasatu + "-" + indexdua
+                              ] = 0)
+                            )
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("i", [
+                          _vm._v(
+                            "A " +
+                              _vm._s(_vm.indexdatasatu) +
+                              " -  A " +
+                              _vm._s(indexdua + 1)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("hr"),
+                        _vm._v(" "),
+                        index == indexdua ? _c("div", [_vm._v("0")]) : _vm._e(),
+                        _vm._v(" "),
+                        index != indexdua
+                          ? _c(
+                              "div",
+                              [
+                                _vm._l(_vm.kriterias, function(
+                                  kriteria,
+                                  index
+                                ) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      staticClass: "text-center",
+                                      attrs: { ":key": kriteria.id }
+                                    },
+                                    [
+                                      _c("div", [
+                                        _vm._v(
+                                          "\n                                     " +
+                                            _vm._s(_vm.indexdatasatu) +
+                                            " --  " +
+                                            _vm._s(indexdua) +
+                                            " ==\n                                       k1(" +
+                                            _vm._s(index) +
+                                            ") = " +
+                                            _vm._s(
+                                              _vm.hasilf[
+                                                _vm.indexdatasatu +
+                                                  "-" +
+                                                  indexdua +
+                                                  "-" +
+                                                  index
+                                              ]
+                                            ) +
+                                            "\n                                       "
+                                        ),
+                                        _c("input", {
+                                          attrs: { type: "hidden" },
+                                          domProps: {
+                                            textContent: _vm._s(
+                                              (_vm.hasiljml_k[
+                                                _vm.indexdatasatu +
+                                                  "-" +
+                                                  indexdua
+                                              ] +=
+                                                _vm.hasilf[
+                                                  _vm.indexdatasatu +
+                                                    "-" +
+                                                    indexdua +
+                                                    "-" +
+                                                    index
+                                                ])
+                                            )
+                                          }
+                                        })
+                                      ])
+                                    ]
+                                  )
+                                }),
+                                _vm._v(
+                                  "\n                                Jumlah k : "
+                                ),
+                                _c("b", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.hasiljml_k[
+                                        _vm.indexdatasatu + "-" + indexdua
+                                      ]
+                                    )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                                Dibagi kriteri (k/jmlh kriteria) : " +
+                                    _vm._s(
+                                      _vm.hasiljml_k[
+                                        _vm.indexdatasatu + "-" + indexdua
+                                      ]
+                                    ) +
+                                    " / " +
+                                    _vm._s(_vm.kriterias.length) +
+                                    " =\n                                "
+                                ),
+                                _c("b", [
+                                  _vm._v(
+                                    _vm._s(
+                                      (_vm.hasil_k_per_jmlh_k[
+                                        _vm.indexdatasatu + "-" + indexdua
+                                      ] = _vm.check_k_null(
+                                        _vm.hasiljml_k[
+                                          _vm.indexdatasatu + "-" + indexdua
+                                        ],
+                                        _vm.kriterias.length
+                                      ))
+                                    )
+                                  )
+                                ])
+                              ],
+                              2
+                            )
+                          : _vm._e()
+                      ]
+                    )
+                  })
+                ],
+                2
+              )
+            }),
+            0
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _vm._m(5),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered table-striped table-hover table-sm"
+        },
+        [
+          _c("thead", [
+            _c(
+              "tr",
+              { staticClass: "text-center" },
+              [
+                _c("th", { attrs: { width: "5%" } }, [_vm._v("NO")]),
+                _vm._v(" "),
+                _c("th", { attrs: { width: "20%" } }, [_vm._v("NAMA")]),
+                _vm._v(" "),
+                _vm._l(_vm.datasdua, function(datadua, indexdua) {
+                  return _c(
+                    "th",
+                    { attrs: { width: "20%", ":key": datadua.id } },
+                    [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "d-inline-block text-truncate",
+                          staticStyle: { "max-width": "15%x" }
+                        },
+                        [
+                          _vm._v(
+                            " A " +
+                              _vm._s(indexdua + 1) +
+                              " = " +
+                              _vm._s(datadua.nama)
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _c("th", { attrs: { width: "5%" } }, [_vm._v("JUMLAH")]),
+                _vm._v(" "),
+                _c("th", { attrs: { width: "15%" } }, [
+                  _vm._v("LEAVING FLOW"),
+                  _c("br"),
+                  _vm._v(
+                    "\n                        1/(" +
+                      _vm._s(_vm.kriterias.length) +
+                      "-1) * jumlah\n\n\n                        "
+                  )
+                ])
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              _vm._l(_vm.datas, function(data, index) {
+                return _c(
+                  "tr",
+                  { attrs: { ":key": data.id } },
+                  [
+                    _c("td", { staticClass: "text-center" }, [
+                      _vm._v(
+                        " A " + _vm._s((_vm.indexdatasatu = index + 1)) + " "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden" },
+                      domProps: {
+                        textContent: _vm._s(
+                          (_vm.hasiljml_untukleaving[_vm.indexdatasatu] = 0)
+                        )
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "d-inline-block text-truncate",
+                          staticStyle: { "max-width": "200px" }
+                        },
+                        [
+                          _vm._v(
+                            "  " + _vm._s(data.nim) + " - " + _vm._s(data.nama)
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.datasdua, function(datadua, indexdua) {
+                      return _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { ":key": datadua.id }
+                        },
+                        [
+                          _c("i", [
+                            _vm._v(
+                              "A " +
+                                _vm._s(_vm.indexdatasatu) +
+                                " -  A " +
+                                _vm._s(indexdua + 1)
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          index == indexdua
+                            ? _c("div", [_vm._v("0")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          index != indexdua
+                            ? _c(
+                                "div",
+                                [
+                                  _vm._l(_vm.kriterias, function(
+                                    kriteria,
+                                    index
+                                  ) {
+                                    return _c("div", {
+                                      staticClass: "text-center",
+                                      attrs: { ":key": kriteria.id }
+                                    })
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: { type: "hidden" },
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        (_vm.hasiljml_untukleaving[
+                                          _vm.indexdatasatu
+                                        ] +=
+                                          _vm.hasil_k_per_jmlh_k[
+                                            _vm.indexdatasatu + "-" + indexdua
+                                          ])
+                                      )
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: { type: "hidden" },
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        (_vm.hasiljml_untukentring[indexdua] +=
+                                          _vm.hasil_k_per_jmlh_k[
+                                            _vm.indexdatasatu + "-" + indexdua
+                                          ])
+                                      )
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("b", [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.hasil_k_per_jmlh_k[
+                                          _vm.indexdatasatu + "-" + indexdua
+                                        ]
+                                      )
+                                    )
+                                  ])
+                                ],
+                                2
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-center" }, [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(
+                            _vm.hasiljml_untukleaving[
+                              _vm.indexdatasatu
+                            ].toFixed(4)
+                          ) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-center" }, [
+                      _vm._v(
+                        "\n                        1/" +
+                          _vm._s(_vm.kriterias.length - 1) +
+                          " * " +
+                          _vm._s(
+                            _vm.hasiljml_untukleaving[
+                              _vm.indexdatasatu
+                            ].toFixed(4)
+                          ) +
+                          "=\n                        "
+                      ),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("b", [
+                        _vm._v(
+                          " " +
+                            _vm._s(
+                              (_vm.leavingflow[data.nim] =
+                                (1 / (_vm.kriterias.length - 1)) *
+                                _vm.hasiljml_untukleaving[
+                                  _vm.indexdatasatu
+                                ].toFixed(4))
+                            )
+                        )
+                      ])
+                    ])
+                  ],
+                  2
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "tr",
+                [
+                  _vm._m(6),
+                  _vm._l(_vm.datasdua, function(datadua, indexdua) {
+                    return _c(
+                      "td",
+                      {
+                        staticClass: "text-center",
+                        attrs: { ":key": datadua.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.hasiljml_untukentring[indexdua]) +
+                            "\n                          "
+                        )
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [_vm._v("-")]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [_vm._v("-")])
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "tr",
+                [
+                  _c("td", { attrs: { colspan: "2" } }, [
+                    _c("b", [
+                      _vm._v("ENTRING FLOW "),
+                      _c("br"),
+                      _vm._v(
+                        "\n                        1/(" +
+                          _vm._s(_vm.kriterias.length) +
+                          "-1) * jumlah"
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.datasdua, function(datadua, indexdua) {
+                    return _c(
+                      "td",
+                      {
+                        staticClass: "text-center",
+                        attrs: { ":key": datadua.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                               1/" +
+                            _vm._s(_vm.kriterias.length - 1) +
+                            " * " +
+                            _vm._s(
+                              _vm.hasiljml_untukentring[indexdua].toFixed(4)
+                            ) +
+                            "=\n\n                               "
+                        ),
+                        _c("b", [
+                          _vm._v(
+                            " " +
+                              _vm._s(
+                                (_vm.entringflow[datadua.nim] =
+                                  (1 / (_vm.kriterias.length - 1)) *
+                                  _vm.hasiljml_untukentring[indexdua].toFixed(
+                                    4
+                                  ))
+                              )
+                          )
+                        ])
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [_vm._v("-")]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [_vm._v("-")])
+                ],
+                2
+              )
+            ],
+            2
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _vm._m(7),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered table-striped table-hover table-sm"
+        },
+        [
+          _vm._m(8),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.datas, function(data, index) {
+              return _c("tr", { attrs: { ":key": data.id } }, [
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(" A " + _vm._s((_vm.indexdatasatu = index + 1)) + " ")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  attrs: { type: "hidden" },
+                  domProps: {
+                    textContent: _vm._s(
+                      (_vm.hasiljml_untukleaving[_vm.indexdatasatu] = 0)
+                    )
+                  }
+                }),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "d-inline-block text-truncate",
+                      staticStyle: { "max-width": "200px" }
+                    },
+                    [
+                      _vm._v(
+                        "  " + _vm._s(data.nim) + " - " + _vm._s(data.nama)
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.leavingflow[data.nim]) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(_vm.entringflow[data.nim]) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-center" }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(
+                        (_vm.netflow[data.nim] = (
+                          _vm.leavingflow[data.nim] - _vm.entringflow[data.nim]
+                        ).toFixed(4))
+                      ) +
+                      "\n                        "
+                  )
+                ])
+              ])
             }),
             0
           )
@@ -58966,7 +60088,119 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-lg-6" }, [
-        _c("h3", [_vm._v("LANGKAH 1 : data asli ubah ke bobot")])
+        _c("h3", [_vm._v("LANGKAH 1 : Bobot Kriteria Tiap Alternatif")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "Ubah data inputan menjadi nilai untuk di hitung, jika data belum diisi otomatis akan di nilai nol (0)"
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "text-center", attrs: { colspan: "2" } }, [
+      _c("b", [_vm._v("Jumlah")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mt-4" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("h3", [
+          _vm._v(
+            "LANGKAH 2 : Preferensi Kriteria Usual , bandingkan tiap kriteria per alternatif"
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "Jika hasilnya lebih dari 0 maka disimpan jadi 1, jika kurang dari nol maka 0"
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mt-4" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("h3", [
+          _vm._v("LANGKAH 3 : Menghitung index preferensi Multikriteria")
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "Dengan cara jumlahkan hasil sebelumnya per alternatif perkriteria kemudia dibagi jumlah kriteria yang ada."
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mt-4" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("h3", [
+          _vm._v("LANGKAH 4 : Menghitung Leaving Flow dan Entring Flow")
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "*)Leaving Flow = Jumlahkan hasil proses sebelumnya per data pertama. Kemudia gunakan rumus 1/jumlah kriteria-1 kemudian di kali hasil penjumlahan per data pertama"
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "*)Entring Flow = Jumlahkan hasil proses sebelumnya per data kedua. Kemudia gunakan rumus 1/jumlah kriteria-1 kemudian di kali hasil penjumlahan per data kedua"
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "2" } }, [_c("b", [_vm._v("JUMLAH")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mt-4" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("h3", [_vm._v("LANGKAH 5 : Menghitung Netflow")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Leaving Flow dikurangi Entring Flow")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "text-center" }, [
+        _c("th", { attrs: { width: "5%" } }, [_vm._v("NO")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "20%" } }, [_vm._v("NAMA")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "20%" } }, [_vm._v("LEAVING FLOW")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "20%" } }, [_vm._v("ENTERING FLOW")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "20%" } }, [_vm._v("NET FLOW")])
       ])
     ])
   }
