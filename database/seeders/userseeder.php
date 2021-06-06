@@ -38,7 +38,7 @@ class userseeder extends Seeder
          DB::table('thseleksi')->insert([
             'tahun' => 2021,
             'status' => 'Proses',
-            'kuota' => '5',
+            'kuota' => '3',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
          ]);
