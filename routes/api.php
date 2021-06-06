@@ -49,6 +49,7 @@ use App\Http\Controllers\dataprosesController;
     // DATAPOSES
     Route::get('dataproses', [dataprosesController::class, 'index'])->name('dataproses');
     Route::get('dataproses/{id}', [dataprosesController::class, 'show'])->name('dataproses.show');
+    Route::get('dataprosesapi/{id}', [dataprosesController::class, 'showapi'])->name('dataprosesapi.show');
     Route::post('dataproses/store', [dataprosesController::class, 'store'])->name('dataproses.store');
     Route::delete('dataproses/{id}/delete/{thseleksi_id}', [dataprosesController::class, 'destroy'])->name('dataproses.delete');
     Route::get('dataproses/getmhs/{id}', [dataprosesController::class, 'getmhs'])->name('dataproses.getmhs');

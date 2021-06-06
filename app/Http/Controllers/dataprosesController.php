@@ -133,6 +133,38 @@ class dataprosesController extends Controller
 
         // return dataprosesResource::make($datas);
     }
+    public function showapi($id)
+    {
+
+
+        $datas=DB::table('dataproses')
+            ->join('mahasiswa', 'dataproses.nim', '=', 'mahasiswa.nim')
+            ->where('dataproses.thseleksi_id',$id)
+            ->get(array(
+                'dataproses.id',
+                'dataproses.nim',
+                'jurusan',
+                'nama',
+                'thseleksi_id',
+                'hasilhitung',
+                'dataproses.created_at',
+            ));
+            return $datas;
+        // return dataprosesResource::collection($datas);
+
+        // $datas=dataproses::latest()->where('id',$id)->first()
+        // ->join('mahasiswa', 'dataproses.nim', '=', 'mahasiswa.nim')
+        // ->select('dataproses.id',
+        // 'dataproses.nim',
+        // 'jurusan',
+        // 'nama',
+        // 'thseleksi_id',
+        // 'hasilhitung',
+        // 'dataproses.created_at')
+        // ->where('dataproses.id',$id)->first();
+
+        // return dataprosesResource::make($datas);
+    }
 
     public function dpdetailshowhitung($id)
     {

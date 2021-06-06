@@ -18,6 +18,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Toasted from 'vue-toasted';
 
+
 Vue.use(Toasted);
 Vue.use(VueRouter);
 
@@ -28,6 +29,8 @@ import routes from './router/index'
 // import routes from './router.index.js'
 
 Vue.component('navigation', require('./components/Navigation.vue').default);
+Vue.component('LineChart', require('./components/LineChart.vue').default);
+
 
 Vue.productionTips=false;
 

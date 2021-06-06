@@ -129,21 +129,47 @@
                 </tbody>
         </table>
        </div>
+
+       <div class="container">
+
+           <div class="row mt-5" v-if="arrHasilhitung.length>0">
+                <div class="col">
+                    <h2>Data Hasil</h2>
+                    <line-chart :chartData="arrHasilhitung" :options="chartOptions" label="Hasil"></line-chart>
+                </div>
+           </div>
+       </div>
     </div>
 </template>
 
 <script>
+// https://api.covidtracking.com/v1/us/daily.json
+// import LineChart from './../../components/LineChart.vue'
+import LineChart from './../../components/LineChart.vue'
 import DeleteData from './Delete'
 import modal from './Modaltambah'
 import modalkt from './Modalkriteria'
+import moment from 'moment'
 export default {
 
     components:{
-            DeleteData,modal,modalkt
+            DeleteData,modal,modalkt,LineChart
     },
 
     data(){
         return{
+                arrNim:[],
+                arrJurusan:[],
+                arrNama:[],
+                arrHasilhitung:[],
+                arrCreatedat:[],
+                chartOptions:{
+                    responsive:true,
+                    maintainAspectRatio:false,
+                    borderWidth:200,
+                },
+
+
             // firstload:null,
              form:{
                 id:'',
@@ -159,12 +185,14 @@ export default {
             ddetail:[],
             kriterias:[],
             kriteriasShow:[],
+            datashasil:[],
             isModalVisible: false,
             isModalktVisible: false,
         }
     },
 
     mounted(){
+        this.created();
         this.getDatas();
         this.getKriteria();
         this.getDatasDetail();
@@ -172,6 +200,38 @@ export default {
     },
 
     methods:{
+        async created() {
+            // const { data } = await axios.get("https://covidtracking.com/api/us/daily");
+            const { data } =  await axios.get(`/api/dataproses/${this.$route.params.id}`);
+// data = JSON.parse(data);
+            this.datashasil = data.data
+            var datashasil= this.datashasil;
+  // this.datas.forEach(function(e){
+            //      var showModalisi=[];
+            this.datashasil.forEach(d=>{
+                const date = d.nama;
+                const namas = d.nama;
+                const {
+
+                    nim,
+                    jurusan,
+                    nama,
+                    hasilhitung,
+                    created_at
+                } = d;
+                // const namas = d.nama;
+
+                this.arrNim.push({date,total:nim});
+                this.arrJurusan.push({date,total:jurusan});
+                this.arrNama.push({date,total:nama});
+                this.arrHasilhitung.push({date,total:hasilhitung});
+                this.arrCreatedat.push({date,total:created_at});
+
+                // console.log(d.nama);
+                // console.log(namas);
+            })
+
+        },
     async kirimdata(dataNim,dataId,KriteriaId){
         this.form.id=dataId;
         this.form.nim=dataNim;
