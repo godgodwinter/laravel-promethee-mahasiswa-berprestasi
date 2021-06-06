@@ -4973,6 +4973,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     options: {
       type: Object
+    },
+    chartColors: {
+      type: Object
     }
   },
   mounted: function mounted() {
@@ -4982,11 +4985,25 @@ __webpack_require__.r(__webpack_exports__);
     var totals = this.chartData.map(function (d) {
       return d.total;
     }).reverse();
+    var borderColor = "#077187";
+    var pointBorderColor = "#0E1428";
+    var pointBackgroundColor = "#AFD6AC";
+    var backgroudColor = "#74A57F"; // const {borderColor,pointBorderColor,pointBackgroundColor,backgroudColor} = this.chartColors;
+
     this.renderChart({
       labels: dates,
       datasets: [{
         label: this.label,
-        data: totals
+        data: totals,
+        borderColor: borderColor,
+        pointBorderColor: pointBorderColor,
+        pointBackgroundColor: pointBackgroundColor,
+        backgroundColor: "#87ceeb" // color: backgroudColor,
+        // borderColor: "#077187",
+        // pointBorderColor: "#0E1428",
+        // pointBackgroundColor: "#AFD6AC",
+        // backgroudColor: "#74A57F",
+
       }]
     }, this.options);
   }
@@ -5728,6 +5745,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 // https://api.covidtracking.com/v1/us/daily.json
 // import LineChart from './../../components/LineChart.vue'
 
@@ -5751,9 +5769,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       arrCreatedat: [],
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false,
-        borderWidth: 200
+        maintainAspectRatio: false
       },
+      // graphColors:{
+      //     borderColor: "#077187",
+      //     pointBorderColor: "#0E1428",
+      //     pointBackgroundColor: "#AFD6AC",
+      //     backgroudColor: "#74A57F",
+      // },
       // firstload:null,
       form: {
         id: '',

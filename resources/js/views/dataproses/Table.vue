@@ -135,6 +135,7 @@
            <div class="row mt-5" v-if="arrHasilhitung.length>0">
                 <div class="col">
                     <h2>Data Hasil</h2>
+                    <!-- <line-chart :chartData="arrHasilhitung" :options="chartOptions" :chartCOlors="graphColors" label="Hasil"></line-chart> -->
                     <line-chart :chartData="arrHasilhitung" :options="chartOptions" label="Hasil"></line-chart>
                 </div>
            </div>
@@ -166,8 +167,13 @@ export default {
                 chartOptions:{
                     responsive:true,
                     maintainAspectRatio:false,
-                    borderWidth:200,
                 },
+                // graphColors:{
+                //     borderColor: "#077187",
+                //     pointBorderColor: "#0E1428",
+                //     pointBackgroundColor: "#AFD6AC",
+                //     backgroudColor: "#74A57F",
+                // },
 
 
             // firstload:null,
