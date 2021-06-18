@@ -30,6 +30,10 @@ use App\Http\Controllers\dataprosesController;
     Route::patch('kriteria/{id}/edit', [kriteriaController::class, 'update'])->name('kriteria.update');
     Route::get('kriteria/{id}/show', [kriteriaController::class, 'show'])->name('kriteria.show');
 
+    // KRITERIA
+    Route::get('kriteriath/{id}', [kriteriaController::class, 'indexth'])->name('kriteriath');
+    Route::post('kriteriath/store', [kriteriaController::class, 'storeth'])->name('kriteriath.store');
+
     // KRITERIADETAIL
     Route::get('kriteriadetail', [kriteriadetailController::class, 'index'])->name('kriteriadetail');
     Route::get('kriteriadetail/{kritria_id}/show', [kriteriadetailController::class, 'show'])->name('kriteriadetail.show');

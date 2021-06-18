@@ -12,6 +12,7 @@ class kriteria extends Model
 
     protected $fillable = [
         'nama',
-        'nilai'
+        'nilai',
+        'thseleksi_id'
     ];
 }

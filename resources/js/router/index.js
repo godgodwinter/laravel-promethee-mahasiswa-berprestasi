@@ -16,6 +16,12 @@ import kriteriaRead from '../views/kriteria/Table'
 import kriteriaCreate from '../views/kriteria/Create'
 import kriteriaEdit from '../views/kriteria/Edit'
 
+
+// KRITERIATH
+import kriteriathRead from '../views/kriteriath/Table'
+import kriteriathCreate from '../views/kriteriath/Create'
+import kriteriathEdit from '../views/kriteriath/Edit'
+
 // THSELEKSI
 import thseleksiRead from '../views/thseleksi/Table'
 import thseleksiCreate from '../views/thseleksi/Create'
@@ -106,6 +112,36 @@ export default {
         },
 
             //END KRITERIAROUTER
+
+
+            // KRITERIATHROUTER
+        {
+          path:'/kriteriath/table/:id',
+          name:'kriteriath.table',
+          meta: {
+              auth: true
+            },
+          component:kriteriathRead
+      },
+      {
+          path:'/kriteriath/create/:id',
+          name:'kriteriath.create',
+          meta: {
+              auth: true
+            },
+          component: kriteriathCreate
+      },
+      {
+          path:'/kriteriath/:id/edit',
+          name:'kriteriath.edit',
+          meta: {
+              auth: true
+            },
+          component:kriteriathEdit
+      },
+
+          //END KRITERIAROUTER
+
 
 
             // THSELEKSIROUTER

@@ -176,7 +176,8 @@ class dataprosesController extends Controller
         $hasildatas=dataprosesdetailResource::collection($datas);
 
         $dhkriteria=kriteria::latest()->get();
-        $hasildhkriteria=kriteriaResource::collection($dhkriteria);
+        // $hasildhkriteria=kriteriaResource::collection($dhkriteria);
+        $hasildhkriteria = DB::table('kriteria')->where('thseleksi_id',$id)->get();
 
         foreach ($hasildatas as $hd){
             foreach ($hasildhkriteria as $hk){

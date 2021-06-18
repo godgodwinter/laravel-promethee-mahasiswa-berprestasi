@@ -12,7 +12,9 @@
 
                 <template>
 
-                    <button type="submit" class="btn btn-primary mb-2" @click="openModal">Tambah Peserta</button>
+                    <button type="submit" class="btn btn-secondary mb-2" @click="openModal"><i class="feather icon-plus-square"></i>Tambah Peserta</button> &nbsp;
+                     <router-link :to="{name:'kriteriath.table',params:{id:this.$route.params.id}}" class="btn btn-primary btn-lg mb-2"><i class="feather icon-plus-square"></i>&nbsp;Kelola Kriteria</router-link>
+
 
                     <modal v-show="isModalVisible" @close-modal="closeModal" />
 
@@ -321,8 +323,8 @@ export default {
 
         },
         async getKriteria(){
-            var {data} = await axios.get(`/api/kriteria`);
-            this.kriterias = data.data
+            let {data} = await axios.get(`/api/kriteriath/${this.$route.params.id}`);
+            this.kriterias = data.datas
             var kriterias= this.kriterias;
         },
         async getKriteriaDetail(id){

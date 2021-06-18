@@ -19,6 +19,7 @@ class kriteriaResource extends JsonResource
             'id'=>$this->id,
             'nama'=>$this->nama,
             'nilai'=>$this->nilai,
+            'thseleksi_id'=>$this->thseleksi_id,
             'publish'=>Carbon::parse($this->created_at)->diffForHumans(),
             // 'link' => route('mahasiswa.show',[$this->id])
         ];

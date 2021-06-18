@@ -56,7 +56,6 @@ export default {
 
     mounted(){
         this.getNotes();
-        this.getThSeleksi();
     },
 
     methods:{
@@ -67,15 +66,8 @@ export default {
 
             // let response = await axios.get('/api/notes');
             // this.notes = response.data.dat
-        },
-        async getThSeleksi(){
-            let {data} = await axios.get('/api/thseleksi');
-            this.dataths = data.data
-
-            console.log(this.dataths);
-            // let response = await axios.get('/api/notes');
-            // this.notes = response.data.dat
         }
+            // console.log(this.notes);
 
     }
 

@@ -783,8 +783,8 @@ export default {
 
                 // console.log(response.data.message);
             }catch(e){
-                    var {data} = await axios.get(`/api/kriteria`);
-                    this.kriterias = data.data
+                    var {data} = await axios.get(`/api/kriteriath/${this.$route.params.id}`);
+                    this.kriterias = data.datas
                     var kriterias= this.kriterias;
 
             }

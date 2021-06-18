@@ -48,6 +48,7 @@ class userseeder extends Seeder
             'id' => 1,
             'nama' => 'IPK',
             'nilai' => '4',
+            'thseleksi_id' => '1',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
          ]);
@@ -56,6 +57,7 @@ class userseeder extends Seeder
             'id' => 2,
             'nama' => 'KEAKTIFAN',
             'nilai' => '3',
+            'thseleksi_id' => '1',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
          ]);
@@ -64,6 +66,7 @@ class userseeder extends Seeder
              'id' => 3,
              'nama' => 'KONDISI KELUARGA',
              'nilai' => '3',
+             'thseleksi_id' => '1',
              'created_at' => Carbon::now(),
              'updated_at' => Carbon::now()
           ]);
@@ -72,6 +75,7 @@ class userseeder extends Seeder
             'id' => 4,
             'nama' => 'PENGHASILAN ORANG TUA',
             'nilai' => '4',
+            'thseleksi_id' => '1',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
          ]);
@@ -80,6 +84,7 @@ class userseeder extends Seeder
             'id' => 5,
             'nama' => 'PRESTASI NON AKADEMIK',
             'nilai' => '4',
+            'thseleksi_id' => '1',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
          ]);

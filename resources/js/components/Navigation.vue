@@ -59,9 +59,9 @@
                     <li class="nav-item">
                         <router-link to="/" class="nav-link" exact>Home</router-link>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <router-link class="nav-link" :to="{name:'kriteria.table'}">Kriteria</router-link>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <router-link class="nav-link" :to="{name:'mahasiswa.table'}">Mahasiswa</router-link>
                     </li>

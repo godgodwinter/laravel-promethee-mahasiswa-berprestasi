@@ -20,8 +20,20 @@ class kriteriaController extends Controller
         return kriteriaResource::collection($datas);
     }
 
+    public function indexth($id)
+    {
+        $parrentdata = DB::table('thseleksi')->where('id',$id)->get();
+        $datas = DB::table('kriteria')->where('thseleksi_id',$id)->get();
+        // return $datas;
+
+        return compact('datas','parrentdata');   
+
+        // $datas=kriteria::latest()->get();
+        // return kriteriaResource::collection($datas);
+    }
+
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a datanew resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -44,6 +56,28 @@ class kriteriaController extends Controller
         ]);
 
         $data=kriteria::create([
+            'nilai'=>request('nilai'),
+            'nama'=>request('nama'),
+        ]);
+
+        return response()->json([
+            'message'=>'Data berhasil ditambahkan',
+            'data'=>$data,
+        ]);
+    }
+
+
+    public function storeth(Request $request)
+    {
+        request()->validate([
+            'thseleksi_id'=>'required',
+            'nama'=>'required',
+            'nilai'=>'required',
+
+        ]);
+
+        $data=kriteria::create([
+            'thseleksi_id'=>request('thseleksi_id'),
             'nilai'=>request('nilai'),
             'nama'=>request('nama'),
         ]);

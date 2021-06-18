@@ -7,7 +7,7 @@
                </div>
                <div class="col-lg-6 d-flex flex-row-reverse">
                    <router-link :to="{name:'kriteriadetail.create',params:{kriteria_id:id}}" class="btn btn-primary btn-lg mb-2 "><i class="feather icon-plus-square"></i>&nbsp;Tambah</router-link>&nbsp;
-                    <router-link :to="{name:'kriteria.table'}" class="btn btn-outline-dark btn-lg mb-2"><i class="feather icon-skip-back"></i>&nbsp;Kembali</router-link>&nbsp;
+                    <router-link :to="{name:'kriteriath.table',params:{id:this.thseleksi_id}}" class="btn btn-outline-dark btn-lg mb-2"><i class="feather icon-skip-back"></i>&nbsp;Kembali</router-link>&nbsp;
 
                </div>
            </div>
@@ -59,6 +59,7 @@ export default {
             id:'',
             kriteria_id:'',
             judulkriteria:'',
+            thseleksi_id:'',
             datas:[],
             parrentdata:[],
         }
@@ -80,6 +81,7 @@ export default {
 
             // console.log(value.nama);
             this.judulkriteria= value.nama;
+            this.thseleksi_id= value.thseleksi_id;
             }
             // this.judulkriteria = obj(this.parrentdata.nama)
             // console.log(this.parrentdata.values(nama));
